@@ -9,12 +9,15 @@ import Home from './Home/Home';
 import About from './About/About';
 import Contact from './Contact/Contact';
 import {FaFacebookF} from "react-icons/fa";
+import { useHistory } from "react-router-dom";
 
 
 const MainPage = () => {
     const [id, setId] = useState("home");
+    const history = useHistory();
     const handleNavBar = (e) => {
-        setId(e.target.id)
+        console.log(e.target);
+        setId(e.target.name)
     }
     const showSection = () => {
         switch(id){
@@ -23,6 +26,10 @@ const MainPage = () => {
             case "contact":return <Contact/>
         }
     }
+    const enableLogin = () => {
+        history.push({pathname : '/login'})
+    }
+    
     
     return(
         <div className="MainPage">
@@ -30,10 +37,10 @@ const MainPage = () => {
                 <div className="NavBarTop">
                     <img src={logo} className="mainLogo" />
                     <div className="NavBarElement">
-                        <Button id="home" onClick={handleNavBar}>HOME</Button>
-                        <Button id="about" onClick={handleNavBar}>ABOUT</Button>
-                        <Button id="contact" onClick={handleNavBar}>CONTACT</Button>
-                        <Button id="loginBtn" onClick={handleNavBar}>LOGIN/REGISTER</Button>
+                        <button name="home" onClick={handleNavBar}>HOME</button>
+                        <button name="about" onClick={handleNavBar}>ABOUT</button>
+                        <button name="contact" onClick={handleNavBar}>CONTACT</button>
+                        <button name="loginBtn" id="loginBtn" onClick={enableLogin}>LOGIN/REGISTER</button>
                     </div>
                 </div>
                 <div className="NavBarSide">

@@ -19,15 +19,20 @@
     align-items: center;
 }
 .NavBarElement>button{
-    color:white;
+    color: white;
     margin: 0px 2%;
+    padding: 2%;
+    background: transparent;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 .NavBarElement>button:hover{
     background: rgb(190, 190, 190);
     color:black;
 }
 #loginBtn{
-    background: rgb(37 13 139);
+    background: rgb(37 13 139) !important;
     color: white;
 }
 .NavBarSide{

@@ -13,6 +13,7 @@ const App = () => {
     <Router>
       <Switch>
         <Route exact path="/" component={MainPage} />
+        <Route exact path="/login"><Login /></Route>
         <Route exact path="/manager-dashboard"></Route>
         <Route exact path="/user-dashboard"></Route>
       </Switch>
