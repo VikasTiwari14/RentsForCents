@@ -12,7 +12,7 @@ const App = () => {
   return <div>
     <Router>
       <Switch>
-        <Route exact path="/" component={Login} />
+        <Route exact path="/" component={MainPage} />
         <Route exact path="/manager-dashboard"></Route>
         <Route exact path="/user-dashboard"></Route>
       </Switch>
