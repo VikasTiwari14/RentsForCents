@@ -1,0 +1,66 @@
+.homePage{
+    background: white;
+    border-radius: 15px;
+    padding: 2%;
+    margin-bottom: 3%;
+}
+.homePage>h1{
+    text-align: center;
+    color: #3a0249;
+}
+.FeaturesContainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.Features{
+    height: 20vw;
+    width: 25%;
+    color: black;
+    border-radius: 10px;
+    text-align: center;
+    padding:4% 8%;
+}
+.Features>h2{
+    color: #3a0249;
+}
+.Features>img{
+    width: 12vw;
+    height: 12vw;
+    border-radius: 50%;
+}
+.TermsContainer{
+    padding: 2% 4%;
+    color: black;
+    font-size: 1.1vw;
+}
+.BikesContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+.Bikes{
+    width: 22vw;
+    background: linear-gradient(65deg, #ff1bba, #160139);
+    color: white;
+    text-align: center;
+    margin: 10%;
+    cursor: pointer;
+    border: 2px solid white;
+}
+.Bikes:hover{
+    border: 2px solid #ff1bba;
+}
+.MoreBtn{
+    background: linear-gradient(65deg, #ff1bba, #160139) !important;
+    color: white !important;
+    margin-left: 87.2% !important;
+    padding: 1% 2% !important;
+}
+.Bikes>img{
+    width:100%;
+}
+.Bikes>h2{
+
+}

@@ -1,0 +1,114 @@
+body{
+    background-image: linear-gradient(90deg,#e3daec,#ad5aff);
+}
+.mainLogo{
+    width: 5vw;
+}
+.box{
+	margin: 5% 14%;
+    background: white;
+    border-radius: 10px;
+    height: 80vh;
+    display: flex;
+}
+#animate{
+	background-color: #660bc0;
+    width: 29%;
+    height: 100%;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 3%;
+    position: relative;
+}
+#signIn{
+    border: 2px solid white;
+    color: white;
+    background: inherit;
+    border-radius: 16px;
+    font-size: 1.3vw;
+    padding: 2% 8%;
+    cursor:pointer;
+
+}
+#create{
+    display: flex;
+    flex-direction: column;
+    padding-top: 5%;
+    align-items: center;
+    width: 61%;
+}
+.paragraph{
+    color: #979793;
+}
+#create h1,#log h1{
+	color:#660bc0;
+}
+.socialMedia{
+    font-size: 1.45vw;
+    padding: 2%;
+    border-radius: 50%;
+}
+.socialMedia:hover{
+    background: rgb(234, 234, 234);
+}
+.socialMediaContainer{
+    display: flex;
+    justify-content: space-evenly;
+    width: 35%;
+}
+#log{
+    display: none;
+    flex-direction: column;
+    padding-top: 5%;
+    align-items: center;
+    width: 61%;
+}
+.materialInput>div>input{
+    padding-left: 5%;
+}
+.materialInput{
+    width: 20vw;
+}
+#create button,#log button{
+	border-radius: 25px;
+    font-size: 1.3vw;
+    width: 25%;
+    padding: 1%;
+    background: #660bc0;
+    color: white;
+    cursor: pointer;
+    margin-left: 3%;
+    margin-top: 4%;
+
+}
+#create button:hover,#log button:hover{
+    color: #660bc0;
+    background: white;
+}
+.inputContainer{
+    display: flex;
+    margin: 1%;
+    align-items: center;
+}
+
+/* ANIMATIONS */
+@keyframes move{
+	0% {width:29%}
+	25% {width:64%}
+	49% {width:99%}
+	51% {width:99%}
+	75% {width:64%}
+	100% {width:29%}
+}
+@keyframes moveBack{
+	0% {width:29%}
+	25% {width:64%}
+	49% {width:99%}
+	51% {width:99%}
+	75% {width:64%}
+	100% {width:29%}
+}

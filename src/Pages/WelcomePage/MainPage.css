@@ -1,0 +1,73 @@
+.MainPage{
+    width:100%;
+    height: 100%;
+}
+.NavBarContainer{
+    background-image: url("../../images/bike1.jpg");
+    height: 30vw;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    padding:1%;
+}
+.NavBarContainer .mainLogo{
+    width: 4vw;
+    margin: 1%;
+}
+.NavBarTop{
+    display: grid;
+    grid-template-columns: 5fr 2fr;
+    align-items: center;
+}
+.NavBarElement>button{
+    color:white;
+    margin: 0px 2%;
+}
+.NavBarElement>button:hover{
+    background: rgb(190, 190, 190);
+    color:black;
+}
+#loginBtn{
+    background: rgb(37 13 139);
+    color: white;
+}
+.NavBarSide{
+    text-align: right;
+    color: white;
+    margin: 8%;
+}
+.NavBarSide>button{
+    border: 2px solid white;
+    color: white;
+    padding: 1% 2%;
+    border-radius: 5px;
+}
+.arrowRight{
+    font-size: 1.4vw;
+}
+.MainContent{
+    margin: -5% 5%;
+}
+.Footer{
+    background: url(../../images/footer.jpg);
+    padding: 1% 14%;
+    margin-top: 8%;
+    color: white;
+    text-align: center;
+}
+.Footer>*{
+    font-weight: 300;
+}
+.Footer>h4{
+    border: 1px solid white;
+    padding: 1%;
+    margin: 1% 19%;
+}
+.SocialLink>*{
+    font-size: 1.6vw;
+    color: #001fff;
+    background: white;
+    padding: 6px;
+    border-radius: 50%;
+    margin: 1%;
+    cursor: pointer;
+}
