@@ -1,0 +1,1 @@
+export const RentsForCents = "localhost:5000";

@@ -6,6 +6,8 @@ import {GrTwitter,GrGoogle} from "react-icons/gr";
 import logo from "../../../images/RentForCentsLogo.png";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { RentsForCents } from "../../../Constants/Constants";
+import axios from "axios";
 
 
 const Login = () => {
@@ -44,6 +46,35 @@ const Login = () => {
             animate.style.animation="moveBack 0.7s linear";
 		  }
     }
+    const handleSignIn = () => {
+        axios.post(`${RentsForCents}/login`, {
+                "email": sign.email,
+                "password": sign.pass
+            },{
+                headers: {'Access-Control-Allow-Origin': '*'}
+            })
+        .then((response) => {
+            
+        })
+        .catch((response) => {
+
+        })
+    }
+    const handleSignUp = () => {
+        axios.post(`${RentsForCents}/register`, {
+            "email": sign.email,
+            "password": sign.pass
+        },{
+            headers: {'Access-Control-Allow-Origin': '*'}
+        })
+        .then((response) => {
+            
+        })
+        .catch((response) => {
+
+        })
+    }
+    
     
     return(
         <>
@@ -65,7 +96,7 @@ const Login = () => {
 		            <div className="inputContainer"><TextField variant="outlined" label="Name" className="materialInput" type="text" name="name" placeholder=" Name" value={sign.name} onChange={handleInput}  />       </div>
 		            <div className="inputContainer"><TextField variant="outlined" label="Email" className="materialInput" type="text" name="email"  placeholder=" Email" value={sign.email} onChange={handleInput} />    </div>
 		            <div className="inputContainer"><TextField variant="outlined" label="Password" className="materialInput" type="password" name="pass" placeholder=" Password" value={sign.pass} onChange={handleInput} /></div>
-		            <Button variant="contained">SIGN UP</Button>
+		            <Button variant="contained" onClick={handleSignUp}>SIGN UP</Button>
 	            </div>
                 <div id="log">
 	                <h1>Sign In</h1>
@@ -78,7 +109,7 @@ const Login = () => {
 		            <div className="inputContainer"><TextField variant="outlined" label="Email" className="materialInput" type="text" name="email"  placeholder=" Email" value={sign.email} onChange={handleInput} />    </div>
 		            <div className="inputContainer"><TextField variant="outlined" label="Password" className="materialInput" type="password" name="pass" placeholder=" Password" value={sign.pass} onChange={handleInput} /></div>
 		            <label><a href="">Forgot your password?</a></label>
-		            <Button variant="contained">SIGN IN</Button>
+		            <Button variant="contained" onClick={handleSignIn}>SIGN IN</Button>
 	            </div>
             </div>
         </>
