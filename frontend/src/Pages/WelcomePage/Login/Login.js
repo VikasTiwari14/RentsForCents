@@ -64,7 +64,7 @@ const Login = () => {
         axios.post(`/signup`, {
             "email": sign.email,
             "password": sign.pass,
-            "name": sign.name,
+            "customerName": sign.name,
             "contactNumber": sign.mobile
         },{
             headers: {'Access-Control-Allow-Origin': '*'}
