@@ -1,1 +1,1 @@
-export const RentsForCents = "localhost:5000";
+export const RentsForCents = "localhost:8000";

@@ -11,7 +11,7 @@ import axios from "axios";
 
 
 const Login = () => {
-    const [sign, setSign] = useState({name:"",email:"",pass:""});
+    const [sign, setSign] = useState({name:"",email:"",pass:"",mobile:""});
     const [isopen, setisopen] = useState(false);
     const [btn, setBtn] = useState();
     const [head, setHead] = useState();
@@ -47,7 +47,7 @@ const Login = () => {
 		  }
     }
     const handleSignIn = () => {
-        axios.post(`${RentsForCents}/login`, {
+        axios.post(`${RentsForCents}/signin`, {
                 "email": sign.email,
                 "password": sign.pass
             },{
@@ -61,14 +61,16 @@ const Login = () => {
         })
     }
     const handleSignUp = () => {
-        axios.post(`${RentsForCents}/register`, {
+        axios.post(`${RentsForCents}/signup`, {
             "email": sign.email,
-            "password": sign.pass
+            "password": sign.pass,
+            "name": sign.name,
+            "contactNumber": sign.mobile
         },{
             headers: {'Access-Control-Allow-Origin': '*'}
         })
         .then((response) => {
-            
+            alert("Your Account Created Successfully");
         })
         .catch((response) => {
 
@@ -96,6 +98,7 @@ const Login = () => {
 		            <div className="inputContainer"><TextField variant="outlined" label="Name" className="materialInput" type="text" name="name" placeholder=" Name" value={sign.name} onChange={handleInput}  />       </div>
 		            <div className="inputContainer"><TextField variant="outlined" label="Email" className="materialInput" type="text" name="email"  placeholder=" Email" value={sign.email} onChange={handleInput} />    </div>
 		            <div className="inputContainer"><TextField variant="outlined" label="Password" className="materialInput" type="password" name="pass" placeholder=" Password" value={sign.pass} onChange={handleInput} /></div>
+		            <div className="inputContainer"><TextField variant="outlined" label="Mobile Number" className="materialInput" type="text" name="mobile" placeholder=" Mobile Number" value={sign.mobile} onChange={handleInput} /></div>
 		            <Button variant="contained" onClick={handleSignUp}>SIGN UP</Button>
 	            </div>
                 <div id="log">

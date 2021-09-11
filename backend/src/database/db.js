@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 mongoose.connect(process.env.DB).then(()=>console.log("connection Successful")).catch((err)=>console.log(err))
 
@@ -50,4 +50,5 @@ const user = new mongoose.Schema({
 
 const userCollection = new mongoose.model("user",user)
 
-module.exports = userCollection;
+export default userCollection;
+// module.exports = userCollection;

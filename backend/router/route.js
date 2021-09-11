@@ -1,8 +1,8 @@
-const express = require('express')
-const router = express.Router()
-const bcrypt=require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const userCollection = require("../src/database/db")
+import express  from 'express';
+const router = express.Router();
+import bcrypt from 'bcryptjs';
+import jwt   from 'jsonwebtoken';
+import userCollection from "../src/database/db.js";
 
 async function tokenGen(id){
     const token = jwt.sign({_id:id},process.env.SECRET_KEY)
@@ -86,5 +86,5 @@ router.post("/signup",async(req,res)=>{
     }
 })
 
-
-module.exports=router;
+export default router;
+// module.exports.router=router;

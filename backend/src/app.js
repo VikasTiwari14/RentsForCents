@@ -1,16 +1,17 @@
-require('dotenv').config()
-const express = require("express")
+import dotenv from "dotenv"
+dotenv.config();
+import express, { urlencoded, json } from "express";
 const app = express()
-const path=require('path')
+import path from 'path';
 const port = process.env.PORT || 8000;
-const cookieParser = require('cookie-parser')
-const router = require("../router/route")
+import cookieParser from 'cookie-parser';
+import router from "../router/route.js";
 
 
 
-app.use(express.urlencoded({extended:false}))
+app.use(urlencoded({extended:false}))
 app.use(cookieParser())
-app.use(express.json())
+app.use(json())
 app.use(router)
 
 app.listen(port, () => {
