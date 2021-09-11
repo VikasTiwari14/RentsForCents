@@ -1,1 +1,1 @@
-export const RentsForCents = "localhost:8000";
+export const RentsForCents = "http://localhost:8000";

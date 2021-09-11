@@ -47,7 +47,7 @@ const Login = () => {
 		  }
     }
     const handleSignIn = () => {
-        axios.post(`${RentsForCents}/signin`, {
+        axios.post(`/signin`, {
                 "email": sign.email,
                 "password": sign.pass
             },{
@@ -61,7 +61,7 @@ const Login = () => {
         })
     }
     const handleSignUp = () => {
-        axios.post(`${RentsForCents}/signup`, {
+        axios.post(`/signup`, {
             "email": sign.email,
             "password": sign.pass,
             "name": sign.name,
