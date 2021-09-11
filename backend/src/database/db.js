@@ -1,4 +1,5 @@
-import mongoose from 'mongoose'
+// import mongoose from 'mongoose'
+const mongoose = require("mongoose")
 
 mongoose.connect("mongodb+srv://harshitraj12:harshit@cluster0.d755c.mongodb.net/mainDB?retryWrites=true&w=majority").then(()=>console.log("connection Successful")).catch((err)=>console.log(err))
 
@@ -9,8 +10,6 @@ const user = new mongoose.Schema({
     },
     contactNumber:{
         type:Number,
-        max:10,
-        min:10,
         unique:true
     },
     email:{
@@ -50,5 +49,5 @@ const user = new mongoose.Schema({
 
 const userCollection = new mongoose.model("user",user)
 
-export default userCollection;
-// module.exports = userCollection;
+// export default userCollection;
+module.exports = userCollection;

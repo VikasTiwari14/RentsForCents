@@ -1,11 +1,11 @@
-import express  from 'express';
-const router = express.Router();
-import bcrypt from 'bcryptjs';
-import jwt   from 'jsonwebtoken';
-import userCollection from "../src/database/db.js";
+const express = require('express')
+const router = express.Router()
+const bcrypt=require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const userCollection = require("../src/database/db")
 
 async function tokenGen(id){
-    const token = jwt.sign({_id:id},process.env.SECRET_KEY)
+    const token = jwt.sign({_id:id},"kjwehcbskhfwehwjefncwefyioenkejvaejgire")
     return token
 }
 
@@ -59,6 +59,7 @@ router.post("/signin",async(req,res)=>{
 
 router.post("/signup",async(req,res)=>{
     const {customerName,contactNumber,email,password} = req.body
+
     try{
         const userRegistered = await userCollection.findOne({email:email})
         if (userRegistered){
@@ -69,7 +70,7 @@ router.post("/signup",async(req,res)=>{
         }
         else{
             hashed_password = await bcrypt.hash(password,12)
-            const userData = new userCollection({customerName,contactNumber,email,password:hashed_password})
+            const userData = new userCollection({customerName,contactNumber,email,password:hashed_password,uniqueId:email,drivingLicenseId:email,DOB:"",loginToken:customerName})
             const token = await tokenGen(userData._id)
             res.cookie("jwt",token,{expires:new Date(Date.now() + 600000)})
             const result = await userData.save()
@@ -83,8 +84,9 @@ router.post("/signup",async(req,res)=>{
     }
     catch(err){
         res.status(400).json(err)
+        // console.log(err)
     }
 })
 
-export default router;
-// module.exports.router=router;
+
+module.exports=router;
