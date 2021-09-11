@@ -1,17 +1,16 @@
-import dotenv from "dotenv"
-dotenv.config();
-import express, { urlencoded, json } from "express";
+const express = require('express')
 const app = express()
-import path from 'path';
+const path=require('path')
 const port = process.env.PORT || 8000;
-import cookieParser from 'cookie-parser';
-import router from "../router/route.js";
+
+const cookieParser = require('cookie-parser')
+// import router from "../router/route.js";
+const router = require("../router/route")
 
 
-
-app.use(urlencoded({extended:false}))
+app.use(express.urlencoded({extended:false}))
 app.use(cookieParser())
-app.use(json())
+app.use(express.json())
 app.use(router)
 
 app.listen(port, () => {
