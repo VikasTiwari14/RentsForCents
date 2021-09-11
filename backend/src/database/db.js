@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-mongoose.connect(process.env.DB).then(()=>console.log("connection Successful")).catch((err)=>console.log(err))
+mongoose.connect("mongodb+srv://harshitraj12:harshit@cluster0.d755c.mongodb.net/mainDB?retryWrites=true&w=majority").then(()=>console.log("connection Successful")).catch((err)=>console.log(err))
 
 const user = new mongoose.Schema({
     customerName:{
