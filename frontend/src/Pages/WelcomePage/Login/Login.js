@@ -111,7 +111,7 @@ const Login = () => {
             alert("Invalid Mobile Number");
             return;
         }
-        if(sign.email.indexOf('@')===-1){
+        if(sign.email.indexOf('@')===-1 || sign.email.indexOf('.com')===-1){
             alert("Invalid Email Address");
             return;
         }
