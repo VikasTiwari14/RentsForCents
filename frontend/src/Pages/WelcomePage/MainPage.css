@@ -31,6 +31,10 @@
     background: rgb(190, 190, 190);
     color:black;
 }
+#home{
+    background: rgb(190, 190, 190);
+    color:black;
+}
 #loginBtn{
     background: rgb(37 13 139) !important;
     color: white;
@@ -75,4 +79,14 @@
     border-radius: 50%;
     margin: 1%;
     cursor: pointer;
+}
+.closeicon{
+    position: absolute;
+    right: 2%;
+    font-size: 2vw;
+    cursor: pointer;
+}
+.ReactModalPortal>div>div{
+    width: 60%;
+    margin: auto;
 }

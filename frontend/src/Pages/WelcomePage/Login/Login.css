@@ -5,15 +5,16 @@ body{
     width: 5vw;
 }
 .box{
-	margin: 5% 14%;
     background: white;
     border-radius: 10px;
     height: 80vh;
     display: flex;
 }
 #animate{
+    background-image: url("../../../images/login2.jpg");
+    background-size: cover;
 	background-color: #660bc0;
-    width: 29%;
+    width: 50%;
     height: 100%;
     color: white;
     text-align: center;
@@ -26,8 +27,9 @@ body{
 }
 #signIn{
     border: 2px solid white;
+    background-image: none !important;
+    background-color: transparent;
     color: white;
-    background: inherit;
     border-radius: 16px;
     font-size: 1.3vw;
     padding: 2% 8%;
@@ -39,13 +41,13 @@ body{
     flex-direction: column;
     padding-top: 5%;
     align-items: center;
-    width: 61%;
+    width: 50%;
 }
 .paragraph{
     color: #979793;
 }
 #create h1,#log h1{
-	color:#660bc0;
+	color:rgba(6,5,11,1);
 }
 .socialMedia{
     font-size: 1.45vw;
@@ -65,7 +67,7 @@ body{
     flex-direction: column;
     padding-top: 5%;
     align-items: center;
-    width: 61%;
+    width: 50%;
 }
 .materialInput>div>input{
     padding-left: 5%;
@@ -74,19 +76,17 @@ body{
     width: 20vw;
 }
 #create button,#log button{
-	border-radius: 25px;
-    font-size: 1.3vw;
-    width: 25%;
+	font-size: 1.3vw;
+    width: 74%;
     padding: 1%;
-    background: #660bc0;
+    background: rgba(6,5,11,1);
     color: white;
     cursor: pointer;
-    margin-left: 3%;
     margin-top: 4%;
 
 }
 #create button:hover,#log button:hover{
-    color: #660bc0;
+    color: rgba(6,5,11,1);
     background: white;
 }
 .inputContainer{

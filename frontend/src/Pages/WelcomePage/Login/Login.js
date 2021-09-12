@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { RentsForCents } from "../../../Constants/Constants";
 import axios from "axios";
+import login from "../../../images/login.jpg"
 
 
 const Login = () => {
@@ -23,6 +24,11 @@ const Login = () => {
         setPara(isopen?"Enter Your Personal Details And Start Journey With Us.":"To Keep Connected With Us Please Login With Your Credentials");
     },[isopen])
     const handleInput = (e) => {
+        if(e.target.name==='contactNumber'){
+            if(isNaN(e.target.value)|| e.target.value.length>10){
+                return;
+            }
+        }
         setSign({
             ...sign,
             [e.target.name]: e.target.value
@@ -97,6 +103,18 @@ const Login = () => {
 
     const handleSignUp = async (e)=>{
         e.preventDefault();
+        if(sign.contactNumber==="" || sign.customerName==="" || sign.email==="" || sign.password===""){
+            alert("All Fields Are Mandatory");
+            return;
+        }
+        if(sign.contactNumber.length!==10){
+            alert("Invalid Mobile Number");
+            return;
+        }
+        if(sign.email.indexOf('@')===-1){
+            alert("Invalid Email Address");
+            return;
+        }
         const {customerName,contactNumber,email,password} = sign
         const res = await fetch("/signup",{
             method:"POST",
@@ -109,6 +127,17 @@ const Login = () => {
             }),
         });
         const data = await res.json()
+        console.log(data);
+        if(data.status){
+            alert("Your Account Created Successfully");
+            setSign({customerName:"",email:"",password:"",contactNumber:""});
+        }
+        else if(data.message==="user already registered"){
+            alert(data.message);
+        }
+        else{
+            alert("Some Error Occured Please Try Again");
+        }
     }
     
     
