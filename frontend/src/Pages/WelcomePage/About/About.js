@@ -33,7 +33,7 @@ const About = () => {
                 <div className="infoBox">
                     <h2>HARSHIT RAJ</h2>
                     <h3>0103CS203D04</h3>
-                    <h3>harshitraj4389@gmail.com</h3>
+                    <h3>harshitraj4839@gmail.com</h3>
                     <h3>+91 7992209885</h3>
                     <h3>BACKEND DEVELOPER</h3>
                     <p>Developed the backend with the help of Express.js and MongoDB</p>

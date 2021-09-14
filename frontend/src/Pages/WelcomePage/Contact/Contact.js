@@ -19,7 +19,7 @@ const Contact = () => {
             [e.target.name]: e.target.value
         })
     }
-    const submitForm = (e) => {
+    const submitForm = async(e) => {
         e.preventDefault();
         if(value.name==="" || value.message==="" || value.email==="" || value.phone===""){
             alert("Please Fill all the Fields");
@@ -33,6 +33,19 @@ const Contact = () => {
             alert("Invalid Email Address");
             return;
         }
+        const {name,email,phone,message} = value
+        const res = await fetch("/contactUs",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+                'Access-Control-Allow-Origin': '*'
+            },
+            body:JSON.stringify({
+                name,email,phone,message
+            }),
+        });
+        const data = await res.json()
+        console.log(data);
     }
     
     
@@ -47,7 +60,7 @@ const Contact = () => {
                 </div>
                 <div className="detailBox">
                     <HiOutlineMail />
-                    <p>tiwarivikas1407@gmail.com<br />harshitraj4389@gmail.com</p>
+                    <p>tiwarivikas1407@gmail.com<br />harshitraj4839@gmail.com</p>
                 </div>
                 <div className="detailBox">
                     <GoLocation/>
