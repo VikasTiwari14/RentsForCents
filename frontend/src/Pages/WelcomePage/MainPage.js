@@ -17,12 +17,13 @@ import Login from './Login/Login';
 const MainPage = () => {
     const [id, setId] = useState("home");
     const [isopen, setisopen] = useState(false);
+    const [islogedIn, setIslogedIn] = useState(false);
     const history = useHistory();
     const handleNavBar = (e) => {
         console.log(e.target);
         setId(e.target.name);
-        // document.getElementById(e.target.name)?.style.background="rgb(190, 190, 190)";
-        // document.getElementById(e.target.name)?.style.color="black";
+        // document.getElementById(e.target.name)?.style.background="rgb(190, 190, 190) !important";
+        // document.getElementById(e.target.name)?.style.color="black !important";
     }
     const showSection = () => {
         switch(id){
@@ -40,7 +41,7 @@ const MainPage = () => {
         <>
         <ReactModal isOpen={isopen}>
             <FaTimes className="closeicon" onClick={()=> setisopen(false)} />
-            <Login />
+            <Login setIslogedIn={setIslogedIn} />
         </ReactModal>
         <div className="MainPage">
             <div className="NavBarContainer">

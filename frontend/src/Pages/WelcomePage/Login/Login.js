@@ -11,7 +11,7 @@ import axios from "axios";
 import login from "../../../images/login.jpg"
 
 
-const Login = () => {
+const Login = ({setIslogedIn}) => {
     const [sign, setSign] = useState({customerName:"",email:"",password:"",contactNumber:""});
     const [isopen, setisopen] = useState(false);
     const [btn, setBtn] = useState();
@@ -81,6 +81,9 @@ const Login = () => {
             }),
         });
         const data = await res.json()
+        if(data.status){
+            setIslogedIn(true);
+        }
     }
 
 

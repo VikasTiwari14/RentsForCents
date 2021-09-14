@@ -1,0 +1,41 @@
+.ContactPage{
+    background-color: white;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+}
+.ContactPage>*{
+    padding: 2%;
+}
+.sideContact{
+    background-image: url(../../../images/contact3.jpg);
+    background-size: cover;
+    color: white;
+    padding: 4% 11%;
+    border-radius: 10px 0 0 10px;
+}
+.contactForm{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px;
+    margin: 3% 15%;
+    height: fit-content;
+}
+.contactForm>*{
+    margin: 2.3% 0 !important;
+}
+.submitBtn{
+    background-color: rgb(254 34 194) !important;
+    color:white !important;
+    width: 76%;
+    margin: 7% 0 !important;
+}
+.detailBox{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    align-items: center;
+    width: 52%;
+}

@@ -97,18 +97,18 @@ body{
 
 /* ANIMATIONS */
 @keyframes move{
-	0% {width:29%}
-	25% {width:64%}
+	0% {width:50%}
+	25% {width:75%}
 	49% {width:99%}
 	51% {width:99%}
-	75% {width:64%}
-	100% {width:29%}
+	75% {width:75%}
+	100% {width:50%}
 }
 @keyframes moveBack{
-	0% {width:29%}
-	25% {width:64%}
+	0% {width:50%}
+	25% {width:75%}
 	49% {width:99%}
 	51% {width:99%}
-	75% {width:64%}
-	100% {width:29%}
+	75% {width:75%}
+	100% {width:50%}
 }

@@ -55,6 +55,9 @@
 }
 .MainContent{
     margin: -5% 5%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 .Footer{
     background: url(../../images/footer.jpg);

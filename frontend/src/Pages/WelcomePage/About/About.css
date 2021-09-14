@@ -1,0 +1,32 @@
+.AboutPage{
+    background-color: white;
+    border-radius: 10px;
+    display: grid;
+    justify-content: center;
+    padding: 2% 4%;
+    text-align: center;
+}
+.aboutHeading{
+    font-size: 3vw;
+    color: rgb(37 13 139);
+}
+.staffCard1, .staffCard2{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    width: 80%;
+    margin:3% auto;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgb(37 13 139);
+    text-align: left;
+}
+.staffCard2{
+    grid-template-columns: 2fr 1fr;
+    text-align: right !important;
+}
+.staffImage{
+    width: 21rem;
+}
+.infoBox{
+    padding: 2% 15%;
+}
