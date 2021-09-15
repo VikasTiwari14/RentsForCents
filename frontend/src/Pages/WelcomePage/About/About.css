@@ -6,6 +6,12 @@
     padding: 2% 4%;
     text-align: center;
 }
+.AboutPage>fieldset{
+    width: 78%;
+    margin: auto;
+    border-radius: 5px;
+    border-color: rgb(37 13 139);
+}
 .aboutHeading{
     font-size: 3vw;
     color: rgb(37 13 139);

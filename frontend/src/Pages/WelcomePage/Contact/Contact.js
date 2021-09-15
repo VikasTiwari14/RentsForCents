@@ -46,6 +46,13 @@ const Contact = () => {
         });
         const data = await res.json()
         console.log(data);
+        if(data.status===200){
+            alert("Your message sent successfully");
+            setValue({name:"",email:"",phone:"",message:""});
+        }
+        else{
+            alert("Some error occured Please try again...");
+        }
     }
     
     

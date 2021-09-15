@@ -1,6 +1,8 @@
 import React from 'react'
 import Login from "./Pages/WelcomePage/Login/Login"
 import MainPage from './Pages/WelcomePage/MainPage';
+import ManagerDashboard from './Pages/ManagerDashboard/ManagerDashboard';
+import UserDashboard from './Pages/UserDashboard/UserDashboard';
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,8 +16,8 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={MainPage} />
         <Route exact path="/login"><Login /></Route>
-        <Route exact path="/manager-dashboard"></Route>
-        <Route exact path="/user-dashboard"></Route>
+        <Route exact path="/manager-dashboard"><ManagerDashboard /></Route>
+        <Route exact path="/user-dashboard"><UserDashboard /></Route>
       </Switch>
     </Router>
   </div>
