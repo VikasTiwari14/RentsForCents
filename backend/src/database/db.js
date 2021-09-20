@@ -4,27 +4,30 @@ const mongoose = require("mongoose")
 mongoose.connect("mongodb+srv://harshitraj12:harshit@cluster0.d755c.mongodb.net/mainDB?retryWrites=true&w=majority").then(()=>console.log("connection Successful")).catch((err)=>console.log(err))
 
 const address_schema = new mongoose.Schema({
-        address : String,
+        hNo:String,
+        street:String,
+        area : String,
         city: String,
+        landmark:String,
         pinCode : Number,
         state: String,
         country: String
 })
 const bank_schema = new mongoose.Schema({
-    accountNo: String,
-    IFSC: String,
-    branchName : String
+    number: String,
+    name:String,
+    ifsc: String,
+    bankName : String,
+    passbook:String
 })
 
 const user = new mongoose.Schema({
     ID:Number,
     customerName:{
         type:String,
-        trim:true
     },
     contactNumber:{
         type:Number,
-        unique:true
     },
     email:{
         type:String,
@@ -35,20 +38,22 @@ const user = new mongoose.Schema({
         type:String,
         trim:true,
     },
-    uniqueId:{
+    idType:String,
+    idNumber:{
         type:String,
-        trim:true,
-        unique:true
     },
-    drivingLicenseId:{
+    idImage:String,
+    drivingLicense:{
         type:String,
-        trim:true,
-        unique:true
     },
+    drivingLicenseImage:String,
+    userImage:String,
     DOB:
     {
         type:Date,
     },
+    dobProof:String,
+    gender:String,
     address: address_schema,
     bankDetails :bank_schema,
     registeredOn:{
