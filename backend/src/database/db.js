@@ -3,7 +3,21 @@ const mongoose = require("mongoose")
 
 mongoose.connect("mongodb+srv://harshitraj12:harshit@cluster0.d755c.mongodb.net/mainDB?retryWrites=true&w=majority").then(()=>console.log("connection Successful")).catch((err)=>console.log(err))
 
+const address_schema = new mongoose.Schema({
+        address : String,
+        city: String,
+        pinCode : Number,
+        state: String,
+        country: String
+})
+const bank_schema = new mongoose.Schema({
+    accountNo: String,
+    IFSC: String,
+    branchName : String
+})
+
 const user = new mongoose.Schema({
+    ID:Number,
     customerName:{
         type:String,
         trim:true
@@ -35,6 +49,8 @@ const user = new mongoose.Schema({
     {
         type:Date,
     },
+    address: address_schema,
+    bankDetails :bank_schema,
     registeredOn:{
         type: Date,
         default : Date.now   
