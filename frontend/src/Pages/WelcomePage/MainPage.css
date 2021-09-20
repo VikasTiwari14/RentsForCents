@@ -15,12 +15,12 @@
 }
 .NavBarTop{
     display: grid;
-    grid-template-columns: 5fr 2fr;
+    grid-template-columns: 3fr 2fr;
     align-items: center;
 }
 .NavBarElement>button{
     color: white;
-    margin: 0px 2%;
+    margin: 0px 1%;
     padding: 2%;
     background: transparent;
     border: none;

@@ -13,7 +13,6 @@ body{
 #animate{
     background-image: url("../../../images/login2.jpg");
     background-size: cover;
-	background-color: #660bc0;
     width: 50%;
     height: 100%;
     color: white;
@@ -46,7 +45,7 @@ body{
 .paragraph{
     color: #979793;
 }
-#create h1,#log h1{
+#create h1,#log h1,#login h1{
 	color:rgba(6,5,11,1);
 }
 .socialMedia{
@@ -75,9 +74,9 @@ body{
 .materialInput{
     width: 20vw;
 }
-#create button,#log button{
+#create button,#log button,#login button{
 	font-size: 1.3vw;
-    width: 74%;
+    width: 68%;
     padding: 1%;
     background: rgba(6,5,11,1);
     color: white;
@@ -85,7 +84,7 @@ body{
     margin-top: 4%;
 
 }
-#create button:hover,#log button:hover{
+#create button:hover,#log button:hover,#login button:hover{
     color: rgba(6,5,11,1);
     background: white;
 }
@@ -94,7 +93,31 @@ body{
     margin: 1%;
     align-items: center;
 }
-
+.Loginbox{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+}
+#sideBox{
+    background-image: url('../../../images/login3.jpg');
+    background-size: cover;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center
+}
+#login{
+    display: flex;
+    flex-direction: column;
+    padding-top: 5%;
+    align-items: center;
+    justify-content: center;
+}
+#login>*{
+    margin: 2% 0;
+}
 /* ANIMATIONS */
 @keyframes move{
 	0% {width:50%}

@@ -1,0 +1,29 @@
+.AddBike{
+    overflow: auto;
+    max-height: 85vh;
+    margin: 2%;
+    display: grid;
+}
+.AddBikeCard{
+    margin: 3%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 2fr;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid brown;
+    background: white;
+    border-radius: 10px;
+    padding: 3%;
+}
+.AddBikeCard>*{
+    margin: 1%;
+    color: black;
+}
+.AddBikeCard h2{
+    width: 200%;
+    color:brown;
+}
+.AddBikeCard label{
+    text-align: right;
+    margin: 16% 4%;
+}

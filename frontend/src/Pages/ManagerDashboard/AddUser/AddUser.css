@@ -1,0 +1,36 @@
+.AddUser{
+    overflow: auto;
+    max-height: 80vh;
+    margin: 2%;
+    display: grid;
+
+}
+.AddUserCard{
+    margin: 3%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 2fr;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid brown;
+    background: white;
+    border-radius: 10px;
+    padding: 3%;
+}
+.AddUserCard>*{
+    margin: 1%;
+    color: black;
+}
+.AddUserCard h2{
+    width: 200%;
+    color:brown;
+}
+.AddUserCard label{
+    text-align: right;
+    margin: 16% 4%;
+}
+.submitButton{
+    background: brown !important;
+    color: white !important;
+    display: inline-block !important;
+    margin: auto !important;
+}

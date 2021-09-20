@@ -4,20 +4,22 @@ import {FaFacebookF,FaTwitter,FaGooglePlusG,FaLock,FaUser} from "react-icons/fa"
 import {IoMail} from "react-icons/io5";
 import {GrTwitter,GrGoogle} from "react-icons/gr";
 import logo from "../../../images/RentForCentsLogo.png";
+import login2 from "../../../images/login3.jpg";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { RentsForCents } from "../../../Constants/Constants";
 import axios from "axios";
 import login from "../../../images/login.jpg"
+import { useHistory } from "react-router";
 
 
-const Login = ({setIslogedIn}) => {
+const Login = ({isLog}) => {
     const [sign, setSign] = useState({customerName:"",email:"",password:"",contactNumber:""});
     const [isopen, setisopen] = useState(false);
     const [btn, setBtn] = useState();
     const [head, setHead] = useState();
     const [para, setPara] = useState();
-
+    const history= useHistory();
     useEffect(()=>{
         setBtn( isopen?"SIGN UP":"SIGN IN")
         setHead(isopen?"Hello, Friend!":"Welcome Back!");
@@ -82,7 +84,12 @@ const Login = ({setIslogedIn}) => {
         });
         const data = await res.json()
         if(data.status){
-            setIslogedIn(true);
+            if(isLog){
+                history.push({pathname:"/user-dashboard"})
+            }
+            else{
+                history.push({pathname:"/manager-dashboard"})
+            }
         }
     }
 
@@ -146,6 +153,7 @@ const Login = ({setIslogedIn}) => {
     
     return(
         <>
+            {isLog?
             <div className="box">
                 <div id="animate">
                     <img src={logo} className="mainLogo" />
@@ -181,6 +189,21 @@ const Login = ({setIslogedIn}) => {
 		            <Button variant="contained" onClick={handleSignIn}>SIGN IN</Button>
 	            </div>
             </div>
+            :
+            <div className="Loginbox">
+                <div id="sideBox">
+                    <img src={logo} className="mainLogo" />
+                    <h1>Manager Login</h1>
+                </div>
+                <div id="login">
+	                <h1>Sign In</h1>
+		            <div className="inputContainer"><TextField variant="outlined" label="Email" className="materialInput" type="text" name="email"  placeholder=" Email" value={sign.email} onChange={handleInput} />    </div>
+		            <div className="inputContainer"><TextField variant="outlined" label="Password" className="materialInput" type="password" name="password" placeholder=" Password" value={sign.password} onChange={handleInput} /></div>
+		            <label><a href="">Forgot your password?</a></label>
+		            <Button variant="contained" onClick={handleSignIn}>SIGN IN</Button>
+	            </div>
+            </div>
+            }
         </>
     )
 }

@@ -14,7 +14,7 @@ import ReactModal from "react-modal";
 import Login from './Login/Login';
 
 
-const MainPage = () => {
+const MainPage = ({setIsLog,isLog}) => {
     const [id, setId] = useState("home");
     const [isopen, setisopen] = useState(false);
     const [islogedIn, setIslogedIn] = useState(false);
@@ -32,8 +32,13 @@ const MainPage = () => {
             case "contact":return <Contact/>
         }
     }
-    const enableLogin = () => {
+    const enableLogin = (e) => {
         setisopen(true);
+        if(e.target.name==="AdminBtn"){
+            setIsLog(false);
+        }
+        else
+            setIsLog(true);
     }
     
     
@@ -41,7 +46,7 @@ const MainPage = () => {
         <>
         <ReactModal isOpen={isopen}>
             <FaTimes className="closeicon" onClick={()=> setisopen(false)} />
-            <Login setIslogedIn={setIslogedIn} />
+            <Login setIslogedIn={setIslogedIn} isLog={isLog}/>
         </ReactModal>
         <div className="MainPage">
             <div className="NavBarContainer">
@@ -52,6 +57,7 @@ const MainPage = () => {
                         <button id="about" name="about" onClick={handleNavBar}>ABOUT</button>
                         <button id="contact" name="contact" onClick={handleNavBar}>CONTACT</button>
                         <button name="loginBtn" id="loginBtn" onClick={enableLogin}>LOGIN/REGISTER</button>
+                        <button name="AdminBtn" id="loginBtn" onClick={enableLogin}>LOGIN AS MANAGER</button>
                     </div>
                 </div>
                 <div className="NavBarSide">

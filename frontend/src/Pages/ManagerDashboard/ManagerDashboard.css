@@ -1,0 +1,66 @@
+.ManagerDashboard{
+    width:100%;
+    height:100vh;
+    background-color: black;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 8fr;
+    grid-template-areas: "sideC topC"
+                         "sideC mainC";
+}
+.ManagerDashboard>*{
+    padding: 1%;
+}
+.topContent{
+    grid-area: topC;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: right;
+}
+.sideContent h1{
+    text-align: center;
+    color: #cd5500;
+}
+.bell{
+    cursor: pointer;
+    width:1.5rem;
+    height:auto;
+}
+.circle{
+    width:2.5rem;
+    height:2.5rem;
+    border-radius: 50%;
+    background-color: #EAEBEF;
+}
+.sideContent{
+    grid-area: sideC;
+    display: flex;
+    flex-direction: column;
+}
+.dash{
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+}
+.dash>input{
+    background-color: transparent;
+    color: white;
+    border-radius: 10px 0 0 10px;
+    margin-right: -1%;
+    border:none;
+    font-size: 1rem;
+    text-align: center;
+    padding: 1rem 20px;
+    cursor: pointer;
+}
+.mainContent{
+    grid-area: mainC;
+    background-color: #1e1e1e;
+}
+#b1{
+    background-color: #1e1e1e;
+    color: #cd5500;
+}
