@@ -1,0 +1,23 @@
+.Feedback{
+    overflow: auto;
+    max-height: 80vh;
+}
+.FeedbackCard{
+    background-color: white;
+    color:black;
+    margin: 1%;
+    border-radius: 10px;
+    border: 4px solid white;
+    padding: 2% 4%;
+}
+.FeedbackCard:hover{
+    border: 4px solid brown;
+}
+.FeedbackCardTop{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.brownText{
+    color: brown;
+}

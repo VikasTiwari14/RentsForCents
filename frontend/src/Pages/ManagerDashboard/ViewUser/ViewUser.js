@@ -1,11 +1,23 @@
 import React,{useState,useEffect} from "react"
+import "./ViewUser.css"
 
 const ViewUser = () => {
     const [value, setValue] = useState([]);
 
-    useEffect(()=>{
-
-    })
+    useEffect(async()=>{
+        const res = await fetch("/userData",{
+            method:"get",
+            headers:{
+                "Content-Type":"application/json",
+                'Access-Control-Allow-Origin': '*'
+            },
+        });
+        const data = await res.json()
+        console.log(data);
+        if(data.status){
+            setValue(data.data);
+        }
+    },[])
     const openModal = (dt) => {
         
     }
@@ -26,7 +38,7 @@ const ViewUser = () => {
                 </div>
                 {value?.map((dt)=>{
                         return <div className="ViewUserTableBody" onClick={()=>openModal(dt)}>
-                                <div>{dt?.id}</div>
+                                <div>{dt?.ID}</div>
                                 <div>{dt?.customerName}</div>
                                 <div>{dt?.email}</div>
                                 <div>{dt?.contactNumber}</div>
