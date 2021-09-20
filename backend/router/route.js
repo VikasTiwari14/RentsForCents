@@ -75,7 +75,36 @@ router.post("/signup",async(req,res)=>{
         }
         else{
             hashed_password = await bcrypt.hash(password,12)
-            const userData = new userCollection({ID:"",customerName,contactNumber,email,password:hashed_password,uniqueId:email,drivingLicenseId:email,DOB:"",loginToken:customerName})
+            const userData = new userCollection({
+            ID:'',customerName,contactNumber,email,
+            password:hashed_password,
+            // idType:email,
+            // idNumber:email,
+            // idImage:email,
+            // drivingLicense:email,
+            // userImage :email,
+            // DOB:'',
+            // dobProof:email,
+            // gender:email,
+            // address:{
+            //     hNo:email,
+            //     street:email,
+            //     area : email,
+            //     city: email,
+            //     landmark:email,
+            //     pinCode : contactNumber,
+            //     state: email,
+            //     country: email
+            // },
+            // bankdetails:{
+            //     number: email,
+            //     name:email,
+            //     ifsc: email,
+            //     bankName : email,
+            //     passbook:email
+            // },
+            loginToken:''
+        })
             const token = await tokenGen(userData._id)
             // res.cookie("jwt",token,{expires:new Date(Date.now() + 600000)})
             const result = await userData.save()
@@ -97,6 +126,7 @@ router.post("/signup",async(req,res)=>{
         }
     }
     catch(err){
+        console.log(err)
         res.status(400).json(err)
     }
 })
