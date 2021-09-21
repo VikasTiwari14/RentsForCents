@@ -8,6 +8,7 @@ const bike_schema = new mongoose.Schema({
     modelNumber:String,
     vehicleNumber:String,
     rate:Number,
+    vehicleType:String,
     vehicleImage:String
 })
 

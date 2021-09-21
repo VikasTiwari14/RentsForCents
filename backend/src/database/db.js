@@ -20,6 +20,18 @@ const bank_schema = new mongoose.Schema({
     bankName : String,
     passbook:String
 })
+const document_schema = new mongoose.Schema({
+    idType:String,
+    idNumber:{
+        type:String,
+    },
+    idImage:String,
+    drivingLicense:{
+        type:String,
+    },
+    drivingLicenseImage:String,
+    userImage:String,
+})
 
 const user = new mongoose.Schema({
     ID:Number,
@@ -38,16 +50,6 @@ const user = new mongoose.Schema({
         type:String,
         trim:true,
     },
-    idType:String,
-    idNumber:{
-        type:String,
-    },
-    idImage:String,
-    drivingLicense:{
-        type:String,
-    },
-    drivingLicenseImage:String,
-    userImage:String,
     DOB:
     {
         type:Date,
@@ -56,6 +58,7 @@ const user = new mongoose.Schema({
     gender:String,
     address: address_schema,
     bankDetails :bank_schema,
+    documentsDetails:document_schema,
     registeredOn:{
         type: Date,
         default : Date.now   

@@ -230,6 +230,34 @@ router.post('/addBike',async(req,res)=>{
     }
 })
 
+// / Get the Bike data
+router.get('/getBike',async(req,res)=>{
+    try{
+        const data = await bikeDetails.find()
+        if(data)
+        {
+            res.status(200).json({
+                status:200,
+                message:'data found',
+                data: data
+            })
+        }
+        else{
+            res.status(422).json({
+                status:422,
+                message:'No data is available'
+            })
+        }
+    }
+    catch(err){
+        res.status(400).json({
+            status:404,
+            message:'Some error occured'
+        })
+    }
+})
+
+
 // router.put('/update',(req,res)=>{
 //     const {} = req.body
 //     try{
