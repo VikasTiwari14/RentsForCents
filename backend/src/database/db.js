@@ -33,8 +33,7 @@ const document_schema = new mongoose.Schema({
     userImage:String,
 })
 
-const user = new mongoose.Schema({
-    ID:Number,
+const user_schema = new mongoose.Schema({
     customerName:{
         type:String,
     },
@@ -54,9 +53,13 @@ const user = new mongoose.Schema({
     {
         type:Date,
     },
-    dobProof:String,
+    dobImage:String,
     gender:String,
-    address: address_schema,
+})
+const user = new mongoose.Schema({
+    ID:Number,
+    userDetails:user_schema,
+    addressDetails: address_schema,
     bankDetails :bank_schema,
     documentsDetails:document_schema,
     registeredOn:{

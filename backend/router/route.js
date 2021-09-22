@@ -25,7 +25,7 @@ router.get("/login",(req,res)=>{
 router.post("/signin",async(req,res)=>{
     const {email,password} = req.body;
     try{
-        const userRegistered = await userCollection.findOne({email:email})
+        const userRegistered = await userCollection.findOne({'userDetails.email':req.body.email})
         if (userRegistered)
         {
             const valid_password = await bcrypt.compare(password,userRegistered.password);
@@ -63,10 +63,9 @@ router.post("/signin",async(req,res)=>{
 
 // Register
 router.post("/signup",async(req,res)=>{
-    const {customerName,contactNumber,email,password} = req.body
-
+    // const {customerName,contactNumber,email,password} = req.body
     try{
-        const userRegistered = await userCollection.findOne({email:email})
+        const userRegistered = await userCollection.findOne({'userDetails.email':req.body.email})
         if (userRegistered){
             return res.status(422).json({
                 status:false,
@@ -74,35 +73,43 @@ router.post("/signup",async(req,res)=>{
             })
         }
         else{
-            hashed_password = await bcrypt.hash(password,12)
+            hashed_password = await bcrypt.hash(req.body.password,12)
             const userData = new userCollection({
-            ID:'',customerName,contactNumber,email,
-            password:hashed_password,
-            // idType:email,
-            // idNumber:email,
-            // idImage:email,
-            // drivingLicense:email,
-            // userImage :email,
-            // DOB:'',
-            // dobProof:email,
-            // gender:email,
-            // address:{
-            //     hNo:email,
-            //     street:email,
-            //     area : email,
-            //     city: email,
-            //     landmark:email,
-            //     pinCode : contactNumber,
-            //     state: email,
-            //     country: email
-            // },
-            // bankdetails:{
-            //     number: email,
-            //     name:email,
-            //     ifsc: email,
-            //     bankName : email,
-            //     passbook:email
-            // },
+            ID:'',
+            userDetails:{
+                customerName:req.body.fName,
+                contactNumber:req.body.mobile,
+                email:req.body.email,
+                password:hashed_password,
+                DOB:req.body.dob,
+                // dobImage:req.body.image[0],
+                gender:req.body.gender,
+            },
+            addressDetails:{
+                hNo:req.body.hNo,
+                street:req.body.street,
+                area : req.body.area,
+                city: req.body.city,
+                landmark:req.body.landmark,
+                pinCode : req.body.pinCode,
+                state: req.body.state,
+                country: req.body.country
+            },
+            bankDetails:{
+                number: req.body.accNo,
+                name:req.body.accName,
+                ifsc: req.body.ifsc,
+                bankName : req.body.bankName,
+                // passbook:req.body.image[1]
+            },
+            documentDetails:{
+                idType:req.body.idType,
+                idNumber:req.body.id,
+                // idImage:req.body.image[2],
+                drivingLicense:req.body.license,
+                // drivingLicenseImage:req.body.image[3],
+                // userImage:req.body.image[4]
+            },
             loginToken:''
         })
             const token = await tokenGen(userData._id)
