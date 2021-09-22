@@ -54,7 +54,7 @@ const AddUser = () => {
         setValue({...value, [e.target.name] : e.target.value})
     }
     const handleImage = (e) => {
-        console.log(e.target.files[0]);
+        console.log( URL.createObjectURL(e.target.files[0]));
         if(e.target.files){
             let dt= e.target.files[0];
             if(dt?.size<2000000){
