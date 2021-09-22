@@ -84,7 +84,6 @@ router.post("/signup",async(req,res)=>{
                         email:req.body.userDetails.email,
                         password:hashed_password,
                         DOB:req.body.userDetails.dob,
-                        dobImage:req.body.userDetails.dobImage,
                         gender:req.body.userDetails.gender,
                     },
                     addressDetails:{
@@ -102,15 +101,19 @@ router.post("/signup",async(req,res)=>{
                         name:req.body.bankDetails.name,
                         ifsc: req.body.bankDetails.ifsc,
                         bankName : req.body.bankDetails.bankName,
-                        passbook:req.body.bankDetails.passbook
                     },
                     documentDetails:{
                         idType:req.body.documentDetails.idType,
                         idNumber:req.body.documentDetails.idNumber,
-                        idImage:req.body.documentDetails.idImage,
-                        drivingLicense:req.body.documentDetails.drivingLicense,
-                        drivingLicenseImage:req.body.documentDetails.drivingLicenseImage,
-                        userImage:req.body.documentDetails.photo
+                        drivingLicense:req.body.documentDetails.drivingLicense,                
+                        
+                    },
+                    idImage:{
+                        passbook:req.body.idImage.passbook,
+                        idImage:req.body.idImage.idImage,
+                        drivingLicenseImage:req.body.idImage.drivingLicenseImage,
+                        userImage:req.body.idImage.photo,
+                        dobImage:req.body.idImage.dobImage,
                     },
                     loginToken:''
                 })
@@ -331,4 +334,18 @@ router.get('/getBike',async(req,res)=>{
 //         })
 //     }
 // })
+
+// router.post('/add',async(req,res)=>{
+//     const b = new userCollection({
+//         bikeHistory:[{
+//             bookDate:"",
+//             model:req.body.model
+//         }]
+//     })
+//     console.log(b)
+//     const update = await userCollection.updateOne({'userDetails.email':'harshitraj41122@gmail.com'},{$set:{bikeHistory:b}},{new:true})
+//     console.log(update)
+
+// })
+
 module.exports=router;
