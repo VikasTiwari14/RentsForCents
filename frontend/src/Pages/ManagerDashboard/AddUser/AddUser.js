@@ -35,6 +35,8 @@ const AddUser = () => {
         photo:""
     }) 
     const [image, setImage] = useState([]); 
+    const date=new Date();
+    const todayDate=date.getFullYear()+"-"+((date.getMonth()+1)<10?"0"+(date.getMonth()+1):(date.getMonth()+1))+"-"+(date.getDate()<10?"0"+date.getDate():date.getDate());
     const handleValue = (e) => {
         if(e.target.name==="mobile"){
             if(isNaN(e.target.value)|| e.target.value.length>10){
@@ -86,6 +88,12 @@ const AddUser = () => {
         document.getElementsByClassName("fileSelect")[e.target.name].click()
     }
     const submitForm = async() => {
+        console.log(image[1])
+        for(let i=0;i<image.length;i++){
+            if(!image[i]){
+                return;
+            }
+        }
         let body = {
             addressDetails:{
                 hNo:value.hNo,
@@ -119,7 +127,7 @@ const AddUser = () => {
                 idImage:  URL.createObjectURL(image[2]),
                 drivingLicense: value.license,
                 drivingLicenseImage:  URL.createObjectURL(image[3]),
-                photo: URL.createObjectURL(image[4])
+                photo: image[4]
             }
         }
         const res = await fetch("/signup",{
@@ -164,7 +172,7 @@ const AddUser = () => {
                     <MenuItem value="Others">Others</MenuItem>
                 </Select>
                 <label>Date of Birth</label>
-                <TextField variant="outlined" className="materialInput" type="date" name="dob" value={value.dob} onChange={handleValue} />
+                <input className="materialInput" type="date" name="dob" max={todayDate} value={value.dob} onChange={handleValue} />
                 <label>Upload DOB proff</label>
                 <input variant="outlined" className="materialInput fileSelect" type="file" name="0" onChange={handleImage} hidden="hidden" />
                 <TextField variant="outlined" className="materialInput" type="text" name="0" value={value.dobImage} onClick={handleClick} disabled={true}/>
