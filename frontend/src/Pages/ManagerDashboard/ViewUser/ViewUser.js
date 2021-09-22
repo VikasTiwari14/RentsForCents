@@ -13,7 +13,7 @@ const ViewUser = () => {
             },
         });
         const data = await res.json()
-        console.log(data);
+        console.log(data.data);
         if(data.status){
             setValue(data.data);
         }
@@ -39,13 +39,13 @@ const ViewUser = () => {
                 {value?.map((dt)=>{
                         return <div className="ViewUserTableBody" onClick={()=>openModal(dt)}>
                                 <div>{dt?.ID}</div>
-                                <div>{dt?.user?.name}</div>
-                                <div>{dt?.user?.email}</div>
-                                <div>{dt?.user?.contactNumber}</div>
-                                <div>{dt?.user?.gender}</div>
-                                <div>{dt?.user?.age}</div>
-                                <div>{dt?.address?.city}</div>
-                                <div>{dt?.address?.state}</div>
+                                <div>{dt?.userDetails?.customerName}</div>
+                                <div>{dt?.userDetails?.email}</div>
+                                <div>{dt?.userDetails?.contactNumber}</div>
+                                <div>{dt?.userDetails?.gender}</div>
+                                <div>{dt?.userDetails?.age}</div>
+                                <div>{dt?.addressDetails?.city}</div>
+                                <div>{dt?.addressDetails?.state}</div>
                         </div>
                 })}
             </div>
