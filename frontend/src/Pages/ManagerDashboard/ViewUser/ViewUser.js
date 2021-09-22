@@ -39,13 +39,13 @@ const ViewUser = () => {
                 {value?.map((dt)=>{
                         return <div className="ViewUserTableBody" onClick={()=>openModal(dt)}>
                                 <div>{dt?.ID}</div>
-                                <div>{dt?.customerName}</div>
-                                <div>{dt?.email}</div>
-                                <div>{dt?.contactNumber}</div>
-                                <div>{dt?.gender}</div>
-                                <div>{dt?.age}</div>
-                                <div>{dt?.city}</div>
-                                <div>{dt?.state}</div>
+                                <div>{dt?.user?.name}</div>
+                                <div>{dt?.user?.email}</div>
+                                <div>{dt?.user?.contactNumber}</div>
+                                <div>{dt?.user?.gender}</div>
+                                <div>{dt?.user?.age}</div>
+                                <div>{dt?.address?.city}</div>
+                                <div>{dt?.address?.state}</div>
                         </div>
                 })}
             </div>
