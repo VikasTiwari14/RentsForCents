@@ -14,7 +14,7 @@ import { useHistory } from "react-router";
 
 
 const Login = ({isLog}) => {
-    const [sign, setSign] = useState({customerName:"",email:"",password:"",contactNumber:""});
+    const [sign, setSign] = useState({fName:"",email:"",password:"",mobile:""});
     const [isopen, setisopen] = useState(false);
     const [btn, setBtn] = useState();
     const [head, setHead] = useState();
@@ -26,7 +26,7 @@ const Login = ({isLog}) => {
         setPara(isopen?"Enter Your Personal Details And Start Journey With Us.":"To Keep Connected With Us Please Login With Your Credentials");
     },[isopen])
     const handleInput = (e) => {
-        if(e.target.name==='contactNumber'){
+        if(e.target.name==='mobile'){
             if(isNaN(e.target.value)|| e.target.value.length>10){
                 return;
             }
@@ -113,11 +113,11 @@ const Login = ({isLog}) => {
 
     const handleSignUp = async (e)=>{
         e.preventDefault();
-        if(sign.contactNumber==="" || sign.customerName==="" || sign.email==="" || sign.password===""){
+        if(sign.mobile==="" || sign.fName==="" || sign.email==="" || sign.password===""){
             alert("All Fields Are Mandatory");
             return;
         }
-        if(sign.contactNumber.length!==10){
+        if(sign.mobile.length!==10){
             alert("Invalid Mobile Number");
             return;
         }
@@ -125,7 +125,7 @@ const Login = ({isLog}) => {
             alert("Invalid Email Address");
             return;
         }
-        const {customerName,contactNumber,email,password} = sign
+        const {fName,mobile,email,password} = sign
         const res = await fetch("/signup",{
             method:"POST",
             headers:{
@@ -133,14 +133,14 @@ const Login = ({isLog}) => {
                 'Access-Control-Allow-Origin': '*'
             },
             body:JSON.stringify({
-                customerName,contactNumber,email,password
+                fName,mobile,email,password
             }),
         });
         const data = await res.json()
         console.log(data);
         if(data.status){
             alert("Your Account Created Successfully");
-            setSign({customerName:"",email:"",password:"",contactNumber:""});
+            setSign({fName:"",email:"",password:"",mobile:""});
         }
         else if(data.message==="user already registered"){
             alert(data.message);
@@ -169,10 +169,10 @@ const Login = ({isLog}) => {
 		                <GrGoogle className="socialMedia" />
                     </div>
 		            <p className="paragraph">or use your email for registeration</p>
-		            <div className="inputContainer"><TextField variant="outlined" label="Name" className="materialInput" type="text" name="customerName" placeholder=" Name" value={sign.customerName} onChange={handleInput}  />       </div>
+		            <div className="inputContainer"><TextField variant="outlined" label="Name" className="materialInput" type="text" name="fName" placeholder=" Name" value={sign.fName} onChange={handleInput}  />       </div>
 		            <div className="inputContainer"><TextField variant="outlined" label="Email" className="materialInput" type="text" name="email"  placeholder=" Email" value={sign.email} onChange={handleInput} />    </div>
 		            <div className="inputContainer"><TextField variant="outlined" label="Password" className="materialInput" type="password" name="password" placeholder=" Password" value={sign.password} onChange={handleInput} /></div>
-		            <div className="inputContainer"><TextField variant="outlined" label="Mobile Number" className="materialInput" type="text" name="contactNumber" placeholder=" Mobile Number" value={sign.contactNumber} onChange={handleInput} /></div>
+		            <div className="inputContainer"><TextField variant="outlined" label="Mobile Number" className="materialInput" type="text" name="mobile" placeholder=" Mobile Number" value={sign.mobile} onChange={handleInput} /></div>
 		            <Button variant="contained" onClick={handleSignUp}>SIGN UP</Button>
 	            </div>
                 <div id="log">
