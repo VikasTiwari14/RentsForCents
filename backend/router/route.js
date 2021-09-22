@@ -64,77 +64,126 @@ router.post("/signin",async(req,res)=>{
 // Register
 router.post("/signup",async(req,res)=>{
     // const {customerName,contactNumber,email,password} = req.body
-    try{
-        const userRegistered = await userCollection.findOne({'userDetails.email':req.body.email})
-        if (userRegistered){
-            return res.status(422).json({
-                status:false,
-                message:"user already registered"
-            })
-        }
-        else{
-            hashed_password = await bcrypt.hash(req.body.password,12)
-            const userData = new userCollection({
-            ID:'',
-            userDetails:{
-                customerName:req.body.fName,
-                contactNumber:req.body.mobile,
-                email:req.body.email,
-                password:hashed_password,
-                DOB:req.body.dob,
-                // dobImage:req.body.image[0],
-                gender:req.body.gender,
-            },
-            addressDetails:{
-                hNo:req.body.hNo,
-                street:req.body.street,
-                area : req.body.area,
-                city: req.body.city,
-                landmark:req.body.landmark,
-                pinCode : req.body.pinCode,
-                state: req.body.state,
-                country: req.body.country
-            },
-            bankDetails:{
-                number: req.body.accNo,
-                name:req.body.accName,
-                ifsc: req.body.ifsc,
-                bankName : req.body.bankName,
-                // passbook:req.body.image[1]
-            },
-            documentDetails:{
-                idType:req.body.idType,
-                idNumber:req.body.id,
-                // idImage:req.body.image[2],
-                drivingLicense:req.body.license,
-                // drivingLicenseImage:req.body.image[3],
-                // userImage:req.body.image[4]
-            },
-            loginToken:''
-        })
-            const token = await tokenGen(userData._id)
-            // res.cookie("jwt",token,{expires:new Date(Date.now() + 600000)})
-            const result = await userData.save()
-            availData = await userCollection.find().sort({_id:-1}).limit(1).skip(1)
-            if(availData.length!=0)
-            {
-                unique_id = Number(availData[0].ID) + 1
+    if(req.body.addressDetails || req.body.bankDetails || req.body.documentDetails)
+        {
+            try{
+                const userRegistered = await userCollection.findOne({'userDetails.email':req.body.userDetails.email})
+                if (userRegistered){
+                    return res.status(422).json({
+                        status:false,
+                        message:"user already registered"
+                    })
+                }
+                else{
+                    hashed_password = await bcrypt.hash(req.body.userDetails.password,12)
+                    const userData = new userCollection({
+                    ID:'',
+                    userDetails:{
+                        customerName:req.body.userDetails.fName,
+                        contactNumber:req.body.userDetails.mobile,
+                        email:req.body.userDetails.email,
+                        password:hashed_password,
+                        DOB:req.body.userDetails.dob,
+                        dobImage:req.body.userDetails.dobImage,
+                        gender:req.body.userDetails.gender,
+                    },
+                    addressDetails:{
+                        hNo:req.body.addressDetails.hNo,
+                        street:req.body.addressDetails.street,
+                        area : req.body.addressDetails.area,
+                        city: req.body.addressDetails.city,
+                        landmark:req.body.addressDetails.landmark,
+                        pinCode : req.body.addressDetails.pinCode,
+                        state: req.body.addressDetails.state,
+                        country: req.body.addressDetails.country
+                    },
+                    bankDetails:{
+                        number: req.body.bankDetails.number,
+                        name:req.body.bankDetails.name,
+                        ifsc: req.body.bankDetails.ifsc,
+                        bankName : req.body.bankDetails.bankName,
+                        passbook:req.body.bankDetails.passbook
+                    },
+                    documentDetails:{
+                        idType:req.body.documentDetails.idType,
+                        idNumber:req.body.documentDetails.idNumber,
+                        idImage:req.body.documentDetails.idImage,
+                        drivingLicense:req.body.documentDetails.drivingLicense,
+                        drivingLicenseImage:req.body.documentDetails.drivingLicenseImage,
+                        userImage:req.body.documentDetails.photo
+                    },
+                    loginToken:''
+                })
+                    const token = await tokenGen(userData._id)
+                    // res.cookie("jwt",token,{expires:new Date(Date.now() + 600000)})
+                    const result = await userData.save()
+                    availData = await userCollection.find().sort({_id:-1}).limit(1).skip(1)
+                    if(availData.length!=0)
+                    {
+                        unique_id = Number(availData[0].ID) + 1
+                    }
+                    else
+                    {
+                        unique_id=1000
+                    }            
+                    const updatedData = await userCollection.findByIdAndUpdate({_id:userData._id},{$set:{registerToken:token,ID:unique_id}},{new:true})
+                    res.status(200).json({
+                        data:updatedData,
+                        status:true,
+                        message:"Registered"
+                    })   
+                }
             }
-            else
-            {
-                unique_id=1000
-            }            
-            const updatedData = await userCollection.findByIdAndUpdate({_id:userData._id},{$set:{registerToken:token,ID:unique_id}},{new:true})
-            res.status(200).json({
-                data:updatedData,
-                status:true,
-                message:"Registered"
-            })   
+            catch(err){
+                console.log(err)
+                res.status(400).json(err)
+            }
         }
-    }
-    catch(err){
-        console.log(err)
-        res.status(400).json(err)
+    else{
+        try{
+            const userRegistered = await userCollection.findOne({'userDetails.email':req.body.userDetails.email})
+            if (userRegistered){
+                return res.status(422).json({
+                    status:false,
+                    message:"user already registered"
+                })
+            }
+            else{
+                hashed_password = await bcrypt.hash(req.body.userDetails.password,12)
+                const userData = new userCollection({
+                ID:'',
+                userDetails:{
+                    customerName:req.body.userDetails.fName,
+                    contactNumber:req.body.userDetails.mobile,
+                    email:req.body.userDetails.email,
+                    password:hashed_password,
+                },
+                loginToken:''
+                })
+                const token = await tokenGen(userData._id)
+                    // res.cookie("jwt",token,{expires:new Date(Date.now() + 600000)})
+                const result = await userData.save()
+                availData = await userCollection.find().sort({_id:-1}).limit(1).skip(1)
+                if(availData.length!=0)
+                {
+                        unique_id = Number(availData[0].ID) + 1
+                }
+                else
+                {
+                        unique_id=1000
+                }            
+                const updatedData = await userCollection.findByIdAndUpdate({_id:userData._id},{$set:{registerToken:token,ID:unique_id}},{new:true})
+                res.status(200).json({
+                        data:updatedData,
+                        status:true,
+                        message:"Registered"
+                })   
+            }
+        }
+        catch(err){
+            console.log(err)
+            res.status(400).json(err)
+        }
     }
 })
 

@@ -87,7 +87,7 @@ const AddUser = () => {
     }
     const submitForm = async() => {
         let body = {
-            address:{
+            addressDetails:{
                 hNo:value.hNo,
                 street:value.street,
                 area : value.area,
@@ -97,23 +97,23 @@ const AddUser = () => {
                 state: value.state,
                 country: value.country
             },
-            bankdetails:{
+            bankDetails:{
                     number: value.accNo,
                     name:value.accName,
                     ifsc: value.ifsc,
                     bankName : value.bankName,
                     passbook: URL.createObjectURL(image[1])
             },
-            user:{
-                name: value.fName+" "+value.lName,
+            userDetails:{
+                fName: value.fName+" "+value.lName,
                 email: value.email,
-                contactNumber: value.mobile,
+                mobile: value.mobile,
                 gender: value.gender,
                 dob: value.dob,
                 password : value.pass,
                 dobImage:  URL.createObjectURL(image[0])
             },
-            document:{
+            documentDetails:{
                 idType: value.idType,
                 idNumber: value.id,
                 idImage:  URL.createObjectURL(image[2]),

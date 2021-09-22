@@ -9,7 +9,7 @@ const address_schema = new mongoose.Schema({
         area : String,
         city: String,
         landmark:String,
-        pinCode : Number,
+        pinCode : String,
         state: String,
         country: String
 })
@@ -61,7 +61,7 @@ const user = new mongoose.Schema({
     userDetails:user_schema,
     addressDetails: address_schema,
     bankDetails :bank_schema,
-    documentsDetails:document_schema,
+    documentDetails:document_schema,
     registeredOn:{
         type: Date,
         default : Date.now   

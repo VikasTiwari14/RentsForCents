@@ -126,6 +126,13 @@ const Login = ({isLog}) => {
             return;
         }
         const {fName,mobile,email,password} = sign
+        const userDetails =
+        {
+                fName: fName,
+                email: email,
+                contactNumber: mobile,
+                password:password
+        }
         const res = await fetch("/signup",{
             method:"POST",
             headers:{
@@ -133,7 +140,7 @@ const Login = ({isLog}) => {
                 'Access-Control-Allow-Origin': '*'
             },
             body:JSON.stringify({
-                fName,mobile,email,password
+                userDetails
             }),
         });
         const data = await res.json()
