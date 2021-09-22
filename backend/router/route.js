@@ -108,13 +108,7 @@ router.post("/signup",async(req,res)=>{
                         drivingLicense:req.body.documentDetails.drivingLicense,                
                         
                     },
-                    idImage:{
-                        passbook:req.body.idImage.passbook,
-                        idImage:req.body.idImage.idImage,
-                        drivingLicenseImage:req.body.idImage.drivingLicenseImage,
-                        userImage:req.body.idImage.photo,
-                        dobImage:req.body.idImage.dobImage,
-                    },
+                    images:req.body.image,
                     loginToken:''
                 })
                     const token = await tokenGen(userData._id)
@@ -337,15 +331,16 @@ router.get('/getBike',async(req,res)=>{
 
 // router.post('/add',async(req,res)=>{
 //     const b = new userCollection({
-//         bikeHistory:[{
-//             bookDate:"",
-//             model:req.body.model
-//         }]
+//         bikeHistory:[
+//             {
+//                 model=req.body.model
+//             }
+//         ]
 //     })
 //     console.log(b)
-//     const update = await userCollection.updateOne({'userDetails.email':'harshitraj41122@gmail.com'},{$set:{bikeHistory:b}},{new:true})
-//     console.log(update)
-
+//     const userRegistered = await userCollection.findOne({'userDetails.email':'harshitraj41122@gmail.com'})
+//     const update = await userCollection.findByIdAndUpdate({_id:userRegistered._id},{$push:{'bikeHistory.bikes':b}},{new:true})
+//     res.json(update)
 // })
 
 module.exports=router;
