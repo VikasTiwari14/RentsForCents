@@ -124,7 +124,7 @@ const AddUser = () => {
                     name:value.accName,
                     ifsc: value.ifsc,
                     bankName : value.bankName,
-                    // passbook: URL.createObjectURL(image[1])
+                    passbook: URL.createObjectURL(image[1])
             },
             userDetails:{
                 fName: value.fName+" "+value.lName,
@@ -133,17 +133,16 @@ const AddUser = () => {
                 gender: value.gender,
                 dob: value.dob,
                 password : value.pass,
-                // dobImage:  URL.createObjectURL(image[0])
+                dobImage:  URL.createObjectURL(image[0])
             },
             documentDetails:{
                 idType: value.idType,
                 idNumber: value.id,
-                // idImage:  URL.createObjectURL(image[2]),
+                idImage:  URL.createObjectURL(image[2]),
                 drivingLicense: value.license,
-                // drivingLicenseImage:  URL.createObjectURL(image[3]),
-                // photo: image[4]
+                drivingLicenseImage:  URL.createObjectURL(image[3]),
+                photo: image[4]
             },
-            images:image
         }
         const res = await fetch("/signup",{
             method:"POST",
