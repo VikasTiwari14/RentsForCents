@@ -124,26 +124,25 @@ const AddUser = () => {
                     name:value.accName,
                     ifsc: value.ifsc,
                     bankName : value.bankName,
-                    // passbook: URL.createObjectURL(image[1])
+                    passbook: image[1]
             },
             userDetails:{
-                fName: value.fName+" "+value.lName,
+                name: value.fName+" "+value.lName,
                 email: value.email,
                 mobile: value.mobile,
                 gender: value.gender,
                 dob: value.dob,
                 password : value.pass,
-                // dobImage:  URL.createObjectURL(image[0])
+                dobImage: image[0]
             },
             documentDetails:{
                 idType: value.idType,
                 idNumber: value.id,
-                // idImage:  URL.createObjectURL(image[2]),
+                idImage:  image[2],
                 drivingLicense: value.license,
-                // drivingLicenseImage:  URL.createObjectURL(image[3]),
-                // photo: image[4]
+                drivingLicenseImage:  image[3],
+                photo: image[4]
             },
-            images:image
         }
         const res = await fetch("/signup",{
             method:"POST",

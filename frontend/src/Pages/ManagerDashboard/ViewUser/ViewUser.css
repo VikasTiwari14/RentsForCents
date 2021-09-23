@@ -18,3 +18,27 @@
     background-color: #EAEBEF !important;
     color: black;
 }
+.ADDUserCardImage{
+    margin: 3%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid brown;
+    background: white;
+    border-radius: 10px;
+    padding: 3%;
+}
+.inp{
+    background-color: rgb(240 240 240);
+    border: 2px solid #2f2f2f;
+    min-height: 2vw;
+    height: fit-content;
+    border-radius: 5px;
+    padding: 3%;
+    display: flex;
+    align-items: center;
+}
+.detailPage>div>div{
+    width: 90%;
+}

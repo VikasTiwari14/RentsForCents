@@ -59,6 +59,7 @@
 .mainContent{
     grid-area: mainC;
     background-color: #1e1e1e;
+    overflow: auto;
 }
 #b1{
     background-color: #1e1e1e;
