@@ -11,7 +11,7 @@ const AddBike = () => {
         type:"",
         image:""
     })
-    const [image, setImage] = useState([]);
+    const [image, setImage] = useState("");
 
     const handleValue = (e) => {
         setValue({...value, [e.target.name] : e.target.value})
@@ -21,9 +21,12 @@ const AddBike = () => {
             let dt= e.target.files[0];
             if(dt?.size<2000000){
                 if(dt.type==="image/png" || dt.type==="image/jpeg" || dt.type==="image/tiff" || dt.type==="image/bmp" || dt.type==="image/svg+xml"){
-                    let newtext = [...image];
-                    newtext[0] = dt;
-                    setImage(newtext);
+                    var reader = new FileReader();
+                    reader.onload = function(event) {
+                        console.log(event.target.result)
+                        setImage(event.target.result);
+                    };
+                    reader.readAsDataURL(dt);
                     setValue({...value,image : dt?.name});
                 }
                 else{
@@ -46,7 +49,7 @@ const AddBike = () => {
             vehicleNumber: value.number,
             rate: value.rate,
             type: value.type,
-            vehicleImage: image[0],
+            vehicleImage: image,
         }
         const res = await fetch("/addBike",{
             method:"POST",

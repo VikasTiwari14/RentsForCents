@@ -3,17 +3,26 @@
     grid-template-columns: 1fr 1fr;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    color: #EAEBEF;
-    border: 1px solid #EAEBEF;
-    margin: 2% 0;
-    cursor: pointer;
+    background-color: white;
+    color:black;
+    margin: 1%;
+    border-radius: 10px;
+    border: 4px solid white;
 }
 .bikeImage{
     width: 100%;
     height: 100%;
 }
-.bikeImage:hover{
-    background-color: #EAEBEF !important;
-    color: black;
+.bikeDetail{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.bikeDetail>*{
+    margin: 3%;
+}
+.ViewBikeCard:hover{
+    border: 4px solid brown;
+}
+.ViewBikeCardLeft{
+    padding: 2% 4%;
 }
