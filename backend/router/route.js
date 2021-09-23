@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const userCollection = require("../src/database/db")
 const contact_collection = require("../src/database/contactDB");
 const bikeDetails = require('../src/database/bikeDB')
+const managerCollection = require('../src/database/managerDB')
 var unique_id = 1000
 
 async function tokenGen(id){
@@ -313,6 +314,41 @@ router.get('/getBike',async(req,res)=>{
     }
 })
 
+
+router.post('/managerCred',async(req,res)=>{
+    const {email,password} = req.body;
+    try{
+        const managerRegistered = await managerCollection.findOne({email:email})
+        console.log(managerRegistered)
+        if (managerRegistered)
+        {
+
+            if(managerRegistered.password === password)
+            {
+                res.json({
+                    status:200,
+                    message:'Manager data found',
+                    data:managerRegistered
+                })
+            }
+            else{
+                res.status(400).json({
+                    status:false,
+                    message:"Invalid Credentials"
+                })
+            }
+        }
+        else{
+            res.status(400).json({
+                status:false,
+                message:"Manager Not registered"
+            })
+        }
+    }
+    catch(err){
+        res.status(422).json(err)
+    }
+})
 
 // router.put('/update',(req,res)=>{
 //     const {} = req.body
