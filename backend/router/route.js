@@ -84,6 +84,7 @@ router.post("/signup",async(req,res)=>{
                         email:req.body.userDetails.email,
                         password:hashed_password,
                         DOB:req.body.userDetails.dob,
+                        dobImage:req.body.userDetails.dobImage,
                         gender:req.body.userDetails.gender,
                     },
                     addressDetails:{
@@ -101,14 +102,16 @@ router.post("/signup",async(req,res)=>{
                         name:req.body.bankDetails.name,
                         ifsc: req.body.bankDetails.ifsc,
                         bankName : req.body.bankDetails.bankName,
+                        passbook: req.body.bankDetails.passbook
                     },
                     documentDetails:{
                         idType:req.body.documentDetails.idType,
                         idNumber:req.body.documentDetails.idNumber,
-                        drivingLicense:req.body.documentDetails.drivingLicense,                
-                        
+                        drivingLicense:req.body.documentDetails.drivingLicense,     
+                        idImage:req.body.documentDetails.idImage,
+                        drivingLicenseImage:req.body.documentDetails.drivingLicenseImage,
+                        photo:req.body.documentDetails.photo
                     },
-                    images:req.body.image,
                     loginToken:''
                 })
                     const token = await tokenGen(userData._id)
@@ -330,16 +333,14 @@ router.get('/getBike',async(req,res)=>{
 // })
 
 // router.post('/add',async(req,res)=>{
-//     const b = new userCollection({
-//         bikeHistory:[
-//             {
-//                 model=req.body.model
-//             }
-//         ]
-//     })
-//     console.log(b)
+//     const obj = {
+//         model:req.body.model,
+//         company:req.body.company
+//     } 
+
 //     const userRegistered = await userCollection.findOne({'userDetails.email':'harshitraj41122@gmail.com'})
-//     const update = await userCollection.findByIdAndUpdate({_id:userRegistered._id},{$push:{'bikeHistory.bikes':b}},{new:true})
+//     // const update = await userCollection.findByIdAndUpdate({_id:userRegistered._id},{$push:{'bikes.bikeHistory':{$each:[{model:req.body.model}]}}},{new:true})
+//     const update = await userCollection.findByIdAndUpdate({_id:userRegistered._id},{$push:{'bikes.bikeHistory':{$each:[obj]}}},{new:true})
 //     res.json(update)
 // })
 

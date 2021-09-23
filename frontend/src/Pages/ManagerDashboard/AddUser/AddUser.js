@@ -124,7 +124,11 @@ const AddUser = () => {
                     name:value.accName,
                     ifsc: value.ifsc,
                     bankName : value.bankName,
+<<<<<<< HEAD
                     passbook: image[1]
+=======
+                    passbook: URL.createObjectURL(image[1])
+>>>>>>> 357cf7d35e6ea9fd79cc1a62a57299488b5f91a8
             },
             userDetails:{
                 name: value.fName+" "+value.lName,
@@ -133,14 +137,24 @@ const AddUser = () => {
                 gender: value.gender,
                 dob: value.dob,
                 password : value.pass,
+<<<<<<< HEAD
                 dobImage: image[0]
+=======
+                dobImage:  URL.createObjectURL(image[0])
+>>>>>>> 357cf7d35e6ea9fd79cc1a62a57299488b5f91a8
             },
             documentDetails:{
                 idType: value.idType,
                 idNumber: value.id,
+<<<<<<< HEAD
                 idImage:  image[2],
                 drivingLicense: value.license,
                 drivingLicenseImage:  image[3],
+=======
+                idImage:  URL.createObjectURL(image[2]),
+                drivingLicense: value.license,
+                drivingLicenseImage:  URL.createObjectURL(image[3]),
+>>>>>>> 357cf7d35e6ea9fd79cc1a62a57299488b5f91a8
                 photo: image[4]
             },
         }
