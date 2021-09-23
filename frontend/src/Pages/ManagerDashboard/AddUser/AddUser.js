@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react";
 import "./AddUser.css";
 import { TextField, Button, Select, MenuItem } from "@material-ui/core";
+import {HiUpload} from "react-icons/hi"
 
 const AddUser = () => {
     const [value, setValue] = useState({
@@ -21,18 +22,18 @@ const AddUser = () => {
         pincode:"",
         id:"",
         idType:"",
-        idImage:"",
+        idImage:"UPLOAD IMAGE",
         license:"",
-        licenseImage:"",
+        licenseImage:"UPLOAD IMAGE",
         accNo:"",
         accName:"",
         ifsc:"",
         bankName:"",
-        passBook:"",
+        passBook:"UPLOAD IMAGE",
         userImage:"",
         landmark:"",
-        dobImage:"",
-        photo:""
+        dobImage:"UPLOAD IMAGE",
+        photo:"UPLOAD IMAGE"
     }) 
     const [image, setImage] = useState([]); 
     const [images, setImages] = useState([]);
@@ -104,8 +105,17 @@ const AddUser = () => {
     const submitForm = async() => {
         for(let i=0;i<image.length;i++){
             if(!image[i]){
+                alert("Please upload all images");
                 return;
             }
+        }
+        if(value.hNo===""||value.city===""||value.pincode===""||value.state===""||value.country===""||value.accNo===""||value.accName===""||value.bankName===""||value.ifsc===""||value.fName===""||value.lName===""||value.mobile===""||value.gender===""||value.email===""||value.dob===""||value.pass===""||value.cPass===""||value.idType===""||value.id===""||value.license===""){
+            alert("Please fill all the required field");
+            return;
+        }
+        if(value.pass!==value.cPass){
+            alert("Password not matching");
+            return;
         }
         console.log(image)
         let body = {
@@ -157,6 +167,7 @@ const AddUser = () => {
         if(data.status){
             alert("Your Account Created Successfully");
             setImage([]);
+            setValue({ fName:"", lName:"", email:"", mobile:"", gender:"", dob:"", pass:"", cPass:"", hNo:"", street:"", area:"", city:"", state:"", country:"", pincode:"", id:"", idType:"", idImage:"", license:"", licenseImage:"", accNo:"", accName:"", ifsc:"", bankName:"", passBook:"", userImage:"", landmark:"", dobImage:"", photo:""})
         }
         else if(data.message==="user already registered"){
             alert(data.message);
@@ -212,6 +223,8 @@ const AddUser = () => {
                 <TextField variant="outlined" className="materialInput" type="text" name="city" value={value.city} onChange={handleValue} />
                 <label>State</label>
                 <TextField variant="outlined" className="materialInput" type="text" name="state" value={value.state} onChange={handleValue} />
+                <label>Country</label>
+                <TextField variant="outlined" className="materialInput" type="text" name="country" value={value.country} onChange={handleValue} />
             </div>
             <div className="AddUserCard">
                 <h2>Bank Information</h2><label></label><label></label><label></label>

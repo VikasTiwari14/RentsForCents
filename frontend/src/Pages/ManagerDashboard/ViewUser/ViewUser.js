@@ -1,7 +1,9 @@
 import React,{useState,useEffect} from "react"
 import { FaTimes} from "react-icons/fa";
 import ReactModal from "react-modal"
+import {GoVerified,GoUnverified} from "react-icons/go"
 import "./ViewUser.css"
+import { TextField, Button, Select, MenuItem } from "@material-ui/core";
 
 const ViewUser = () => {
     const [value, setValue] = useState([]);
@@ -21,7 +23,7 @@ const ViewUser = () => {
         if(data.status){
             setValue(data.data);
         }
-    },[])
+    },[isopen])
     const openModal = (dt) => {
         setDdata(dt);
         setisopen(true);
@@ -32,7 +34,7 @@ const ViewUser = () => {
             <ReactModal isOpen={isopen} portalClassName="detailPage">
                 <FaTimes className="closeicon" onClick={()=> setisopen(false)} />
                 <div className="AddUser">
-                    <h2>VIEW USER</h2>
+                    <div className="viewUserHead"><h2>VIEW USER</h2><Button className="verifyButton">Verify User</Button></div>
                     <div className="AddUserCard">
                         <h2>General Information</h2><label></label><label></label><label></label>
                         <label>Name</label>
@@ -93,7 +95,7 @@ const ViewUser = () => {
                         </div>
                         <div>
                             <label>DOB Proff</label>
-                            <img src={Ddata?.addressDetails?.dobImage} className="DetailImage" />
+                            <img src={Ddata?.userDetails?.dobImage} className="DetailImage" />
                         </div>
                         <div>
                             <label>ID Image</label>
@@ -120,9 +122,9 @@ const ViewUser = () => {
                         <div><b>Email</b></div>
                         <div><b>Phone No.</b></div>
                         <div><b>Gender</b></div>
-                        <div><b>Age</b></div>
                         <div><b>City</b></div>
                         <div><b>State</b></div>
+                        <div><b>Verified</b></div>
                     </div>
                     {value?.map((dt)=>{
                             return <div className="ViewUserTableBody" onClick={()=>openModal(dt)}>
@@ -131,9 +133,9 @@ const ViewUser = () => {
                                     <div>{dt?.userDetails?.email}</div>
                                     <div>{dt?.userDetails?.contactNumber}</div>
                                     <div>{dt?.userDetails?.gender}</div>
-                                    <div>{dt?.userDetails?.age}</div>
                                     <div>{dt?.addressDetails?.city}</div>
                                     <div>{dt?.addressDetails?.state}</div>
+                                    <div>{dt?.verified?<GoVerified className="verifiedicon" />:<GoUnverified className="unverifiedicon" />}</div>
                             </div>
                     })}
                 </div>

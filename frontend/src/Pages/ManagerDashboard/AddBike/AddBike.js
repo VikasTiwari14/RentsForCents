@@ -43,6 +43,10 @@ const AddBike = () => {
         document.getElementsByClassName("fileSelect")[0].click()
     }
     const submitForm = async() => {
+        if(value.brand===""||value.model===""||value.number===""||value.rate===""||value.type===""||image===""){
+            alert("Please fill all the fields")
+            return;
+        }
         let body = {
             brandName: value.brand,
             modelNumber: value.model,
