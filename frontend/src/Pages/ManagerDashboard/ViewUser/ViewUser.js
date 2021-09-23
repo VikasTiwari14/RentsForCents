@@ -25,7 +25,7 @@ const ViewUser = () => {
     return(
         <div className="ViewUser">
             <h2>View Users</h2>
-            <img src={value[5].documentDetails.idImage} />
+            {/* <img src={value[5].documentDetails.idImage} /> */}
             <div className="ViewUserTable">
                 <div className="ViewUserTableHead">
                     <div><b>Id</b></div>

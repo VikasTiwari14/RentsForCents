@@ -35,6 +35,7 @@ const AddUser = () => {
         photo:""
     }) 
     const [image, setImage] = useState([]); 
+    const [images, setImages] = useState([]);
     const date=new Date();
     const todayDate=date.getFullYear()+"-"+((date.getMonth()+1)<10?"0"+(date.getMonth()+1):(date.getMonth()+1))+"-"+(date.getDate()<10?"0"+date.getDate():date.getDate());
     const handleValue = (e) => {
@@ -63,10 +64,14 @@ const AddUser = () => {
                 if(dt.type==="image/png" || dt.type==="image/jpeg" || dt.type==="image/tiff" || dt.type==="image/bmp" || dt.type==="image/svg+xml"){
                     // setValue({...value, [e.target.name] : dt});
                     let newtext = [...image];
-                    newtext[parseInt(e.target.name)] = dt;
+                    var reader = new FileReader();
+                    reader.onload = function(event) {
+                        console.log(event.target.result)
+                        newtext[parseInt(e.target.name)] = event.target.result;
+                    };
+                    reader.readAsDataURL(dt);
                     setImage(newtext);
                     console.log(newtext)
-                    console.log(parseInt(e.target.name));
                     switch(parseInt(e.target.name)){
                         case 0: setValue({...value,dobImage : dt?.name}); break;
                         case 1: setValue({...value,passBook : dt?.name}); break;
@@ -87,13 +92,22 @@ const AddUser = () => {
     const handleClick = (e) => {
         document.getElementsByClassName("fileSelect")[e.target.name].click()
     }
+    const saveImage = (file) => {
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            console.log(event.target.result)
+            setImages(prevState => [...prevState, event.target.result])
+        };
+        reader.readAsDataURL(file);
+    }
+    
     const submitForm = async() => {
-        console.log(image[1])
         for(let i=0;i<image.length;i++){
             if(!image[i]){
                 return;
             }
         }
+        console.log(image)
         let body = {
             addressDetails:{
                 hNo:value.hNo,
@@ -110,7 +124,7 @@ const AddUser = () => {
                     name:value.accName,
                     ifsc: value.ifsc,
                     bankName : value.bankName,
-                    passbook: URL.createObjectURL(image[1])
+                    // passbook: URL.createObjectURL(image[1])
             },
             userDetails:{
                 fName: value.fName+" "+value.lName,
@@ -119,16 +133,17 @@ const AddUser = () => {
                 gender: value.gender,
                 dob: value.dob,
                 password : value.pass,
-                dobImage:  URL.createObjectURL(image[0])
+                // dobImage:  URL.createObjectURL(image[0])
             },
             documentDetails:{
                 idType: value.idType,
                 idNumber: value.id,
-                idImage:  URL.createObjectURL(image[2]),
+                // idImage:  URL.createObjectURL(image[2]),
                 drivingLicense: value.license,
-                drivingLicenseImage:  URL.createObjectURL(image[3]),
-                photo: image[4]
-            }
+                // drivingLicenseImage:  URL.createObjectURL(image[3]),
+                // photo: image[4]
+            },
+            images:image
         }
         const res = await fetch("/signup",{
             method:"POST",
@@ -142,6 +157,7 @@ const AddUser = () => {
         console.log(data);
         if(data.status){
             alert("Your Account Created Successfully");
+            setImage([]);
         }
         else if(data.message==="user already registered"){
             alert(data.message);

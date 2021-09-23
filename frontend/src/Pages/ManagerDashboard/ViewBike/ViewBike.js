@@ -2,6 +2,21 @@ import React,{useState,useEffect} from "react"
 
 const ViewBike = () => {
     const [value, setValue] = useState([]);
+
+    useEffect(async()=>{
+        const res = await fetch("/getBike",{
+            method:"get",
+            headers:{
+                "Content-Type":"application/json",
+                'Access-Control-Allow-Origin': '*'
+            },
+        });
+        const data = await res.json()
+        console.log(data.data);
+        if(data.status){
+            setValue(data.data);
+        }
+    },[])
     return(
         <div className="ViewBike">
             <h2>View Bike</h2>
