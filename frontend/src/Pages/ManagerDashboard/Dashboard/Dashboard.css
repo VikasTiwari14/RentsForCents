@@ -1,0 +1,32 @@
+.Dashboard{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    margin: 3%;
+    grid-gap: 2%;
+}
+.dashboardCard{
+    background-color: white;
+    color: black;
+    padding: 2%;
+    border: 2px solid brown;
+    border-radius: 10px;
+    margin: 5% 0;
+    height: 15vw;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    justify-content: end;
+    cursor: pointer;
+}
+.dashboardCard>div{
+    display: grid;
+    align-items: end;
+}
+.dahboardIcon{
+    font-size: 4vw;
+}
+.dashboardCard:hover{
+    background-color: brown;
+    color: white;
+}
