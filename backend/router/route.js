@@ -340,7 +340,7 @@ router.post('/managerLogin',async(req,res)=>{
         else{
             res.status(400).json({
                 status:false,
-                message:"Manager Not registered"
+                message:"Invalid Credentials"
             })
         }
     }

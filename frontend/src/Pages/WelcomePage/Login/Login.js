@@ -84,15 +84,35 @@ const Login = ({isLog}) => {
         });
         const data = await res.json()
         if(data.status){
-            if(isLog){
                 history.push({pathname:"/user-dashboard"})
-            }
-            else{
                 history.push({pathname:"/manager-dashboard"})
-            }
         }
     }
-
+    const handleManagerSignIn = async (e)=>{
+        e.preventDefault();
+        if(sign.email==="" || sign.password===""){
+            alert("All Fields Are Mandatory");
+            return;
+        }
+        const {email,password} = sign
+        const res = await fetch("/managerLogin",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+                'Access-Control-Allow-Origin': '*'
+            },
+            body:JSON.stringify({
+                email,password
+            }),
+        });
+        const data = await res.json()
+        if(data.status){
+            history.push({pathname:"/manager-dashboard"})
+        }
+        else{
+            alert(data.message);
+        }
+    }
 
     // const handleSignUp = () => {
     //     axios.post(`/signup`, {
@@ -207,7 +227,7 @@ const Login = ({isLog}) => {
 		            <div className="inputContainer"><TextField variant="outlined" label="Email" className="materialInput" type="text" name="email"  placeholder=" Email" value={sign.email} onChange={handleInput} />    </div>
 		            <div className="inputContainer"><TextField variant="outlined" label="Password" className="materialInput" type="password" name="password" placeholder=" Password" value={sign.password} onChange={handleInput} /></div>
 		            <label><a href="">Forgot your password?</a></label>
-		            <Button variant="contained" onClick={handleSignIn}>SIGN IN</Button>
+		            <Button variant="contained" onClick={handleManagerSignIn}>SIGN IN</Button>
 	            </div>
             </div>
             }

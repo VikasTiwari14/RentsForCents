@@ -69,6 +69,6 @@
     align-items: center;
 }
 .verifyButton{
-    background: brown;
-    color: white;
+    background: brown !important;
+    color: white !important;
 }
