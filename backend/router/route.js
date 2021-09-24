@@ -113,6 +113,7 @@ router.post("/signup",async(req,res)=>{
                         drivingLicenseImage:req.body.documentDetails.drivingLicenseImage,
                         photo:req.body.documentDetails.photo
                     },
+                    verified:false,
                     loginToken:''
                 })
                     const token = await tokenGen(userData._id)
@@ -240,7 +241,7 @@ router.get('/userFeedback',async(req,res)=>{
 // get the Registered user data
 router.get('/userData',async(req,res)=>{
     try{
-        const data = await userCollection.find().select('-password')
+        const data = await userCollection.find().sort({ID:-1}).select('-password')
         const count = await userCollection.find().count()
         if(data)
         {
@@ -270,7 +271,7 @@ router.get('/userData',async(req,res)=>{
 router.post('/addBike',async(req,res)=>{
     const {brandName,modelNumber,vehicleNumber,rate,vehicleImage} = req.body
     try{
-        const data = new bikeDetails({brandName,modelNumber,vehicleNumber,rate,vehicleImage})
+        const data = new bikeDetails({brandName,modelNumber,vehicleNumber,rate,vehicleImage,available:true})
         const result = await data.save()
         res.status(200).json({
             status:200,
@@ -290,7 +291,7 @@ router.post('/addBike',async(req,res)=>{
 // / Get the Bike data
 router.get('/getBike',async(req,res)=>{
     try{
-        const data = await bikeDetails.find()
+        const data = await bikeDetails.find().sort({_id:-1})
         if(data)
         {
             res.status(200).json({
@@ -346,6 +347,27 @@ router.post('/managerLogin',async(req,res)=>{
     }
     catch(err){
         res.status(422).json(err)
+    }
+})
+
+router.get('/dashboard',async(req,res)=>{
+    try{
+        const countUsers = await userCollection.find().count()
+        const verifiedUsers = await userCollection.find({verified:true}).count()
+        const unVerifiedUsers = await userCollection.find({verified:false}).count()
+        const countBikes = await bikeDetails.find().count()
+        const availBike = await bikeDetails.find({available:true}).count() 
+        const unAvailBike = await bikeDetails.find({available:false}).count() 
+        res.status(200).json({
+            status:true,
+            message:'fetched all data',
+            data:{
+                countUsers,verifiedUsers,unVerifiedUsers,countBikes,availBike,unAvailBike
+            }
+        })
+    }
+    catch(err){
+        res.status(400).json(err)
     }
 })
 
