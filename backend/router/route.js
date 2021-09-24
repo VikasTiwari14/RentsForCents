@@ -315,11 +315,10 @@ router.get('/getBike',async(req,res)=>{
 })
 
 
-router.post('/managerCred',async(req,res)=>{
+router.post('/managerLogin',async(req,res)=>{
     const {email,password} = req.body;
     try{
         const managerRegistered = await managerCollection.findOne({email:email})
-        console.log(managerRegistered)
         if (managerRegistered)
         {
 

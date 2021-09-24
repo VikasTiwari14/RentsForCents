@@ -38,15 +38,15 @@ const ViewUser = () => {
                     <div className="AddUserCard">
                         <h2>General Information</h2><label></label><label></label><label></label>
                         <label>Name</label>
-                        <p className="inp">{Ddata?.userDetails?.name}</p>
+                        <p className="inp">{Ddata?.userDetails?.customerName}</p>
                         <label>Email</label>
                         <p className="inp">{Ddata?.userDetails?.email}</p>
                         <label>Mobile No.</label>
-                        <p className="inp">{Ddata?.userDetails?.mobile}</p>
+                        <p className="inp">{Ddata?.userDetails?.contactNumber}</p>
                         <label>Gender</label>
                         <p className="inp">{Ddata?.userDetails?.gender}</p>
                         <label>Date of Birth</label>
-                        <p className="inp">{Ddata?.userDetails?.dob}</p>
+                        <p className="inp">{Ddata?.userDetails?.DOB}</p>
                     </div>
                     <div className="AddUserCard">
                         <h2>Address Information</h2><label></label><label></label><label></label>
@@ -59,7 +59,7 @@ const ViewUser = () => {
                         <label>Landmark</label>
                         <p className="inp">{Ddata?.addressDetails?.landmark}</p>
                         <label>Pincode</label>
-                        <p className="inp">{Ddata?.addressDetails?.pincode}</p>
+                        <p className="inp">{Ddata?.addressDetails?.pinCode}</p>
                         <label>City</label>
                         <p className="inp">{Ddata?.addressDetails?.city}</p>
                         <label>State</label>
