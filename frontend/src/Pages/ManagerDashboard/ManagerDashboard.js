@@ -14,7 +14,16 @@ import { useHistory } from 'react-router';
 
 const ManagerDashboard = () => {
     const [value, setValue] = useState("b1");
+    const [islog, setislog] = useState(false);
     const history= useHistory();
+    useEffect(() => {
+        if(localStorage.getItem("email")){
+            setislog(false);
+        }
+        else{
+            setislog(true);
+        }
+    },[])
     const handleValue = (e) => {
         setValue(e.target.id);
         for(let i=1;i<=6;i++){
@@ -45,32 +54,36 @@ const ManagerDashboard = () => {
     }
     
     return(
-        <div className="ManagerDashboard">
-            <div className="sideContent">
-                <div>
-                    <h1>RENT FOR CENTS</h1>
+        <>
+            {islog?<Profile />:
+            <div className="ManagerDashboard">
+                <div className="sideContent">
+                    <div>
+                        <h1>RENT FOR CENTS</h1>
+                    </div>
+                    <div  className="dash">
+                        <input type="button" id="b1" value="Dashboard" onClick={handleValue}/>
+                        <input type="button" id="b2" value="Add Users" onClick={handleValue}/>
+                        <input type="button" id="b3" value="View Users" onClick={handleValue}/>
+                        <input type="button" id="b4" value="Add Bike" onClick={handleValue}/>
+                        <input type="button" id="b5" value="View Bikes" onClick={handleValue}/>
+                        <input type="button" id="b6" value="Feedback & Query" onClick={handleValue}/>
+                        <input type="button" id="b0" value="Sign Out" onClick={signOut}/>
+                    </div>
                 </div>
-                <div  className="dash">
-                    <input type="button" id="b1" value="Dashboard" onClick={handleValue}/>
-                    <input type="button" id="b2" value="Add Users" onClick={handleValue}/>
-                    <input type="button" id="b3" value="View Users" onClick={handleValue}/>
-                    <input type="button" id="b4" value="Add Bike" onClick={handleValue}/>
-                    <input type="button" id="b5" value="View Bikes" onClick={handleValue}/>
-                    <input type="button" id="b6" value="Feedback & Query" onClick={handleValue}/>
-                    <input type="button" id="b0" value="Sign Out" onClick={signOut}/>
+                <div  className="topContent">
+                    <div>
+                        <p>Welcome</p>
+                    </div>
+                        <div className="circle"></div>
+                        <FaBell className="bell" />
+                </div>
+                <div className="mainContent">
+                    {selectComponent()}
                 </div>
             </div>
-            <div  className="topContent">
-                <div>
-                    <p>Welcome</p>
-                </div>
-                    <div className="circle"></div>
-                    <FaBell className="bell" />
-            </div>
-            <div className="mainContent">
-                {selectComponent()}
-            </div>
-        </div>
+            }
+        </>
     )
 }
 

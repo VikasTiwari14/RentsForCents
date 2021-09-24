@@ -1,0 +1,13 @@
+.Profile{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+.Profile h1{
+    font-size: 4vw;
+    color: rgb(255 255 255);
+    margin: 2px;
+    text-align: center;
+}

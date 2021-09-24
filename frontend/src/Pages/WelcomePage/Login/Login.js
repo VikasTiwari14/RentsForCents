@@ -107,6 +107,9 @@ const Login = ({isLog}) => {
         });
         const data = await res.json()
         if(data.status){
+            localStorage.setItem("name",data.data.name)
+            localStorage.setItem("email",data.data.email)
+            localStorage.setItem("mobile",data.data.mobile)
             history.push({pathname:"/manager-dashboard"})
         }
         else{

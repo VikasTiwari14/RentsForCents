@@ -25,42 +25,42 @@ const Dashboard = () => {
         <div className="Dashboard">
             <div className="dashboardCard">
                 <div>
-                    <h2 className="brownText">{value?.totalUser}</h2>
+                    <h2 className="brownText">{value?.countUsers}</h2>
                     <h3>Total Number of Users</h3>
                 </div>
                 <FaUsers className="dahboardIcon" />
             </div>
             <div className="dashboardCard">
                 <div>
-                    <h2 className="brownText">{value?.verifiedUser}</h2>
+                    <h2 className="brownText">{value?.verifiedUsers}</h2>
                     <h3>Number of Users Verified</h3>
                 </div>
                 <FaUserCheck className="dahboardIcon" />
             </div>
             <div className="dashboardCard">
                 <div>
-                    <h2 className="brownText">{value?.unVerifiedUser}</h2>
+                    <h2 className="brownText">{value?.unVerifiedUsers}</h2>
                     <h3>Number of User Unverified</h3>
                 </div>
                 <FaUserTimes className="dahboardIcon" />
             </div>
             <div className="dashboardCard">
                 <div>
-                    <h2 className="brownText">{value?.totalBikes}</h2>
+                    <h2 className="brownText">{value?.countBikes}</h2>
                     <h3>Total Number of Bikes</h3>
                 </div>
                 <FaMotorcycle className="dahboardIcon" />
             </div>
             <div className="dashboardCard">
                 <div>
-                    <h2 className="brownText">{value?.availableBikes}</h2>
+                    <h2 className="brownText">{value?.availBike}</h2>
                     <h3>Number of Bikes Available</h3>
                 </div>
                 <RiMotorbikeFill className="dahboardIcon" />
             </div>
             <div className="dashboardCard">
                 <div>
-                    <h2 className="brownText">{value?.unAvailableBikes}</h2>
+                    <h2 className="brownText">{value?.unAvailBike}</h2>
                     <h3>Number of Bikes Unavailable</h3>
                 </div>
                 <GiFullMotorcycleHelmet className="dahboardIcon" />

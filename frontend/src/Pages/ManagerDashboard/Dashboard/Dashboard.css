@@ -20,13 +20,16 @@
     cursor: pointer;
 }
 .dashboardCard>div{
-    display: grid;
-    align-items: end;
+    padding: 10% 0;
 }
 .dahboardIcon{
     font-size: 4vw;
 }
 .dashboardCard:hover{
     background-color: brown;
-    color: white;
+    color: white !important;
+}
+.dashboardCard h2{
+    font-size: 5vw;
+    margin: 0;
 }
