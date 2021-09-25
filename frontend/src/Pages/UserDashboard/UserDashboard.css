@@ -1,0 +1,16 @@
+.UserDashboard .NavBarTop{
+    grid-template-columns: 3fr 1fr;
+}
+.UserDashboard .NavBarElement{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.UserDashboard .NavBarElement>button{
+    padding: 3% 5%;
+}
+.UserDashboard .circle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

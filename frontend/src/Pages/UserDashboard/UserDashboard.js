@@ -34,7 +34,7 @@ const UserDashboard = () => {
                             <button id="home" name="home" onClick={handleNavBar}>HOME</button>
                             <button id="about" name="about" onClick={handleNavBar}>ABOUT</button>
                             <button id="contact" name="contact" onClick={handleNavBar}>CONTACT</button>
-                            <div id="circle">{localStorage.getItem("name")[0]}</div>
+                            <div className="circle"><h1>{/*localStorage.getItem("name")[0]*/}V</h1></div>
                         </div>
                     </div>
                     <div className="NavBarSide">
