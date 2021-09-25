@@ -50,10 +50,7 @@ const user_schema = new mongoose.Schema({
         type:String,
         trim:true,
     },
-    DOB:
-    {
-        type:Date,
-    },
+    DOB:String,
     dobImage:String,
     gender:String,
 })

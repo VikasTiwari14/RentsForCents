@@ -80,7 +80,7 @@ router.post("/signup",async(req,res)=>{
                     const userData = new userCollection({
                     ID:'',
                     userDetails:{
-                        customerName:req.body.userDetails.fName,
+                        customerName:req.body.userDetails.fullName,
                         contactNumber:req.body.userDetails.mobile,
                         email:req.body.userDetails.email,
                         password:hashed_password,
@@ -160,6 +160,7 @@ router.post("/signup",async(req,res)=>{
                     email:req.body.userDetails.email,
                     password:hashed_password,
                 },
+                verified:false,
                 loginToken:''
                 })
                 const token = await tokenGen(userData._id)
