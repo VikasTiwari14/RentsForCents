@@ -6,6 +6,7 @@ const userCollection = require("../src/database/db")
 const contact_collection = require("../src/database/contactDB");
 const bikeDetails = require('../src/database/bikeDB')
 const managerCollection = require('../src/database/managerDB')
+const auth = require('../middleware/managerAuth')
 var unique_id = 1000
 
 async function tokenGen(id){
@@ -214,7 +215,7 @@ router.post('/contactUs',async(req,res)=>{
 // Get the Feedback/Query data
 router.get('/userFeedback',async(req,res)=>{
     try{
-        const data = await contact_collection.find()
+        const data = await contact_collection.find().sort({_id:-1})
         if(data)
         {
             res.status(200).json({
@@ -325,10 +326,13 @@ router.post('/managerLogin',async(req,res)=>{
 
             if(managerRegistered.password === password)
             {
+                const token = await tokenGen(managerRegistered._id)
+                res.cookie("manJwt",token,{expires:new Date(Date.now() + 600000),httpOnly:true})
+                const updatedData = await managerCollection.findByIdAndUpdate({_id:managerRegistered._id},{$set:{loginToken:token}},{new:true})
                 res.json({
                     status:200,
                     message:'Manager data found',
-                    data:managerRegistered
+                    data:updatedData
                 })
             }
             else{
