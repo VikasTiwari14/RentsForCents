@@ -25,12 +25,11 @@ router.get("/login",(req,res)=>{
 
 // Login
 router.post("/signin",async(req,res)=>{
-    const {email,password} = req.body;
     try{
         const userRegistered = await userCollection.findOne({'userDetails.email':req.body.email})
         if (userRegistered)
-        {
-            const valid_password = await bcrypt.compare(password,userRegistered.password);
+        {   
+            const valid_password = await bcrypt.compare(req.body.password,userRegistered.userDetails.password);
             if(valid_password == true)
             {
                 const token = await tokenGen(userRegistered._id)
