@@ -73,10 +73,10 @@ const ManagerDashboard = () => {
                 </div>
                 <div  className="topContent">
                     <div>
-                        <p>Welcome</p>
+                        <span>Welcome</span><br />
+                        <span>{localStorage.getItem("name")}</span>
                     </div>
                         <div className="circle"></div>
-                        <FaBell className="bell" />
                 </div>
                 <div className="mainContent">
                     {selectComponent()}
