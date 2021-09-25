@@ -8,10 +8,12 @@ import Home from '../WelcomePage/Home/Home';
 import About from '../WelcomePage/About/About';
 import Contact from '../WelcomePage/Contact/Contact';
 import {FaFacebookF, FaTimes} from "react-icons/fa";
+import { useHistory } from 'react-router';
 
 const UserDashboard = () => {
     const [id, setId] = useState("home");
     const [isopen, setisopen] = useState(false);
+    const history= useHistory();
 
     const showSection = () => {
         switch(id){
@@ -24,6 +26,16 @@ const UserDashboard = () => {
         console.log(e.target);
         setId(e.target.name);
     }
+    const mouseOver = () => {
+        document.getElementsByClassName("dropdown")[0].style.display="flex"
+    }
+    const mouseOut = () => {
+        document.getElementsByClassName("dropdown")[0].style.display="none"
+    }
+    const signOut = () => {
+        localStorage.clear();
+        history.push({pathname:"/"});
+    }
     return(
         <div className="UserDashboard">
             <div className="MainPage">
@@ -34,7 +46,18 @@ const UserDashboard = () => {
                             <button id="home" name="home" onClick={handleNavBar}>HOME</button>
                             <button id="about" name="about" onClick={handleNavBar}>ABOUT</button>
                             <button id="contact" name="contact" onClick={handleNavBar}>CONTACT</button>
-                            <div className="circle"><h1>{/*localStorage.getItem("name")[0]*/}V</h1></div>
+                            <div className="circle" onMouseOver={mouseOver} onMouseOut={mouseOut}><h1>{/*localStorage.getItem("name")[0]*/}V</h1></div>
+                        </div>
+                        <span></span>
+                        <div className="dropdown">
+                            <div className="dropdownMenu">
+                                <div>Signed In as<br /> <b>{localStorage.getItem("name")}</b></div>
+                                <hr />
+                                <button>Profile</button>
+                                <button>History</button>
+                                <button>Applications</button>
+                                <button onClick={signOut}>Log Out</button>
+                            </div>
                         </div>
                     </div>
                     <div className="NavBarSide">

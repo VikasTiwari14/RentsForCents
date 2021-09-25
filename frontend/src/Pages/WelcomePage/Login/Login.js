@@ -85,9 +85,9 @@ const Login = ({isLog}) => {
         });
         const data = await res.json()
         if(data.status){
-            localStorage.setItem("name",data.data.name)
-            localStorage.setItem("email",data.data.email)
-            localStorage.setItem("mobile",data.data.mobile)
+            localStorage.setItem("name",data.data.userDetails.customerName)
+            localStorage.setItem("email",data.data.userDetails.email)
+            localStorage.setItem("mobile",data.data.userDetails.mobile)
             localStorage.setItem("id",data.data.ID)
             history.push({pathname:"/user-dashboard"})
         }
@@ -160,7 +160,7 @@ const Login = ({isLog}) => {
         {
                 fName: fName,
                 email: email,
-                contactNumber: mobile,
+                mobile: mobile,
                 password:password
         }
         const res = await fetch("/signup",{

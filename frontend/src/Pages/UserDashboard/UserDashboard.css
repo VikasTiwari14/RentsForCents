@@ -13,4 +13,37 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+}
+.dropdown{
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    color: black;
+    display: flex;
+    justify-content: end;
+    margin-top: -9%;
+    display: none;
+}
+.dropdownMenu{
+    background-color: #f9f9f9;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+.dropdownMenu button{
+    border: none;
+    width: 100%;
+    background-color: transparent;
+    padding: 8px 25px;
+    border-top: 1px solid rgb(150, 150, 150);
+    border-bottom: 1px solid rgb(150, 150, 150);
+    cursor: pointer;
+}
+.dropdownMenu button:hover{
+    background-color: cornsilk;
+}
+.dropdown:hover{
+    display: flex !important;
 }
