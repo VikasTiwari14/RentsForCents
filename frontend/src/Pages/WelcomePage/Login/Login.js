@@ -71,21 +71,28 @@ const Login = ({isLog}) => {
 
     const handleSignIn = async (e)=>{
         e.preventDefault();
-        const {email,password} = sign
+        let body = {
+            email: sign.email,
+            password: sign.password
+        }
         const res = await fetch("/signin",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json",
                 'Access-Control-Allow-Origin': '*'
             },
-            body:JSON.stringify({
-                email,password
-            }),
+            body:JSON.stringify(body),
         });
         const data = await res.json()
         if(data.status){
-                history.push({pathname:"/user-dashboard"})
-                history.push({pathname:"/manager-dashboard"})
+            localStorage.setItem("name",data.data.name)
+            localStorage.setItem("email",data.data.email)
+            localStorage.setItem("mobile",data.data.mobile)
+            localStorage.setItem("id",data.data.ID)
+            history.push({pathname:"/user-dashboard"})
+        }
+        else{
+            alert(data.message);
         }
     }
     const handleManagerSignIn = async (e)=>{
