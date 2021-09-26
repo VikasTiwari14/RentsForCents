@@ -9,10 +9,15 @@ import About from '../WelcomePage/About/About';
 import Contact from '../WelcomePage/Contact/Contact';
 import {FaFacebookF, FaTimes} from "react-icons/fa";
 import { useHistory } from 'react-router';
+import ReactModal from 'react-modal';
+import Profile from './Profile/Profile';
+import History from './History/History';
+import Application from './Application/Application';
 
 const UserDashboard = () => {
     const [id, setId] = useState("home");
     const [isopen, setisopen] = useState(false);
+    const [section, setSection] = useState("")
     const history= useHistory();
 
     const showSection = () => {
@@ -36,54 +41,72 @@ const UserDashboard = () => {
         localStorage.clear();
         history.push({pathname:"/"});
     }
+    const selectSection = (e) => {
+        setisopen(true);
+        setSection(e.target.id);
+    }
+    const modalSection = () => {
+        switch(section){
+            case "profile" : return <Profile />
+            case "history" : return <History />
+            case "application" : return <Application />
+        }
+    }
+    
     return(
-        <div className="UserDashboard">
-            <div className="MainPage">
-                <div className="NavBarContainer">
-                    <div className="NavBarTop">
-                        <img src={logo} className="mainLogo" />
-                        <div className="NavBarElement">
-                            <button id="home" name="home" onClick={handleNavBar}>HOME</button>
-                            <button id="about" name="about" onClick={handleNavBar}>ABOUT</button>
-                            <button id="contact" name="contact" onClick={handleNavBar}>CONTACT</button>
-                            <div className="circle" onMouseOver={mouseOver} onMouseOut={mouseOut}><h1>{/*localStorage.getItem("name")[0]*/}V</h1></div>
-                        </div>
-                        <span></span>
-                        <div className="dropdown">
-                            <div className="dropdownMenu">
-                                <div>Signed In as<br /> <b>{localStorage.getItem("name")}</b></div>
-                                <hr />
-                                <button>Profile</button>
-                                <button>History</button>
-                                <button>Applications</button>
-                                <button onClick={signOut}>Log Out</button>
+        <>
+            <ReactModal isOpen={isopen} modalPortalName="userLogIn">
+                <FaTimes onClick={() => setisopen(false)} className="closeicon" />
+                {modalSection()}
+            </ReactModal>
+            <div className="UserDashboard">
+                <div className="MainPage">
+                    <div className="NavBarContainer">
+                        <div className="NavBarTop">
+                            <img src={logo} className="mainLogo" />
+                            <div className="NavBarElement">
+                                <button id="home" name="home" onClick={handleNavBar}>HOME</button>
+                                <button id="about" name="about" onClick={handleNavBar}>ABOUT</button>
+                                <button id="contact" name="contact" onClick={handleNavBar}>CONTACT</button>
+                                <div className="circle" onMouseOver={mouseOver} onMouseOut={mouseOut}><h1>{/*localStorage.getItem("name")[0]*/}V</h1></div>
+                            </div>
+                            <span></span>
+                            <div className="dropdown">
+                                <div className="dropdownMenu">
+                                    <div>Signed In as<br /> <b>{localStorage.getItem("name")}</b></div>
+                                    <hr />
+                                    <button id="profile" onClick={selectSection}>Profile</button>
+                                    <button id="history" onClick={selectSection}>History</button>
+                                    <button id="application" onClick={selectSection}>Applications</button>
+                                    <button onClick={signOut}>Log Out</button>
+                                </div>
                             </div>
                         </div>
+                        <div className="NavBarSide">
+                            <h2>NO. 1 BIKE RENTAL<br /> SERVICES IN BHOPAL</h2>
+                            <Button variant="outlined">Learn More<FiArrowRight className="arrowRight" /></Button>
+                        </div>
                     </div>
-                    <div className="NavBarSide">
-                        <h2>NO. 1 BIKE RENTAL<br /> SERVICES IN BHOPAL</h2>
-                        <Button variant="outlined">Learn More<FiArrowRight className="arrowRight" /></Button>
+                    <div className="MainContent">
+                        {showSection()}
                     </div>
-                </div>
-                <div className="MainContent">
-                    {showSection()}
-                </div>
-                <div className="Footer">
-                    <h3>P NO. 174 SHYAM NAGAR BERKHERA PATHANI, BHOPAL, MADHYA PRADESH</h3>
-                    <h4>tiwarivikas1407@gmail.com</h4>
-                    <h3>+91 9826831306/ +91 7992209885</h3>
-                    <h3>Booking Timings are from 10:00 AM to 8:00 PM</h3>
-                    <h2>We Are Social</h2>
-                    <hr />
-                    <div className="SocialLink">
-                        <FaFacebookF />
-                    </div>
-                    <div className="rightReserved">
-                        ALL RIGHTS RESERVED
+                    <div className="Footer">
+                        <h3>P NO. 174 SHYAM NAGAR BERKHERA PATHANI, BHOPAL, MADHYA PRADESH</h3>
+                        <h4>tiwarivikas1407@gmail.com</h4>
+                        <h3>+91 9826831306/ +91 7992209885</h3>
+                        <h3>Booking Timings are from 10:00 AM to 8:00 PM</h3>
+                        <h2>We Are Social</h2>
+                        <hr />
+                        <div className="SocialLink">
+                            <FaFacebookF />
+                        </div>
+                        <div className="rightReserved">
+                            ALL RIGHTS RESERVED
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
