@@ -375,24 +375,53 @@ router.get('/dashboard',async(req,res)=>{
     }
 })
 
-// router.put('/update',(req,res)=>{
-//     const {} = req.body
-//     try{
-//         const result_from_db= await userCollection.findOne({email:email})
-//         if(result_from_db)
-//         {
-//             const update = await student_collection.findByIdAndUpdate({_id:result_from_db._id},{$set:{}},{new:true})
-//         }
-//     }
-//     catch(err)
-//     {
-//         res.status(400).json({
-//             status:404,
-//             message:'Some error occured'
-//         })
-//     }
-// })
+router.put('/update',async(req,res)=>{
+    try{
+        const result_from_db= await userCollection.findOne({'userDetails.email':req.body.userDetails.email})
+        if(result_from_db)
+        {
+            const update = await userCollection.findByIdAndUpdate({_id:result_from_db._id},{$set:req.body}
+            ,{new:true})
+            res.json(update)
+        }
+    }
+    catch(err)
+    {
+        res.status(400).json({
+            status:404,
+            message:'Some error occured'
+        })
+    }
+})
 
+
+
+router.get('/user/id',async(req,res)=>{
+    const {id} = req.body
+    try{
+        const data = await userCollection.find({ID:id})
+        if(data)
+        {
+            res.status(200).json({
+                status:200,
+                message:'data found',
+                data: data
+            })
+        }
+        else{
+            res.status(422).json({
+                status:422,
+                message:'User Not Found'
+            })
+        }
+    }
+    catch(err){
+        res.status(400).json({
+            status:404,
+            message:'Some error occured'
+        })
+    }
+})
 // router.post('/add',async(req,res)=>{
 //     const obj = {
 //         model:req.body.model,
