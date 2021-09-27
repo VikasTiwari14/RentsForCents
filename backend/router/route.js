@@ -375,9 +375,9 @@ router.get('/dashboard',async(req,res)=>{
     }
 })
 
-router.put('/update',async(req,res)=>{
+router.put('/update/:id',async(req,res)=>{
     try{
-        const result_from_db= await userCollection.findOne({'userDetails.email':req.body.userDetails.email})
+        const result_from_db= await userCollection.findOne({ID:req.params.id})
         if(result_from_db)
         {
             const update = await userCollection.findByIdAndUpdate({_id:result_from_db._id},{$set:req.body}
@@ -396,8 +396,8 @@ router.put('/update',async(req,res)=>{
 
 
 
-router.get('/user/id',async(req,res)=>{
-    const {id} = req.body
+router.get('/user/:id',async(req,res)=>{
+    const id = req.params.id
     try{
         const data = await userCollection.find({ID:id})
         if(data)
