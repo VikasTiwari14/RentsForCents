@@ -382,7 +382,11 @@ router.put('/update/:id',async(req,res)=>{
         {
             const update = await userCollection.findByIdAndUpdate({_id:result_from_db._id},{$set:req.body}
             ,{new:true})
-            res.json(update)
+            res.status(200).json({
+                status:200,
+                message:'Data updated',
+                data:update
+            })
         }
     }
     catch(err)
