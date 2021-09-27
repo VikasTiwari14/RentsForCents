@@ -55,7 +55,7 @@ const UserDashboard = () => {
     
     return(
         <>
-            <ReactModal isOpen={isopen} modalPortalName="userLogIn">
+            <ReactModal isOpen={isopen} portalClassName="userLogIn">
                 <FaTimes onClick={() => setisopen(false)} className="closeicon" />
                 {modalSection()}
             </ReactModal>

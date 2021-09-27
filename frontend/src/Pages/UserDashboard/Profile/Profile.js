@@ -5,24 +5,59 @@ import { Button,TextField, MenuItem, Select } from '@material-ui/core'
 const Profile = () => {
     const [isEdit, setIsEdit] = useState(false);
     const [value, setValue] = useState();
-    const [docs, setDocs] = useState();
+    const [docs, setDocs] = useState({
+        idType: "",
+        idNumber: "",
+        idImage:  "Upload Image",
+        drivingLicense: "",
+        drivingLicenseImage:  "Upload Image",
+        photo: "Upload Image"
+    });
     const [address, setAddress] = useState()
-    const [bank, setBank] = useState();
-    const [general, setGeneral] = useState();
+    const [bank, setBank] = useState({
+        number: "",
+        name:"",
+        ifsc: "",
+        bankName : "",
+        passbook: "Upload Image"
+    });
+    const [general, setGeneral] = useState({
+        customerName: "",
+        email: "",
+        mobile: "",
+        gender: "",
+        dob: "",
+        password : "",
+        dobImage: "Upload Image"
+    });
     const [image, setImage] = useState([]);
     const date = new Date();
     const todayDate=date.getFullYear()+"-"+((date.getMonth()+1)<10?"0"+(date.getMonth()+1):(date.getMonth()+1))+"-"+(date.getDate()<10?"0"+date.getDate():date.getDate());
 
+    useEffect(async() => {
+        const res = await fetch(`/user/${localStorage.getItem("id")}`);
+        const data = await res.json()
+        console.log(data);
+        setValue(data.data[0]);
+        data.data[0]?.addressDetails&&setAddress(data.data[0]?.addressDetails);
+        data.data[0].bankDetails&&setBank(data.data[0].bankDetails);
+        data.data[0].bankDetails&&setDocs(data.data[0].documentDetails)
+        setGeneral(data.data[0].userDetails)
+    },[])
     const handleDocs = (e) => {
+        console.log(docs)
         setDocs({...docs, [e.target.name] : e.target.value})
     }
     const handleAddress = (e) => {
+        console.log(address)
         setAddress({...address, [e.target.name] : e.target.value})
     }
     const handleBank = (e) => {
+        console.log(bank)
         setBank({...bank, [e.target.name] : e.target.value})
     }
     const handleGeneral = (e) => {
+        console.log(general)
         setGeneral({...general, [e.target.name] : e.target.value})
     }
     const handleClick = (e) => {
@@ -43,6 +78,13 @@ const Profile = () => {
                     reader.readAsDataURL(dt);
                     setImage(newtext);
                     console.log(newtext)
+                    switch(parseInt(e.target.name)){
+                        case 0: setGeneral({...general,dobImage : dt?.name}); break;
+                        case 1: setBank({...bank,passbook : dt?.name}); break;
+                        case 2: setDocs({...docs,idImage : dt?.name}); break;
+                        case 3: setDocs({...docs,drivingLicenseImage : dt?.name}); break;
+                        case 4: setDocs({...docs,photo : dt?.name}); break;
+                    }
                 }
                 else{
                     alert("Invalid File Format");
@@ -53,8 +95,50 @@ const Profile = () => {
             }
         }
     }
-    const submitForm = () => {
+    const submitForm = async() => {
+        if(!(value?.documentDetails?.drivingLicenseImage)){
+            for(let i=0;i<image.length;i++){
+                if(!image[i]){
+                    alert("Please upload all images");
+                    return;
+                }
+            }
+            setGeneral({...general,dobImage : image[0]}); 
+            setBank({...bank,passbook : image[1]});
+            setDocs({...docs,idImage :image[2]});
+            setDocs({...docs,drivingLicenseImage : image[3]});
+            setDocs({...docs,photo : image[4]});
+        }
+        if(address.hNo===""||address.city===""||address.pincode===""||address.state===""||address.country===""||bank.accNo===""||bank.accName===""||bank.bankName===""||bank.ifsc===""||general.gender===""||general.dob===""||docs.idType===""||docs.id===""||docs.license===""){
+            alert("Please fill all the required field");
+            return;
+        }
         
+        const body = {
+            userDetails: general,
+            bankDetails: bank,
+            addressDetails: address,
+            documentDetails: docs,
+            ID: localStorage.getItem("id")
+        }
+        const res = await fetch("/update",{
+            method:"PUT",
+            headers:{
+                "Content-Type":"application/json",
+                'Access-Control-Allow-Origin': '*'
+            },
+            body:JSON.stringify(body),
+        });
+        const data = await res.json()
+        console.log(data);
+        if(data.status){
+            alert("Your Account Updated Successfully");
+            setImage([]);
+            // setValue({ fName:"", lName:"", email:"", mobile:"", gender:"", dob:"", pass:"", cPass:"", hNo:"", street:"", area:"", city:"", state:"", country:"", pincode:"", id:"", idType:"", idImage:"", license:"", licenseImage:"", accNo:"", accName:"", ifsc:"", bankName:"", passBook:"", userImage:"", landmark:"", dobImage:"", photo:""})
+        }
+        else{
+            alert("Some Error Occured Please Try Again");
+        }
     }
     
     
@@ -74,19 +158,25 @@ const Profile = () => {
                         <div className="AddUserCard">
                             <h2>General Information</h2><label></label><label></label><label></label>
                             <label>Name</label>
-                            <TextField variant="outlined" className="materialInput" type="text" name="fName" value={value?.userDetails?.customerName} disabled={true} />
+                            <p className="inp">{value?.userDetails?.customerName}</p>
                             <label>Email</label>
-                            <TextField variant="outlined" className="materialInput" type="text" name="email" value={value?.userDetails?.email} disabled={true} />
+                            <p className="inp">{value?.userDetails?.email}</p>
                             <label>Mobile No.</label>
-                            <TextField variant="outlined" className="materialInput" type="text" name="mobile" value={value?.userDetails?.mobile} disabled={true} />
+                            <p className="inp">{value?.userDetails?.contactNumber}</p>
                             <label>Gender</label>
+                            {value?.userDetails?.gender?<p className="inp">{value?.userDetails?.gender}</p>:
                             <Select variant="outlined" className="materialInput" name="gender" value={general?.gender} onChange={handleGeneral}>
                                 <MenuItem value="Male">Male</MenuItem>
                                 <MenuItem value="Female">Female</MenuItem>
                                 <MenuItem value="Others">Others</MenuItem>
-                            </Select>
+                            </Select>}
                             <label>Date of Birth</label>
-                            <input className="materialInput" type="date" name="dob" max={todayDate} value={general?.dob} onChange={handleGeneral} />
+                            {value?.userDetails?.gender?<p className="inp">{value?.userDetails?.DOB}</p>:<>
+                            <input className="datePicker" type="date" name="dob" max={todayDate} value={general?.dob} onChange={handleGeneral} />
+                            <label>Upload DOB proff</label>
+                            <input variant="outlined" className="materialInput fileSelect" type="file" name="0" onChange={handleImage} hidden="hidden" />
+                            <TextField variant="outlined" className="materialInput" type="text" name="0" value={general?.dobImage} onClick={handleClick} disabled={true}/>
+                            </>}
                         </div>
                         <div className="AddUserCard">
                             <h2>Address Information</h2><label></label><label></label><label></label>
@@ -99,7 +189,7 @@ const Profile = () => {
                             <label>Landmark</label>
                             <TextField variant="outlined" className="materialInput" type="text" name="landmark" value={address?.landmark} onChange={handleAddress} />
                             <label>Pincode</label>
-                            <TextField variant="outlined" className="materialInput" type="text" name="pincode" value={address?.pincode} onChange={handleAddress} />
+                            <TextField variant="outlined" className="materialInput" type="text" name="pinCode" value={address?.pinCode} onChange={handleAddress} />
                             <label>City</label>
                             <TextField variant="outlined" className="materialInput" type="text" name="city" value={address?.city} onChange={handleAddress} />
                             <label>State</label>
@@ -112,11 +202,16 @@ const Profile = () => {
                             <label>Bank Name</label>
                             <TextField variant="outlined" className="materialInput" type="text" name="bankName" value={bank?.bankName} onChange={handleBank} />
                             <label>Account Number</label>
-                            <TextField variant="outlined" className="materialInput" type="text" name="accNo" value={bank?.accNo} onChange={handleBank} />
+                            <TextField variant="outlined" className="materialInput" type="text" name="number" value={bank?.number} onChange={handleBank} />
                             <label>Name (as per passbook)</label>
-                            <TextField variant="outlined" className="materialInput" type="text" name="accName" value={bank?.accName} onChange={handleBank} />
+                            <TextField variant="outlined" className="materialInput" type="text" name="name" value={bank?.name} onChange={handleBank} />
                             <label>IFSC Code</label>
                             <TextField variant="outlined" className="materialInput" type="text" name="ifsc" value={bank?.ifsc} onChange={handleBank} />
+                            {!(value?.bankDetails?.passbook)&&<>
+                                <label>Upload Passbook</label>
+                                <input variant="outlined" className="materialInput  fileSelect" type="file" name="1"  onChange={handleImage} hidden="hidden" />
+                                <TextField variant="outlined" className="materialInput" type="text" name="1" value={bank?.passbook} onClick={handleClick} disabled={true}/>
+                            </>}
                         </div>
                         {!(value?.documentDetails)?
                         <div className="AddUserCard">
@@ -136,7 +231,7 @@ const Profile = () => {
                             <TextField variant="outlined" className="materialInput" type="text" name="license" value={docs?.license} onChange={handleDocs} />
                             <label>Upload Driving License</label>
                             <input variant="outlined" className="materialInput  fileSelect" type="file" name="3" onChange={handleImage} hidden="hidden" />
-                            <TextField variant="outlined" className="materialInput" type="text" name="3" value={docs?.licenseImage} onClick={handleClick} disabled={true}/>
+                            <TextField variant="outlined" className="materialInput" type="text" name="3" value={docs?.drivingLicenseImage} onClick={handleClick} disabled={true}/>
                             <label>Upload User's Photo</label>
                             <input variant="outlined" className="materialInput  fileSelect" type="file" name="4" onChange={handleImage} hidden="hidden" />
                             <TextField variant="outlined" className="materialInput" type="text" name="4" value={docs?.photo} onClick={handleClick} disabled={true}/>
@@ -148,10 +243,6 @@ const Profile = () => {
                             <p className="inp">{value?.documentDetails?.idNumber}</p>
                             <label>Driving License</label>
                             <p className="inp">{value?.documentDetails?.drivingLicense}</p>
-                            <label>ID Image</label>
-                            <img src={value?.documentDetails?.idImage} className="DetailImage" />
-                            <label>Driving License Image</label>
-                            <img src={value?.documentDetails?.idImage} className="DetailImage" />
                         </div>
                         }
                         <Button variant="contained" className="submitButton" onClick={submitForm} >Update Details</Button>

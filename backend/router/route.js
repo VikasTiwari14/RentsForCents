@@ -396,8 +396,8 @@ router.put('/update',async(req,res)=>{
 
 
 
-router.get('/user/id',async(req,res)=>{
-    const {id} = req.body
+router.get('/user/:id',async(req,res)=>{
+    const id = req.params.id
     try{
         const data = await userCollection.find({ID:id})
         if(data)

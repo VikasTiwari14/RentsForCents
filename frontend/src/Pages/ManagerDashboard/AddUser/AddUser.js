@@ -137,7 +137,7 @@ const AddUser = () => {
                     passbook: image[1]
             },
             userDetails:{
-                fullName: value.fName+" "+value.lName,
+                customerName: value.fName+" "+value.lName,
                 email: value.email,
                 mobile: value.mobile,
                 gender: value.gender,

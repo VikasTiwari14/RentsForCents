@@ -47,3 +47,7 @@
 .dropdown:hover{
     display: flex !important;
 }
+.userLogIn>div>div {
+    width: 90%;
+    margin: auto;
+}
