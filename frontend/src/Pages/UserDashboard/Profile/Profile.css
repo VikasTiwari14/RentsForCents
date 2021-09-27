@@ -1,0 +1,21 @@
+.UserProfile{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    justify-content: center;
+}
+.UserProfileLeft{
+    text-align: center;
+}
+.ProfilePhoto{
+    width: 20vw;
+    height: 20vw;
+    border-radius: 50%;
+    border: 2px solid #d7d7d7;
+    margin-top: 20%;
+}
+.datePicker{
+    margin-left: 0;
+    width: 17.7vw;
+    font-size: 1vw;
+    padding: 5%;
+}
