@@ -6,6 +6,7 @@ const userCollection = require("../src/database/db")
 const contact_collection = require("../src/database/contactDB");
 const bikeDetails = require('../src/database/bikeDB')
 const managerCollection = require('../src/database/managerDB')
+const bookingCollection = require('../src/database/bikeBooking')
 const auth = require('../middleware/managerAuth')
 var unique_id = 1000
 
@@ -426,6 +427,85 @@ router.get('/user/:id',async(req,res)=>{
         })
     }
 })
+
+// router.get('/history/:id', async(req, res)=>{
+//     const id = req.params.id
+//     try{
+//         const data = await userCollection.find({ID:id})
+//         if(data)
+//         {
+//             res.status(200).json({
+//                 status:200,
+//                 message:'data found',
+//                 data: data[0].bikes
+//             })
+//         }
+//         else{
+//             res.status(422).json({
+//                 status:422,
+//                 message:'User Not Found'
+//             })
+//         }
+//     }
+//     catch(err){
+//         console.log(err);
+//         res.status(400).json({
+//             status:404,
+//             message:'Some error occured'
+//         })
+//     }
+// })
+
+
+router.put('/bookBike/vehcileNumber/:vehcileNumber/id/:id', async(req, res)=>{
+    const vehicleNumber = req.params.vehcileNumber
+    const id = req.params.id
+    try{
+        const result_from_db = await userCollection.findOne({ID:id})
+        const bikeAvail = await bikeCollection.findOne({vehicleNumber:vehicleNumber})
+        if(result_from_db && bikeAvail.available===true)
+        {
+
+            const data = new bookingCollection({
+                bookingId:Math.floor(Math.random()*90000) + 10000,
+                userID:id,
+                name:req.body.name,
+                vehicleNumber:vehicleNumber,
+                modelNumber:req.body.modelNumber,
+                brandName:req.body.brandName,
+                bookingDuration:req.body.bookingDuration,
+                confirm:false,
+                bookedAt:'',
+                returnedAt:'',
+                extraCharge:''
+            })
+
+            const result = await data.save()
+
+            res.status(200).json({
+                status:200,
+                message:'Data updated',
+                data:result
+            })
+        }
+        else {
+            res.status(400).json({
+                status:400,
+                message:'user Not found'
+            })
+        }
+    }
+    catch(err)
+    {
+        console.log(err)
+        res.status(400).json({
+            status:404,
+            message:'Some error occured'
+        })
+    }
+})
+
+
 // router.post('/add',async(req,res)=>{
 //     const obj = {
 //         model:req.body.model,

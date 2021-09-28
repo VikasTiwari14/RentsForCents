@@ -60,10 +60,6 @@ const user = new mongoose.Schema({
     addressDetails: address_schema,
     bankDetails :bank_schema,
     documentDetails:document_schema,
-    // bikes:{bikeHistory:[{
-    //     model:String,
-    //     company:String
-    // }]},
     verified:Boolean,
     registeredOn:{
         type: Date,
