@@ -68,7 +68,7 @@ const UserDashboard = () => {
                                 <button id="home" name="home" onClick={handleNavBar}>HOME</button>
                                 <button id="about" name="about" onClick={handleNavBar}>ABOUT</button>
                                 <button id="contact" name="contact" onClick={handleNavBar}>CONTACT</button>
-                                <div className="circle" onMouseOver={mouseOver} onMouseOut={mouseOut}><h1>{/*localStorage.getItem("name")[0]*/}V</h1></div>
+                                <div className="circle" onMouseOver={mouseOver} onMouseOut={mouseOut}><h1>{localStorage.getItem("name")[0]}</h1></div>
                             </div>
                             <span></span>
                             <div className="dropdown">

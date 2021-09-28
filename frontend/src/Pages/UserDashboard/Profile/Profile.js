@@ -95,7 +95,7 @@ const Profile = () => {
             }
         }
     }
-    const submitForm = async() => {
+    const validateForm = () => {
         if(!(value?.documentDetails?.drivingLicenseImage)){
             for(let i=0;i<image.length;i++){
                 if(!image[i]){
@@ -104,16 +104,34 @@ const Profile = () => {
                 }
             }
             console.log("hello")
-            setGeneral({...general,dobImage : image[0]}); 
+            let newText = general;
+            newText.dobImage=image[0];
+            setGeneral(newText);
+            // setGeneral({...general,dobImage : image[0]}); 
             console.log(image[0])
-            setBank({...bank,passbook : image[1]});
-            setDocs({...docs,idImage : image[2],drivingLicenseImage : image[3],photo : image[4]});
+            newText = bank;
+            newText.passbook = image[1];
+            setBank(newText)
+            // setBank({...bank,passbook : image[1]});
+            newText = docs;
+            newText.idImage = image[2];
+            newText.drivingLicenseImage = image[3];
+            newText.photo = image[4];
+            setDocs(newText)
+            // setDocs({...docs,idImage : image[2],drivingLicenseImage : image[3],photo : image[4]});
         }
         if(address.hNo===""||address.city===""||address.pincode===""||address.state===""||address.country===""||bank.accNo===""||bank.accName===""||bank.bankName===""||bank.ifsc===""||general.gender===""||general.dob===""||docs.idType===""||docs.id===""||docs.license===""){
             alert("Please fill all the required field");
             return;
         }
-        
+        else{
+            setTimeout(() =>{
+                submitForm()
+            },2000)
+        }
+    }
+    
+    const submitForm = async() => {
         const body = {
             userDetails: general,
             bankDetails: bank,
@@ -245,7 +263,7 @@ const Profile = () => {
                             <p className="inp">{value?.documentDetails?.drivingLicense}</p>
                         </div>
                         }
-                        <Button variant="contained" className="submitButton" onClick={submitForm} >Update Details</Button>
+                        <Button variant="contained" className="submitButton" onClick={validateForm} >Update Details</Button>
             </div>
         </div>
     )

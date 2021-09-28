@@ -14,6 +14,12 @@ import { Button } from '@material-ui/core'
 
 const Home = () => {
     const [value, setValue] = useState([]);
+    const [fDate, setFDate] = useState(new Date());
+    const [tDate, setTDate] = useState("");
+    const date = new Date();
+    const todayDate=date.getFullYear()+"-"+((date.getMonth()+1)<10?"0"+(date.getMonth()+1):(date.getMonth()+1))+"-"+(date.getDate()<10?"0"+date.getDate():date.getDate());
+    const finalDate=date.getFullYear()+"-"+((date.getMonth()+2)<10?"0"+(date.getMonth()+2):(date.getMonth()+2))+"-"+(date.getDate()<10?"0"+date.getDate():date.getDate());
+
 
     useEffect(async() => {
         const res = await fetch(`/getBike`);
@@ -118,7 +124,9 @@ const Home = () => {
                                     <p>{dt?.modelNumber}</p>
                                     <p>{dt?.vehicleNumber}</p>
                                     <h3>{dt?.rate} Rs/Month</h3>
-                                    <Button variant="contained" onClick="">RENT BIKE</Button>
+                                    <p>from<input type="date" value={fDate} className="datePicker" min={todayDate} onChange={(e) => setFDate(e.target.value)}  /></p>
+                                    <p> to <input type="date" value={tDate} className="datePicker" max={finalDate} onChange={(e) => setTDate(e.target.value)}  /></p>
+                                    <Button variant="contained" className="bookBike" onClick="">RENT BIKE</Button>
                                 </div>
                             </div>
                         )

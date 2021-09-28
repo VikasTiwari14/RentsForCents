@@ -49,6 +49,7 @@
     cursor: pointer;
     border: 2px solid white;
     height: 23vw;
+    overflow: hidden;
 }
 .Bikes:hover{
     border: 2px solid #ff1bba;
@@ -61,7 +62,19 @@
 }
 .Bikes>img{
     width:100%;
+    height: 16vw;
 }
-.Bikes>h2{
+.Bikes .datePicker{
+    width: 50%;
+    padding: 1%;
+}
+.bikesInfo{
+    /* display: grid;
+    justify-content: center;
+    align-items: center; */
 
+}
+.bookBike{
+    background-color: #2f2f2f !important;
+    color: white !important;
 }
