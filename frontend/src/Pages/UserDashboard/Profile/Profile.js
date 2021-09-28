@@ -103,9 +103,11 @@ const Profile = () => {
                     return;
                 }
             }
+            console.log("hello")
             setGeneral({...general,dobImage : image[0]}); 
+            console.log(image[0])
             setBank({...bank,passbook : image[1]});
-            setDocs({...docs,idImage :image[2]});
+            setDocs({...docs,idImage : image[2]});
             setDocs({...docs,drivingLicenseImage : image[3]});
             setDocs({...docs,photo : image[4]});
         }
@@ -134,6 +136,7 @@ const Profile = () => {
         if(data.status){
             alert("Your Account Updated Successfully");
             setImage([]);
+            setValue(data.data[0]);
             // setValue({ fName:"", lName:"", email:"", mobile:"", gender:"", dob:"", pass:"", cPass:"", hNo:"", street:"", area:"", city:"", state:"", country:"", pincode:"", id:"", idType:"", idImage:"", license:"", licenseImage:"", accNo:"", accName:"", ifsc:"", bankName:"", passBook:"", userImage:"", landmark:"", dobImage:"", photo:""})
         }
         else{
@@ -172,7 +175,7 @@ const Profile = () => {
                             </Select>}
                             <label>Date of Birth</label>
                             {value?.userDetails?.gender?<p className="inp">{value?.userDetails?.DOB}</p>:<>
-                            <input className="datePicker" type="date" name="dob" max={todayDate} value={general?.dob} onChange={handleGeneral} />
+                            <input className="datePicker" type="date" name="DOB" max={todayDate} value={general?.dob} onChange={handleGeneral} />
                             <label>Upload DOB proff</label>
                             <input variant="outlined" className="materialInput fileSelect" type="file" name="0" onChange={handleImage} hidden="hidden" />
                             <TextField variant="outlined" className="materialInput" type="text" name="0" value={general?.dobImage} onClick={handleClick} disabled={true}/>
@@ -223,12 +226,12 @@ const Profile = () => {
                                 <MenuItem value="Passport">Passport</MenuItem>
                             </Select>
                             <label>ID NO.</label>
-                            <TextField variant="outlined" className="materialInput" type="text" name="id" value={docs?.id} onChange={handleDocs} />
+                            <TextField variant="outlined" className="materialInput" type="text" name="idNumber" value={docs?.id} onChange={handleDocs} />
                             <label>Upload ID</label>
                             <input variant="outlined" className="materialInput  fileSelect" type="file" name="2" onChange={handleImage} hidden="hidden" />
                             <TextField variant="outlined" className="materialInput" type="text" name="2" value={docs?.idImage} onClick={handleClick} disabled={true}/>
                             <label>Driving License</label>
-                            <TextField variant="outlined" className="materialInput" type="text" name="license" value={docs?.license} onChange={handleDocs} />
+                            <TextField variant="outlined" className="materialInput" type="text" name="drivingLicense" value={docs?.license} onChange={handleDocs} />
                             <label>Upload Driving License</label>
                             <input variant="outlined" className="materialInput  fileSelect" type="file" name="3" onChange={handleImage} hidden="hidden" />
                             <TextField variant="outlined" className="materialInput" type="text" name="3" value={docs?.drivingLicenseImage} onClick={handleClick} disabled={true}/>
