@@ -48,6 +48,7 @@
     margin: 10%;
     cursor: pointer;
     border: 2px solid white;
+    height: 23vw;
 }
 .Bikes:hover{
     border: 2px solid #ff1bba;

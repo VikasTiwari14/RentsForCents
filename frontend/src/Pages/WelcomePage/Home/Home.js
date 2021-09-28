@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import "./Home.css"
 import feature1 from "../../../images/cardPayment.jpg"
 import feature2 from "../../../images/maintained.jpg"
@@ -13,6 +13,22 @@ import { Button } from '@material-ui/core'
 
 
 const Home = () => {
+    const [value, setValue] = useState([]);
+
+    useEffect(async() => {
+        const res = await fetch(`/getBike`);
+        const data = await res.json()
+        console.log(data);
+        setValue(data.data);
+    },[])
+    const handleMouseOver = (e,index) => {
+        document.getElementsByClassName("bikesImage")[index].style.display="none";
+        document.getElementsByClassName("bikesInfo")[index].style.height="23vw";
+    }
+    const handleMouseOut = (e,index) => {
+        document.getElementsByClassName("bikesImage")[index].style.display="block";
+    }
+    
     return(
         <>
         <div className="homePage">
@@ -56,6 +72,7 @@ const Home = () => {
         <div className="homePage">
             <h1>BIKES</h1>
             <hr />
+            {localStorage.getItem("id")===null?<>
             <div className="BikesContainer">
                 <div className="Bikes">
                     <img src={bike2} />
@@ -89,6 +106,26 @@ const Home = () => {
                 </div>
             </div>
             <Button variant="outlined" className="MoreBtn" >More...</Button>
+            </>:
+            <div className="BikesContainer">
+                {
+                    value?.map((dt,index) => {
+                        return(
+                            <div className="Bikes" onMouseOver={(e) => handleMouseOver(e,index)} onMouseOut={(e) => handleMouseOut(e,index)}>
+                                <img src={dt?.vehicleImage} className="bikesImage" />
+                                <div className="bikesInfo">
+                                    <h2>{dt?.brandName}</h2>
+                                    <p>{dt?.modelNumber}</p>
+                                    <p>{dt?.vehicleNumber}</p>
+                                    <h3>{dt?.rate} Rs/Month</h3>
+                                    <Button variant="contained" onClick="">RENT BIKE</Button>
+                                </div>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+            }
         </div>
         <div className="homePage">
             <h1>CUSTOMERS REVIEW</h1>

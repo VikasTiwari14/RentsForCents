@@ -107,9 +107,7 @@ const Profile = () => {
             setGeneral({...general,dobImage : image[0]}); 
             console.log(image[0])
             setBank({...bank,passbook : image[1]});
-            setDocs({...docs,idImage : image[2]});
-            setDocs({...docs,drivingLicenseImage : image[3]});
-            setDocs({...docs,photo : image[4]});
+            setDocs({...docs,idImage : image[2],drivingLicenseImage : image[3],photo : image[4]});
         }
         if(address.hNo===""||address.city===""||address.pincode===""||address.state===""||address.country===""||bank.accNo===""||bank.accName===""||bank.bankName===""||bank.ifsc===""||general.gender===""||general.dob===""||docs.idType===""||docs.id===""||docs.license===""){
             alert("Please fill all the required field");
@@ -121,9 +119,8 @@ const Profile = () => {
             bankDetails: bank,
             addressDetails: address,
             documentDetails: docs,
-            ID: localStorage.getItem("id")
         }
-        const res = await fetch("/update",{
+        const res = await fetch(`/update/${localStorage.getItem("id")}`,{
             method:"PUT",
             headers:{
                 "Content-Type":"application/json",
@@ -136,7 +133,7 @@ const Profile = () => {
         if(data.status){
             alert("Your Account Updated Successfully");
             setImage([]);
-            setValue(data.data[0]);
+            setValue(data.data);
             // setValue({ fName:"", lName:"", email:"", mobile:"", gender:"", dob:"", pass:"", cPass:"", hNo:"", street:"", area:"", city:"", state:"", country:"", pincode:"", id:"", idType:"", idImage:"", license:"", licenseImage:"", accNo:"", accName:"", ifsc:"", bankName:"", passBook:"", userImage:"", landmark:"", dobImage:"", photo:""})
         }
         else{
