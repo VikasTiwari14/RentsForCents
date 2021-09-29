@@ -548,31 +548,60 @@ router.get('/history/:id', async(req, res)=>{
     const id = req.params.id
     var confirmedData=[]
     try{
-        const data = await bookingCollection.find({userID:id})
-        for(var i =0;i <data.length;i++) {{
-            if (data[i].confirm===true) {
-                confirmedData.push(data[i])
+        if (id==='0')
+        {
+            const data = await bookingCollection.find({confirm:true}).sort({_id:-1})
+            if(data.length!=0)
+            {
+                res.status(200).json({
+                    status:true,
+                    message:'All confirmation sent successfully',
+                    data:data
+                })
             }
-        }}
-
-        if(confirmedData.length===0) {
-            res.status(200).json({
-                status:false,
-                message:'No Bike booked now',
-                
-            })
+            else{
+                res.status(400).json({
+                    status:false,
+                    message:'No confirmed booking found',
+                })
+            }
         }
-        else{
-            res.status(200).json({
-                status:true,
-                message:'booking found',
-                data:confirmedData
-            })
+        else
+        {
+            const data = await bookingCollection.find({userID:id})
+            if(data.length!=0)
+            {
+                for(var i =0;i <data.length;i++) {{
+                    if (data[i].confirm===true) {
+                        confirmedData.push(data[i])
+                    }
+                }}
+        
+                if(confirmedData.length===0) {
+                    res.status(200).json({
+                        status:false,
+                        message:'No confirmed booking found for this user',
+                        
+                    })
+                }
+                else{
+                    res.status(200).json({
+                        status:true,
+                        message:'booking found',
+                        data:confirmedData
+                    })
+                }
+            }
+            else{
+                res.status(400).json({
+                    status:false,
+                    message:'User Not found',
+                })
+            }
         }
     }
     catch(err){
-        console.log(err);
-        res.status(400).json({
+            res.status(400).json({
             status:404,
             message:'Some error occured'
         })
