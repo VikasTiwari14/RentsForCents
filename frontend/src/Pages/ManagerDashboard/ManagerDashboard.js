@@ -9,6 +9,7 @@ import Settings from './Settings/Settings';
 import Verification from './Verification/Verification';
 import ViewBike from './ViewBike/ViewBike';
 import ViewUser from './ViewUser/ViewUser';
+import Engaged from './Engaged/Engaged';
 import { FaBell } from "react-icons/fa";
 import { useHistory } from 'react-router';
 
@@ -26,7 +27,7 @@ const ManagerDashboard = () => {
     },[])
     const handleValue = (e) => {
         setValue(e.target.id);
-        for(let i=1;i<=8;i++){
+        for(let i=1;i<=9;i++){
             console.log(i, e.target.id[1])
             if(i===parseInt(e.target.id[1])){
                 document.getElementById(e.target.id).style.background="#1e1e1e"
@@ -48,6 +49,7 @@ const ManagerDashboard = () => {
             case "b6" : return <Feedback />
             case "b7" : return <Verification />
             case "b8" : return <Settings />
+            case "b9" : return <Engaged />
         }
     }
     const signOut = () => {
@@ -71,6 +73,7 @@ const ManagerDashboard = () => {
                         <input type="button" id="b5" value="View Bikes" onClick={handleValue}/>
                         <input type="button" id="b7" value="Confirmation" onClick={handleValue}/>
                         <input type="button" id="b8" value="Booking History" onClick={handleValue}/>
+                        <input type="button" id="b9" value="Engaged Vehicle" onClick={handleValue}/>
                         <input type="button" id="b6" value="Feedback & Query" onClick={handleValue}/>
                         <input type="button" id="b0" value="Sign Out" onClick={signOut}/>
                     </div>

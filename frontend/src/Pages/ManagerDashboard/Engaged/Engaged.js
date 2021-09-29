@@ -1,32 +1,25 @@
 import { Button } from "@material-ui/core";
 import React,{useState,useEffect} from "react"
-import "./Verification.css"
+import "./Engaged.css"
 import moment from "moment"
 
-const Verification = () => {
+const Engaged = () => {
     const [value, setValue] = useState([]);
     const [id, setid ] = useState([]);
     const [isopen, setisopen] = useState(false);
 
     useEffect(async() => {
-        const res = await fetch(`/application/0`);
+        const res = await fetch(`/engaged`);
         const data = await res.json()
         console.log(data);
         setValue(data?.data);
     },[isopen])
-    const handleBook = (e,index) => {
-        let newText = id;
-        id[index] = e.target.value;
-        setid(newText)
-    }
-    const handleConfirm = async(bookingId,index) => {
-        console.log(bookingId, id[index])
-        if(bookingId===id[index]){
+    const handleConfirm = async(dt) => {
             let body = {
-                confirm: true,
-                bookedAt: moment(new Date).format('DD-MM-YYYY HH:mm:ss')
+                return: true,
+                returnedAt: moment(new Date).format('DD-MM-YYYY HH:mm:ss')
             }
-            const res = await fetch(`application/${bookingId}`,{
+            const res = await fetch(`application/${dt?.bookingId}`,{
                 method:"PUT",
                 headers:{
                     "Content-Type":"application/json",
@@ -36,24 +29,30 @@ const Verification = () => {
             });
             const data = await res.json();
             if(data.status===200){
-                alert("Bike confirmation successful");
+                alert("Bike returned successful");
+                let body ={
+                    available:true
+                }
+                const result =await fetch(`bike/${dt?.vehicleNumber}`,{
+                    method:"PUT",
+                    headers:{
+                        "Content-Type":"application/json",
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    body: JSON.stringify(body)
+                });
                 setisopen(!isopen);
             }
-        }
-        else{
-            alert("Invalid Booking Id")
-        }
     }
-    
-    return(
+    return (
         <div className="Confirmation">
             <h1>CONFIRMATION</h1>
             {
-                value?.length===0?<h2>No Request for Confirmation</h2>:
+                value?.length===0?<h2>No Engaged Vehicle</h2>:
                 <div className="ConfirmationTable">
                     <div className="ConfirmationTableHead">
                         <div><b>Booking<br />Id</b></div>
-                        <div><b>Requested<br />On</b></div>
+                        <div><b>Booked<br />On</b></div>
                         <div><b>Customer<br />Id</b></div>
                         <div><b>Customer<br />Name</b></div>
                         <div><b>Vehicle<br />Number</b></div>
@@ -66,15 +65,15 @@ const Verification = () => {
                         value?.map((dt,index) => {
                             return(
                                 <div className="ConfirmationTableBody">
-                                    <div><input type="text" value={id[index]} onChange={(e) => handleBook(e,index)} className="bookingInput" /> </div>
-                                    <div>{dt?.requestedAt}</div>
+                                    <div>{dt?.bookingId}</div>
+                                    <div>{dt?.bookedAt}</div>
                                     <div>{dt?.userID}</div>
                                     <div>{dt?.name}</div>
                                     <div>{dt?.vehicleNumber}</div>
                                     <div>{dt?.rate}</div>
                                     <div>{dt?.duration}</div>
                                     <div>{parseInt(dt?.rate)*parseInt(dt?.duration)}</div>
-                                    <Button variant="contained" className="confirmBtn" onClick={() => handleConfirm(dt.bookingId,index)}>Confirm</Button>
+                                    <Button variant="contained" className="confirmBtn" onClick={() => handleConfirm(dt)}>Bike Returned</Button>
                                 </div>
                             )
                         })
@@ -84,4 +83,5 @@ const Verification = () => {
         </div>
     )
 }
-export default Verification;
+
+export default Engaged

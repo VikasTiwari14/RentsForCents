@@ -8,7 +8,7 @@ const Settings = () => {
         const res = await fetch(`/history/0`);
         const data = await res.json()
         console.log(data);
-        // setValue(data.data);
+        setValue(data.data);
     },[])
     return(
         <div className="Settings">
