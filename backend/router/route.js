@@ -447,7 +447,9 @@ router.post('/bookBike/vehcileNumber/:vehcileNumber/id/:id', async(req, res)=>{
                 modelNumber:req.body.modelNumber,
                 brandName:req.body.brandName,
                 bookingDuration:req.body.bookingDuration,
+                requestedAt:req.body.requestedAt,
                 confirm:false,
+                return:false,
                 bookedAt:'',
                 returnedAt:'',
                 rate:req.body.rate,
@@ -602,6 +604,34 @@ router.get('/history/:id', async(req, res)=>{
     }
     catch(err){
             res.status(400).json({
+            status:404,
+            message:'Some error occured'
+        })
+    }
+})
+
+router.put('/application/:bookingId',async(req,res)=>{
+    const bookingId = req.params.bookingId
+    try{
+        const data = await bookingCollection.findOne({bookingId:bookingId})
+        if(data)
+        {
+            const update = await bookingCollection.findByIdAndUpdate({_id:data._id},{$set:req.body},{new:true})
+            res.status(200).json({
+                status:true,
+                message:'Booking confirmed',
+                data:update
+            })
+        }
+        else{
+            res.status(400).json({
+                status:false,
+                message:'Booking Id not found',
+            })
+        }
+    }
+    catch(err) {
+        res.status(400).json({
             status:404,
             message:'Some error occured'
         })
