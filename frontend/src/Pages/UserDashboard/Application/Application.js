@@ -32,9 +32,9 @@ const Application = () => {
                         return(
                             <div className="ApplicationTableBody">
                                 <div>{dt?.bookingId}</div>
-                                <div>{dt?.requestedOn}</div>
-                                <div>{dt?.customerId}</div>
-                                <div>{dt?.customerName}</div>
+                                <div>{dt?.requestedAt}</div>
+                                <div>{dt?.userID}</div>
+                                <div>{dt?.name}</div>
                                 <div>{dt?.vehicleNumber}</div>
                                 <div>{dt?.vehicleBrand}</div>
                                 <div>{dt?.rate}</div>

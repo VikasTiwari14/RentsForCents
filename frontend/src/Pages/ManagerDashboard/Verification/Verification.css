@@ -4,7 +4,7 @@
 }
 .ConfirmationTableHead, .ConfirmationTableBody{
     display: grid;
-    grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     justify-content: center;
     align-items: center;
     margin: 1% 0;
@@ -18,4 +18,11 @@
 .ConfirmationTableBody:hover{
     background-color: #EAEBEF !important;
     color: black;
+}
+.bookingInput{
+    width: 75%;
+    font-size: 1.2rem;
+}
+.confirmBtn{
+    width: 75%;
 }

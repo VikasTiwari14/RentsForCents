@@ -10,7 +10,7 @@ import bike3 from "../../../images/bike3.jpg"
 import bike4 from "../../../images/bike4.png"
 import bike5 from "../../../images/bike5.png"
 import { Button } from '@material-ui/core'
-
+import moment from "moment"
 
 const Home = () => {
     const [value, setValue] = useState([]);
@@ -57,6 +57,7 @@ const Home = () => {
             modelNumber: dt?.brandName,
             bookingDuration: diffDays /* Math.ceil(Math.abs(parseInt(tDate[8]+""+tDate[9]) - parseInt(fDate[8]+""+fDate[9]))/(1000 * 60 * 60 * 24))*/,
             rate: dt?.rate,
+            requestedAt: moment(new Date).format('DD-MM-YYYY HH:mm:ss')
         }
         const res = await fetch(`/bookBike/vehcileNumber/${dt?.vehicleNumber}/id/${localStorage.getItem("id")}`,{
             method:"POST",

@@ -35,8 +35,8 @@ const History = () => {
                                         <div>{dt?.bookingId}</div>
                                         <div>{dt?.bookedAt}</div>
                                         <div>{dt?.returnedAt}</div>
-                                        <div>{dt?.customerId}</div>
-                                        <div>{dt?.customerName}</div>
+                                        <div>{dt?.userID}</div>
+                                        <div>{dt?.name}</div>
                                         <div>{dt?.vehicleNumber}</div>
                                         <div>{dt?.vehicleBrand}</div>
                                         <div>{dt?.rate}</div>
