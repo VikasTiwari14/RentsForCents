@@ -46,12 +46,20 @@ const Home = () => {
             alert("You are not a verified user");
             return;
         }
+        let body = {
+            name: localStorage.getItem("name"),
+            brandName: dt?.brandName,
+            modelNumber: dt?.brandName,
+            bookingDuration:  parseInt(tDate[8]+""+tDate[9]) - parseInt(fDate[8]+""+fDate[9]),
+            rate: dt?.rate,
+        }
         const res = await fetch(`/bookBike/vehcileNumber/${dt?.vehicleNumber}/id/${localStorage.getItem("id")}`,{
-            method:"PUT",
+            method:"POST",
             headers:{
                 "Content-Type":"application/json",
                 'Access-Control-Allow-Origin': '*'
             },
+            body: JSON.stringify(body)
         });
         const data = await res.json()
         console.log(data);
