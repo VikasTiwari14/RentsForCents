@@ -552,7 +552,7 @@ router.get('/history/:id', async(req, res)=>{
     try{
         if (id==='0')
         {
-            const data = await bookingCollection.find({confirm:true}).sort({_id:-1})
+            const data = await bookingCollection.find({confirm:true,return:true}).sort({_id:-1})
             if(data.length!=0)
             {
                 res.status(200).json({
@@ -610,6 +610,34 @@ router.get('/history/:id', async(req, res)=>{
     }
 })
 
+
+
+router.get('/engaged', async(req, res)=>{
+    try{
+            const data = await bookingCollection.find({confirm:true,return:false}).sort({_id:-1})
+            if(data.length!=0)
+            {
+                res.status(200).json({
+                    status:true,
+                    message:'All engaged bikes sent successfully',
+                    data:data
+                })
+            }
+            else{
+                res.status(400).json({
+                    status:false,
+                    message:'No bikes engaged',
+                })
+            }
+    }
+    catch(err){
+            res.status(400).json({
+            status:404,
+            message:'Some error occured'
+        })
+    }
+})
+
 router.put('/application/:bookingId',async(req,res)=>{
     const bookingId = req.params.bookingId
     try{
@@ -619,7 +647,7 @@ router.put('/application/:bookingId',async(req,res)=>{
             const update = await bookingCollection.findByIdAndUpdate({_id:data._id},{$set:req.body},{new:true})
             res.status(200).json({
                 status:true,
-                message:'Booking confirmed',
+                message:'updated',
                 data:update
             })
         }
