@@ -14,7 +14,7 @@ import { Button } from '@material-ui/core'
 
 const Home = () => {
     const [value, setValue] = useState([]);
-    const [fDate, setFDate] = useState(new Date());
+    const [fDate, setFDate] = useState("");
     const [tDate, setTDate] = useState("");
     const date = new Date();
     const todayDate=date.getFullYear()+"-"+((date.getMonth()+1)<10?"0"+(date.getMonth()+1):(date.getMonth()+1))+"-"+(date.getDate()<10?"0"+date.getDate():date.getDate());
@@ -34,6 +34,29 @@ const Home = () => {
     const handleMouseOut = (e,index) => {
         document.getElementsByClassName("bikesImage")[index].style.display="block";
     }
+    const bookBike = async(dt) => {
+        let retValue = window.confirm("Are you sure you want to book"+dt?.brandName+" "+dt?.modelNumber);
+        if(!retValue)
+            return;
+        if(fDate==="" || tDate===""){
+            alert("Please Select Date");
+            return;
+        }
+        if(localStorage.getItem("verified")===null){
+            alert("You are not a verified user");
+            return;
+        }
+        const res = await fetch(`/bookBike/vehcileNumber/${dt?.vehicleNumber}/id/${localStorage.getItem("id")}`,{
+            method:"PUT",
+            headers:{
+                "Content-Type":"application/json",
+                'Access-Control-Allow-Origin': '*'
+            },
+        });
+        const data = await res.json()
+        console.log(data);
+    }
+    
     
     return(
         <>
@@ -116,6 +139,7 @@ const Home = () => {
             <div className="BikesContainer">
                 {
                     value?.map((dt,index) => {
+                        console.log(dt?.available?false:true)
                         return(
                             <div className="Bikes" onMouseOver={(e) => handleMouseOver(e,index)} onMouseOut={(e) => handleMouseOut(e,index)}>
                                 <img src={dt?.vehicleImage} className="bikesImage" />
@@ -124,9 +148,9 @@ const Home = () => {
                                     <p>{dt?.modelNumber}</p>
                                     <p>{dt?.vehicleNumber}</p>
                                     <h3>{dt?.rate} Rs/Month</h3>
-                                    <p>from<input type="date" value={fDate} className="datePicker" min={todayDate} onChange={(e) => setFDate(e.target.value)}  /></p>
-                                    <p> to <input type="date" value={tDate} className="datePicker" max={finalDate} onChange={(e) => setTDate(e.target.value)}  /></p>
-                                    <Button variant="contained" className="bookBike" onClick="">RENT BIKE</Button>
+                                    <p>from<input type="date" value={fDate} className="datePicker" min={todayDate} max={finalDate} onChange={(e) => setFDate(e.target.value)}  /></p>
+                                    <p> to <input type="date" value={tDate} className="datePicker" min={todayDate} max={finalDate} onChange={(e) => setTDate(e.target.value)}  /></p>
+                                    <Button variant="contained" className="bookBike" onClick={() => bookBike(dt)} disabled={dt?.available?false:true}>{dt?.available?"RENT BIKE":"NOT AVAILABLE"}</Button>
                                 </div>
                             </div>
                         )
