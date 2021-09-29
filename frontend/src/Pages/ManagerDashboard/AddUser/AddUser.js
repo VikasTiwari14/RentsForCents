@@ -198,7 +198,7 @@ const AddUser = () => {
                     <MenuItem value="Others">Others</MenuItem>
                 </Select>
                 <label>Date of Birth</label>
-                <input className="materialInput" type="date" name="dob" max={todayDate} value={value.dob} onChange={handleValue} />
+                <input className="datePicker" type="date" name="dob" max={todayDate} value={value.dob} onChange={handleValue} />
                 <label>Upload DOB proff</label>
                 <input variant="outlined" className="materialInput fileSelect" type="file" name="0" onChange={handleImage} hidden="hidden" />
                 <TextField variant="outlined" className="materialInput" type="text" name="0" value={value.dobImage} onClick={handleClick} disabled={true}/>

@@ -26,7 +26,7 @@ const ManagerDashboard = () => {
     },[])
     const handleValue = (e) => {
         setValue(e.target.id);
-        for(let i=1;i<=6;i++){
+        for(let i=1;i<=8;i++){
             console.log(i, e.target.id[1])
             if(i===parseInt(e.target.id[1])){
                 document.getElementById(e.target.id).style.background="#1e1e1e"
@@ -46,6 +46,8 @@ const ManagerDashboard = () => {
             case "b3" : return <ViewUser />
             case "b5" : return <ViewBike />
             case "b6" : return <Feedback />
+            case "b7" : return <Verification />
+            case "b8" : return <Settings />
         }
     }
     const signOut = () => {
@@ -67,6 +69,8 @@ const ManagerDashboard = () => {
                         <input type="button" id="b3" value="View Users" onClick={handleValue}/>
                         <input type="button" id="b4" value="Add Bike" onClick={handleValue}/>
                         <input type="button" id="b5" value="View Bikes" onClick={handleValue}/>
+                        <input type="button" id="b7" value="Confirmation" onClick={handleValue}/>
+                        <input type="button" id="b8" value="Booking History" onClick={handleValue}/>
                         <input type="button" id="b6" value="Feedback & Query" onClick={handleValue}/>
                         <input type="button" id="b0" value="Sign Out" onClick={signOut}/>
                     </div>
