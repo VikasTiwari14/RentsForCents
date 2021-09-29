@@ -428,33 +428,6 @@ router.get('/user/:id',async(req,res)=>{
     }
 })
 
-// router.get('/history/:id', async(req, res)=>{
-//     const id = req.params.id
-//     try{
-//         const data = await userCollection.find({ID:id})
-//         if(data)
-//         {
-//             res.status(200).json({
-//                 status:200,
-//                 message:'data found',
-//                 data: data[0].bikes
-//             })
-//         }
-//         else{
-//             res.status(422).json({
-//                 status:422,
-//                 message:'User Not Found'
-//             })
-//         }
-//     }
-//     catch(err){
-//         console.log(err);
-//         res.status(400).json({
-//             status:404,
-//             message:'Some error occured'
-//         })
-//     }
-// })
 
 
 router.post('/bookBike/vehcileNumber/:vehcileNumber/id/:id', async(req, res)=>{
@@ -507,6 +480,72 @@ router.post('/bookBike/vehcileNumber/:vehcileNumber/id/:id', async(req, res)=>{
     }
 })
 
+
+router.get('/application/:id',async(req, res) => {
+    const id = req.params.id
+    var unConfirmedData=[]
+    try{
+        const data = await bookingCollection.find({userID:id})
+        for(var i =0;i <data.length;i++) {{
+            if (data[i].confirm===false) {
+                unConfirmedData.push(data[i])
+            }
+        }}
+
+        if(unConfirmedData.length===0) {
+            res.status(200).json({
+                status:false,
+                message:'No Bike request Found',
+                
+            })
+        }
+        else{
+            res.status(200).json({
+                status:true,
+                message:'request found',
+                data:unConfirmedData
+            })
+        }
+    }
+    catch(err) {
+        console.log(err)
+    }
+})
+
+router.get('/history/:id', async(req, res)=>{
+    const id = req.params.id
+    var confirmedData=[]
+    try{
+        const data = await bookingCollection.find({userID:id})
+        for(var i =0;i <data.length;i++) {{
+            if (data[i].confirm===true) {
+                confirmedData.push(data[i])
+            }
+        }}
+
+        if(confirmedData.length===0) {
+            res.status(200).json({
+                status:false,
+                message:'No Bike booked now',
+                
+            })
+        }
+        else{
+            res.status(200).json({
+                status:true,
+                message:'booking found',
+                data:confirmedData
+            })
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).json({
+            status:404,
+            message:'Some error occured'
+        })
+    }
+})
 
 // router.post('/add',async(req,res)=>{
 //     const obj = {

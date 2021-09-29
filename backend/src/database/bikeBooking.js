@@ -10,6 +10,10 @@ const bikeBook_Schema = new mongoose.Schema({
         bookingId:String,
         modelNumber:String,
         brandName:String,
+        requestedAt:{
+                type: Date,
+                default : Date.now   
+            },
         bookedAt: String,
         returnedAt:String,
         bookingDuration:String,
