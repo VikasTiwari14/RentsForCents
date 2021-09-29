@@ -457,7 +457,7 @@ router.get('/user/:id',async(req,res)=>{
 // })
 
 
-router.put('/bookBike/vehcileNumber/:vehcileNumber/id/:id', async(req, res)=>{
+router.post('/bookBike/vehcileNumber/:vehcileNumber/id/:id', async(req, res)=>{
     const vehicleNumber = req.params.vehcileNumber
     const id = req.params.id
     try{
@@ -477,7 +477,8 @@ router.put('/bookBike/vehcileNumber/:vehcileNumber/id/:id', async(req, res)=>{
                 confirm:false,
                 bookedAt:'',
                 returnedAt:'',
-                extraCharge:''
+                rate:req.body.rate,
+                price:req.body.rate*req.body.bookingDuration
             })
 
             const result = await data.save()

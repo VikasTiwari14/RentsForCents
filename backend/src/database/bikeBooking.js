@@ -14,7 +14,8 @@ const bikeBook_Schema = new mongoose.Schema({
         returnedAt:String,
         bookingDuration:String,
         confirm:Boolean,
-        extraCharge:String
+        rate:Number,
+        price:Number
 })
 
 
