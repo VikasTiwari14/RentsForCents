@@ -46,11 +46,16 @@ const Home = () => {
             alert("You are not a verified user");
             return;
         }
+        console.log(tDate[8]+""+tDate[9],parseInt(fDate[8]+""+fDate[9]))
+        const date1 = new Date(fDate);
+        const date2 = new Date(tDate);
+        const diffTime = Math.abs(date2 - date1);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
         let body = {
             name: localStorage.getItem("name"),
             brandName: dt?.brandName,
             modelNumber: dt?.brandName,
-            bookingDuration:  parseInt(tDate[8]+""+tDate[9]) - parseInt(fDate[8]+""+fDate[9]),
+            bookingDuration: diffDays /* Math.ceil(Math.abs(parseInt(tDate[8]+""+tDate[9]) - parseInt(fDate[8]+""+fDate[9]))/(1000 * 60 * 60 * 24))*/,
             rate: dt?.rate,
         }
         const res = await fetch(`/bookBike/vehcileNumber/${dt?.vehicleNumber}/id/${localStorage.getItem("id")}`,{
