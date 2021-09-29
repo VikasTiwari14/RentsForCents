@@ -1,0 +1,19 @@
+.History{
+    text-align: center;
+    padding: 1%;
+}
+.HistoryTableHead, .HistoryTableBody{
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    margin: 1% 0;
+}
+.HistoryTableBody{
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 2% 0;
+}
+.HistoryTableBody:hover{
+    background-color: rgb(207, 207, 207);
+}

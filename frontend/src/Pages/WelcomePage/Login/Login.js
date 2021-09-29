@@ -87,7 +87,8 @@ const Login = ({isLog}) => {
         if(data.status){
             localStorage.setItem("name",data.data.userDetails.customerName)
             localStorage.setItem("email",data.data.userDetails.email)
-            localStorage.setItem("mobile",data.data.userDetails.mobile)
+            localStorage.setItem("mobile",data.data.userDetails.contactNumber)
+            localStorage.setItem("verified",data.data.verified)
             localStorage.setItem("id",data.data.ID)
             history.push({pathname:"/user-dashboard"})
         }

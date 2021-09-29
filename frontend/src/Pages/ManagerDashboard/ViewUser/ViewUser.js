@@ -28,13 +28,32 @@ const ViewUser = () => {
         setDdata(dt);
         setisopen(true);
     }
+    const handleVerify = async(e) => {
+        e.preventDefault();
+        let retValue = window.confirm("Are you sure you want to verify this user");
+        if(!retValue)
+            return;
+        const body = {
+            verified: true
+        }
+        const res = await fetch(`/update/${Ddata?.ID}`,{
+            method:"PUT",
+            headers:{
+                "Content-Type":"application/json",
+                'Access-Control-Allow-Origin': '*'
+            },
+            body:JSON.stringify(body),
+        });
+        const data = await res.json()
+        console.log(data);
+    }
     
     return(
         <>
             <ReactModal isOpen={isopen} portalClassName="detailPage">
                 <FaTimes className="closeicon" onClick={()=> setisopen(false)} />
                 <div className="AddUser">
-                    <div className="viewUserHead"><h2>VIEW USER</h2><Button className="verifyButton">Verify User</Button></div>
+                    <div className="viewUserHead"><h2>VIEW USER</h2><Button className="verifyButton" onClick={handleVerify}>Verify User</Button></div>
                     <div className="AddUserCard">
                         <h2>General Information</h2><label></label><label></label><label></label>
                         <label>Name</label>
