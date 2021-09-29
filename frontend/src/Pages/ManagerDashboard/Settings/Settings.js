@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react"
+import "./Settings.css"
 
 const Settings = () => {
     const [value, setValue] = useState([]);
@@ -13,7 +14,7 @@ const Settings = () => {
         <div className="Settings">
             <h1>BOOKING HISTORY</h1>
             {
-                value.length===0?<h2>NO HISTORY AVAILABLE</h2>:
+                value?.length===0?<h2>NO HISTORY AVAILABLE</h2>:
                 <div className="HistoryTable">
                     <div className="HistoryTableHead">
                         <div><b>Booking<br />Id</b></div>
