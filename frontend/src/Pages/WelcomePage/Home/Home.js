@@ -42,7 +42,7 @@ const Home = () => {
             alert("Please Select Date");
             return;
         }
-        if(localStorage.getItem("verified")===null){
+        if(localStorage.getItem("verified")==="false"){
             alert("You are not a verified user");
             return;
         }
@@ -68,6 +68,9 @@ const Home = () => {
         });
         const data = await res.json()
         console.log(data);
+        if(data.status===200){
+            alert("Your bike booking request is initiated. \r\n Your Booking id is "+ data.data.bookingId+"\r\nPlease visit Rent for Cents outlet for further Process")
+        }
     }
     
     
