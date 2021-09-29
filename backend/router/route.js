@@ -462,7 +462,7 @@ router.post('/bookBike/vehcileNumber/:vehcileNumber/id/:id', async(req, res)=>{
     const id = req.params.id
     try{
         const result_from_db = await userCollection.findOne({ID:id})
-        const bikeAvail = await bikeCollection.findOne({vehicleNumber:vehicleNumber})
+        const bikeAvail = await bikeDetails.findOne({vehicleNumber:vehicleNumber})
         if(result_from_db && bikeAvail.available===true)
         {
 
@@ -490,6 +490,7 @@ router.post('/bookBike/vehcileNumber/:vehcileNumber/id/:id', async(req, res)=>{
             })
         }
         else {
+            console.log(err)
             res.status(400).json({
                 status:400,
                 message:'user Not found'
