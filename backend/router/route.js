@@ -455,6 +455,7 @@ router.post('/bookBike/vehcileNumber/:vehcileNumber/id/:id', async(req, res)=>{
             })
 
             const result = await data.save()
+            const update = await bikeDetails.findByIdAndUpdate({_id:bikeAvail._id},{$set:{available:false}},{new:true})          
 
             res.status(200).json({
                 status:200,
@@ -472,8 +473,7 @@ router.post('/bookBike/vehcileNumber/:vehcileNumber/id/:id', async(req, res)=>{
     }
     catch(err)
     {
-        console.log(err)
-        res.status(400).json({
+            res.status(400).json({
             status:404,
             message:'Some error occured'
         })
@@ -485,30 +485,62 @@ router.get('/application/:id',async(req, res) => {
     const id = req.params.id
     var unConfirmedData=[]
     try{
-        const data = await bookingCollection.find({userID:id})
-        for(var i =0;i <data.length;i++) {{
-            if (data[i].confirm===false) {
-                unConfirmedData.push(data[i])
+        if (id==='0')
+        {
+            const data = await bookingCollection.find({confirm:false}).sort({_id:-1})
+            if(data.length!=0)
+            {
+                res.status(200).json({
+                    status:true,
+                    message:'All booking sent successfully',
+                    data:data
+                })
             }
-        }}
-
-        if(unConfirmedData.length===0) {
-            res.status(200).json({
-                status:false,
-                message:'No Bike request Found',
-                
-            })
+            else{
+                res.status(400).json({
+                    status:false,
+                    message:'No booking found',
+                })
+            }
         }
         else{
-            res.status(200).json({
-                status:true,
-                message:'request found',
-                data:unConfirmedData
-            })
+            const data = await bookingCollection.find({userID:id})
+            if (data.length!=0)
+            {
+                for(var i =0;i <data.length;i++) {{
+                    if (data[i].confirm===false) {
+                        unConfirmedData.push(data[i])
+                    }
+                }}
+        
+                if(unConfirmedData.length===0) {
+                    res.status(400).json({
+                        status:false,
+                        message:'No Bike request Found for this user',
+                        
+                    })
+                }
+                else{
+                    res.status(200).json({
+                        status:true,
+                        message:'request found',
+                        data:unConfirmedData
+                    })
+                }
+            }
+            else{
+                res.status(400).json({
+                    status:false,
+                    message:'User Not found',
+                }) 
+            }
         }
     }
     catch(err) {
-        console.log(err)
+        res.status(422).json({
+            status:422,
+            message:'Some error occured'
+        })
     }
 })
 
