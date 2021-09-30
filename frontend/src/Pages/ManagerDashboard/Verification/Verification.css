@@ -10,6 +10,9 @@
     margin: 1% 0;
     color: #EAEBEF;
 }
+.EngagedTableBody ,.EngagedTableHead{
+    grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr !important;
+}
 .ConfirmationTableBody{
     border: 1px solid #EAEBEF;
     border-radius: 5px;

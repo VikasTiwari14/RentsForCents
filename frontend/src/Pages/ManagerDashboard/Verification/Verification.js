@@ -17,6 +17,7 @@ const Verification = () => {
         data?.data?.forEach((dt,index) => {
             id[index] = "";
         })
+        setid(newText)
     },[isopen])
     const handleBook = (e,index) => {
         let newText = id;

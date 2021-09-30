@@ -55,7 +55,7 @@ const Engaged = () => {
             {
                 value?.length===0?<h2>No Engaged Vehicle</h2>:
                 <div className="ConfirmationTable">
-                    <div className="ConfirmationTableHead">
+                    <div className="ConfirmationTableHead EngagedTableHead">
                         <div><b>Booking<br />Id</b></div>
                         <div><b>Booked<br />On</b></div>
                         <div><b>Customer<br />Id</b></div>
@@ -69,7 +69,7 @@ const Engaged = () => {
                     {
                         value?.map((dt,index) => {
                             return(
-                                <div className="ConfirmationTableBody">
+                                <div className="ConfirmationTableBody EngagedTableBody">
                                     <div>{dt?.bookingId}</div>
                                     <div>{dt?.bookedAt}</div>
                                     <div>{dt?.userID}</div>
