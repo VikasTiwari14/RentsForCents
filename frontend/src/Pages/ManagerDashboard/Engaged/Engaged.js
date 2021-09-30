@@ -15,6 +15,9 @@ const Engaged = () => {
         if(data.status){
             setValue(data?.data);
         }
+        else{
+            setValue([])
+        }
     },[isopen])
     const handleConfirm = async(dt) => {
             let body = {
@@ -30,7 +33,7 @@ const Engaged = () => {
                 body: JSON.stringify(body)
             });
             const data = await res.json();
-            if(data.status===200){
+            if(data.status){
                 alert("Bike returned successful");
                 let body ={
                     available:true
@@ -73,8 +76,8 @@ const Engaged = () => {
                                     <div>{dt?.name}</div>
                                     <div>{dt?.vehicleNumber}</div>
                                     <div>{dt?.rate}</div>
-                                    <div>{dt?.duration}</div>
-                                    <div>{parseInt(dt?.rate)*parseInt(dt?.duration)}</div>
+                                    <div>{dt?.bookingDuration}</div>
+                                    <div>{dt?.price}</div>
                                     <Button variant="contained" className="confirmBtn" onClick={() => handleConfirm(dt)}>Bike Returned</Button>
                                 </div>
                             )

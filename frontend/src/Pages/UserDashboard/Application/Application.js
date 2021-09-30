@@ -14,7 +14,7 @@ const Application = () => {
         <div className="Application">
             <h1>Bike Booking Applications</h1>
             {
-                value.length===0?<h2>NO ONGOING APPLICATIONS</h2>:
+                value?.length===0?<h2>NO ONGOING APPLICATIONS</h2>:
                 <div className="ApplicationTable">
                     <div className="ApplicationTableHead">
                         <div><b>Booking<br />Id</b></div>
@@ -36,10 +36,10 @@ const Application = () => {
                                 <div>{dt?.userID}</div>
                                 <div>{dt?.name}</div>
                                 <div>{dt?.vehicleNumber}</div>
-                                <div>{dt?.vehicleBrand}</div>
+                                <div>{dt?.brandName}</div>
                                 <div>{dt?.rate}</div>
-                                <div>{dt?.duration}</div>
-                                <div>{parseInt(dt?.rate)*parseInt(dt?.duration)}</div>
+                                <div>{dt?.bookingDuration}</div>
+                                <div>{dt?.price}</div>
                             </div>
                         )
                     })

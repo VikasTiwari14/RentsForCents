@@ -5,16 +5,18 @@ const History = () => {
     const [value, setValue] = useState([]);
 
     useEffect(async() => {
-        const res = await fetch(`/user/${localStorage.getItem("id")}`);
+        const res = await fetch(`/history/${localStorage.getItem("id")}`);
         const data = await res.json()
         console.log(data);
-        setValue(data.data);
+        if(data.status){
+            setValue(data.data);
+        }
     },[])
     return (
         <div className="History">
             <h1>Bike Booking History</h1>
             {
-                value.length===0?<h2>NO HISTORY AVAILABLE</h2>:
+                value?.length===0?<h2>NO HISTORY AVAILABLE</h2>:
                     <div className="HistoryTable">
                         <div className="HistoryTableHead">
                             <div><b>Booking<br />Id</b></div>
@@ -38,10 +40,10 @@ const History = () => {
                                         <div>{dt?.userID}</div>
                                         <div>{dt?.name}</div>
                                         <div>{dt?.vehicleNumber}</div>
-                                        <div>{dt?.vehicleBrand}</div>
+                                        <div>{dt?.brandName}</div>
                                         <div>{dt?.rate}</div>
-                                        <div>{dt?.duration}</div>
-                                        <div>{parseInt(dt?.rate)*parseInt(dt?.duration)}</div>
+                                        <div>{dt?.bookingDuration}</div>
+                                        <div>{dt?.price}</div>
                                     </div>
                                 )
                             })
