@@ -35,7 +35,7 @@ const Home = () => {
         document.getElementsByClassName("bikesImage")[index].style.display="block";
     }
     const bookBike = async(dt) => {
-        let retValue = window.confirm("Are you sure you want to book"+dt?.brandName+" "+dt?.modelNumber);
+        let retValue = window.confirm("Are you sure you want to book "+dt?.brandName+" "+dt?.modelNumber);
         if(!retValue)
             return;
         if(fDate==="" || tDate===""){
@@ -59,7 +59,7 @@ const Home = () => {
             rate: dt?.rate,
             requestedAt: moment(new Date).format('DD-MM-YYYY HH:mm:ss')
         }
-        const res = await fetch(`/bookBike/vehcileNumber/${dt?.vehicleNumber}/id/${localStorage.getItem("id")}`,{
+        const res = await fetch(`/bookBike/vehicleNumber/${dt?.vehicleNumber}/id/${localStorage.getItem("id")}`,{
             method:"POST",
             headers:{
                 "Content-Type":"application/json",
@@ -70,17 +70,17 @@ const Home = () => {
         const data = await res.json()
         console.log(data);
         if(data.status===200){
-            let body ={
-                available:true
-            }
-            const result =await fetch(`bike/${dt?.vehicleNumber}`,{
-                method:"PUT",
-                headers:{
-                    "Content-Type":"application/json",
-                    'Access-Control-Allow-Origin': '*'
-                },
-                body: JSON.stringify(body)
-            });
+            // let body ={
+            //     available:true
+            // }
+            // const result =await fetch(`bike/${dt?.vehicleNumber}`,{
+            //     method:"PUT",
+            //     headers:{
+            //         "Content-Type":"application/json",
+            //         'Access-Control-Allow-Origin': '*'
+            //     },
+            //     body: JSON.stringify(body)
+            // });
             alert("Your bike booking request is initiated. \r\n Your Booking id is "+ data.data.bookingId+"\r\nPlease visit Rent for Cents outlet for further Process")
         }
     }

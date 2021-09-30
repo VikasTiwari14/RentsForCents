@@ -430,8 +430,8 @@ router.get('/user/:id',async(req,res)=>{
 
 
 
-router.post('/bookBike/vehcileNumber/:vehcileNumber/id/:id', async(req, res)=>{
-    const vehicleNumber = req.params.vehcileNumber
+router.post('/bookBike/vehicleNumber/:vehicleNumber/id/:id', async(req, res)=>{
+    const vehicleNumber = req.params.vehicleNumber
     const id = req.params.id
     try{
         const result_from_db = await userCollection.findOne({ID:id})
@@ -455,21 +455,19 @@ router.post('/bookBike/vehcileNumber/:vehcileNumber/id/:id', async(req, res)=>{
                 rate:req.body.rate,
                 price:req.body.rate*req.body.bookingDuration
             })
-
-            const result = await data.save()
-            const update = await bikeDetails.findByIdAndUpdate({_id:bikeAvail._id},{$set:{available:false}},{new:true})          
-
+            var body = {available:false}
+            const update = await bikeDetails.findOneAndUpdate({vehicleNumber:vehicleNumber},{$set:body},{new:true}) 
+            const result = await data.save()  
             res.status(200).json({
                 status:200,
                 message:'Data updated',
-                data:result
+                data: result
             })
         }
         else {
-            console.log(err)
-            res.status(400).json({
+                res.status(400).json({
                 status:400,
-                message:'user Not found'
+                message:'Bike Not available'
             })
         }
     }
