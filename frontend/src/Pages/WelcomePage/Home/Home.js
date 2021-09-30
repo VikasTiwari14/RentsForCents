@@ -14,6 +14,7 @@ import moment from "moment"
 
 const Home = () => {
     const [value, setValue] = useState([]);
+    const [isopen, setisopen] = useState(false)
     const [fDate, setFDate] = useState("");
     const [tDate, setTDate] = useState("");
     const date = new Date();
@@ -26,7 +27,7 @@ const Home = () => {
         const data = await res.json()
         console.log(data);
         setValue(data.data);
-    },[])
+    },[isopen])
     const handleMouseOver = (e,index) => {
         document.getElementsByClassName("bikesImage")[index].style.display="none";
         document.getElementsByClassName("bikesInfo")[index].style.height="23vw";
@@ -54,7 +55,7 @@ const Home = () => {
         let body = {
             name: localStorage.getItem("name"),
             brandName: dt?.brandName,
-            modelNumber: dt?.brandName,
+            modelNumber: dt?.modelNumber,
             bookingDuration: diffDays /* Math.ceil(Math.abs(parseInt(tDate[8]+""+tDate[9]) - parseInt(fDate[8]+""+fDate[9]))/(1000 * 60 * 60 * 24))*/,
             rate: dt?.rate,
             requestedAt: moment(new Date).format('DD-MM-YYYY HH:mm:ss')
@@ -71,7 +72,7 @@ const Home = () => {
         console.log(data);
         if(data.status===200){
             let body ={
-                available:true
+                available:false
             }
             const result =await fetch(`bike/${dt?.vehicleNumber}`,{
                 method:"PUT",
@@ -81,6 +82,7 @@ const Home = () => {
                 },
                 body: JSON.stringify(body)
             });
+            setisopen(!isopen)
             alert("Your bike booking request is initiated. \r\n Your Booking id is "+ data.data.bookingId+"\r\nPlease visit Rent for Cents outlet for further Process")
         }
     }

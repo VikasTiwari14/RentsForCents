@@ -30,7 +30,7 @@ const Profile = () => {
         password : "",
         dobImage: "Upload Image"
     });
-    const [image, setImage] = useState([]);
+    const [image, setImage] = useState(["","","","",""]);
     const date = new Date();
     const todayDate=date.getFullYear()+"-"+((date.getMonth()+1)<10?"0"+(date.getMonth()+1):(date.getMonth()+1))+"-"+(date.getDate()<10?"0"+date.getDate():date.getDate());
 
@@ -98,17 +98,15 @@ const Profile = () => {
     const validateForm = () => {
         if(!(value?.documentDetails?.drivingLicenseImage)){
             for(let i=0;i<image.length;i++){
-                if(!image[i]){
+                if(image[i]===""){
                     alert("Please upload all images");
                     return;
                 }
             }
-            console.log("hello")
             let newText = general;
             newText.dobImage=image[0];
             setGeneral(newText);
             // setGeneral({...general,dobImage : image[0]}); 
-            console.log(image[0])
             newText = bank;
             newText.passbook = image[1];
             setBank(newText)
@@ -120,7 +118,7 @@ const Profile = () => {
             setDocs(newText)
             // setDocs({...docs,idImage : image[2],drivingLicenseImage : image[3],photo : image[4]});
         }
-        if(address.hNo===""||address.city===""||address.pincode===""||address.state===""||address.country===""||bank.accNo===""||bank.accName===""||bank.bankName===""||bank.ifsc===""||general.gender===""||general.dob===""||docs.idType===""||docs.id===""||docs.license===""){
+        if(address?.hNo===""||address?.city===""||address?.pincode===""||address?.state===""||address?.country===""||bank?.accNo===""||bank?.accName===""||bank?.bankName===""||bank?.ifsc===""||general?.gender===""||general?.dob===""||docs?.idType===""||docs?.id===""||docs?.license===""){
             alert("Please fill all the required field");
             return;
         }

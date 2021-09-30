@@ -38,10 +38,10 @@ const Settings = () => {
                                         <div>{dt?.userID}</div>
                                         <div>{dt?.name}</div>
                                         <div>{dt?.vehicleNumber}</div>
-                                        <div>{dt?.vehicleBrand}</div>
+                                        <div>{dt?.brandName}</div>
                                         <div>{dt?.rate}</div>
-                                        <div>{dt?.duration}</div>
-                                        <div>{parseInt(dt?.rate)*parseInt(dt?.duration)}</div>
+                                        <div>{dt?.bookingDuration}</div>
+                                        <div>{dt?.price}</div>
                                     </div>
                                 )
                             })
