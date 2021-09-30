@@ -487,7 +487,7 @@ router.get('/application/:id',async(req, res) => {
     try{
         if (id==='0')
         {
-            const data = await bookingCollection.find({confirm:false}).sort({_id:-1})
+            const data = await bookingCollection.find({confirm:false})
             if(data.length!=0)
             {
                 res.status(200).json({
