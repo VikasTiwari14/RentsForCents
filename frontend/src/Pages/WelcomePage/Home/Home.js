@@ -60,7 +60,7 @@ const Home = () => {
             rate: dt?.rate,
             requestedAt: moment(new Date).format('DD-MM-YYYY HH:mm:ss')
         }
-        const res = await fetch(`/bookBike/vehcileNumber/${dt?.vehicleNumber}/id/${localStorage.getItem("id")}`,{
+        const res = await fetch(`/bookBike/vehicleNumber/${dt?.vehicleNumber}/id/${localStorage.getItem("id")}`,{
             method:"POST",
             headers:{
                 "Content-Type":"application/json",
