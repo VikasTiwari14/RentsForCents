@@ -20,6 +20,7 @@ const UserDashboard = () => {
     const [isopen, setisopen] = useState(false);
     const [section, setSection] = useState("");
     const [islog, setislog] = useState(false);
+    const [value, setValue] = useState();
     const history= useHistory();
 
     const showSection = () => {
@@ -38,6 +39,12 @@ const UserDashboard = () => {
             setislog(true);
             console.log(islog)
         }
+    },[])
+    useEffect(async() => {
+        const res = await fetch(`/user/${localStorage.getItem("id")}`);
+        const data = await res.json()
+        console.log(data);
+        setValue(data.data[0]);
     },[])
     const handleNavBar = (e) => {
         console.log(e.target);
@@ -82,7 +89,7 @@ const UserDashboard = () => {
                                 <button id="home" name="home" onClick={handleNavBar}>HOME</button>
                                 <button id="about" name="about" onClick={handleNavBar}>ABOUT</button>
                                 <button id="contact" name="contact" onClick={handleNavBar}>CONTACT</button>
-                                <div className="circle" onMouseOver={mouseOver} onMouseOut={mouseOut}><h1>{localStorage.getItem("name")&&localStorage.getItem("name")[0]}</h1></div>
+                                {value?.documentDetails?.photo?<img src={value?.documentDetails?.photo} className="circle" onMouseOver={mouseOver} onMouseOut={mouseOut} />:<div className="circle" onMouseOver={mouseOver} onMouseOut={mouseOut}><h1>{localStorage.getItem("name")&&localStorage.getItem("name")[0]}</h1></div>}
                             </div>
                             <span></span>
                             <div className="dropdown">
