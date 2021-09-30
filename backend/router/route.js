@@ -666,6 +666,34 @@ router.put('/application/:bookingId',async(req,res)=>{
     }
 })
 
+
+router.put('/bike/:vehicleNumber',async(req,res)=>{
+    const vehicleNumber = req.params.vehicleNumber
+    try{
+        const data = await bikeDetails.findOne({vehicleNumber:vehicleNumber})
+        if(data)
+        {
+            const update = await bikeDetails.findByIdAndUpdate({_id:data._id},{$set:req.body},{new:true})
+            res.status(200).json({
+                status:true,
+                message:'updated',
+                data:update
+            })
+        }
+        else{
+            res.status(400).json({
+                status:false,
+                message:'Vehicle Number not found',
+            })
+        }
+    }
+    catch(err) {
+        res.status(400).json({
+            status:404,
+            message:'Some error occured'
+        })
+    }
+})
 // router.post('/add',async(req,res)=>{
 //     const obj = {
 //         model:req.body.model,
