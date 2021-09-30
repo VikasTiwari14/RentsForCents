@@ -4,7 +4,7 @@
 }
 .HistoryTableHead, .HistoryTableBody{
     display: grid;
-    grid-template-columns: 1fr 1.5fr 1.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1.5fr 1.5fr 1fr 1.5fr 1fr 1fr 1fr 1fr 1fr;
     justify-content: center;
     align-items: center;
     margin: 1% 0;

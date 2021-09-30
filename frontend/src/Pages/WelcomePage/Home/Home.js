@@ -44,8 +44,13 @@ const Home = () => {
             return;
         }
         if(localStorage.getItem("verified")==="false"){
-            alert("You are not a verified user");
-            return;
+            const res = await fetch(`/user/${localStorage.getItem("id")}`);
+            const data = await res.json()
+            console.log(data?.data[0].verified);
+            if(data?.data[0].verified==="false"){
+                alert("You are not a verified user");
+                return;
+            }
         }
         console.log(tDate[8]+""+tDate[9],parseInt(fDate[8]+""+fDate[9]))
         const date1 = new Date(fDate);
@@ -179,7 +184,7 @@ const Home = () => {
                                     <p>{dt?.vehicleNumber}</p>
                                     <h3>{dt?.rate} Rs/Month</h3>
                                     <p>from<input type="date" value={fDate} className="datePicker" min={todayDate} max={finalDate} onChange={(e) => setFDate(e.target.value)}  /></p>
-                                    <p> to <input type="date" value={tDate} className="datePicker" min={todayDate} max={finalDate} onChange={(e) => setTDate(e.target.value)}  /></p>
+                                    <p> to <input type="date" value={tDate} className="datePicker" min={fDate} max={finalDate} onChange={(e) => setTDate(e.target.value)}  /></p>
                                     <Button variant="contained" className="bookBike" onClick={() => bookBike(dt)} disabled={dt?.available?false:true}>{dt?.available?"RENT BIKE":"NOT AVAILABLE"}</Button>
                                 </div>
                             </div>
