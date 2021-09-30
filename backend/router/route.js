@@ -365,7 +365,7 @@ router.get('/dashboard',async(req,res)=>{
         const unAvailBike = await bikeDetails.find({available:false}).count() 
         const feedback = await contact_collection.find().count()
         const confirmed = await bookingCollection.find({confirm:false}).count()
-        const bookingHistory = await bookingCollection.find({confirm:true},{return:true}).count()
+        const bookingHistory = await bookingCollection.find({confirm:true,return:true}).count()
         res.status(200).json({
             status:true,
             message:'fetched all data',
