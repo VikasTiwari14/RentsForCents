@@ -46,6 +46,9 @@ const ViewUser = () => {
         });
         const data = await res.json()
         console.log(data);
+        if(data.status===200){
+            setDdata(data?.data);
+        }
     }
     
     return(
@@ -53,7 +56,7 @@ const ViewUser = () => {
             <ReactModal isOpen={isopen} portalClassName="detailPage">
                 <FaTimes className="closeicon" onClick={()=> setisopen(false)} />
                 <div className="AddUser">
-                    <div className="viewUserHead"><h2>VIEW USER</h2><Button className="verifyButton" onClick={handleVerify}>Verify User</Button></div>
+                    <div className="viewUserHead"><h2>VIEW USER</h2>{!(Ddata?.verified)&&<Button className="verifyButton" onClick={handleVerify}>Verify User</Button>}</div>
                     <div className="AddUserCard">
                         <h2>General Information</h2><label></label><label></label><label></label>
                         <label>Name</label>

@@ -44,13 +44,8 @@ const Home = () => {
             return;
         }
         if(localStorage.getItem("verified")==="false"){
-            const res = await fetch(`/user/${localStorage.getItem("id")}`);
-            const data = await res.json()
-            console.log(data?.data[0].verified);
-            if(data?.data[0].verified==="false"){
                 alert("You are not a verified user");
                 return;
-            }
         }
         console.log(tDate[8]+""+tDate[9],parseInt(fDate[8]+""+fDate[9]))
         const date1 = new Date(fDate);

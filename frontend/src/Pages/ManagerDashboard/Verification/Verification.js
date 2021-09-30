@@ -13,6 +13,10 @@ const Verification = () => {
         const data = await res.json()
         console.log(data);
         setValue(data?.data);
+        let newText = id;
+        data?.data?.forEach((dt,index) => {
+            id[index] = "";
+        })
     },[isopen])
     const handleBook = (e,index) => {
         let newText = id;
@@ -37,7 +41,9 @@ const Verification = () => {
             const data = await res.json();
             if(data.status){
                 alert("Bike confirmation successful");
-                setid([])
+                let newText = id;
+                id[index] = "";
+                setid(newText)
                 setisopen(!isopen);
             }
         }

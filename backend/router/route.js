@@ -430,8 +430,8 @@ router.get('/user/:id',async(req,res)=>{
 
 
 
-router.post('/bookBike/vehicleNumber/:vehicleNumber/id/:id', async(req, res)=>{
-    const vehicleNumber = req.params.vehicleNumber
+router.post('/bookBike/vehicleNumber/:vehcileNumber/id/:id', async(req, res)=>{
+    const vehicleNumber = req.params.vehcileNumber
     const id = req.params.id
     try{
         const result_from_db = await userCollection.findOne({ID:id})
@@ -455,19 +455,21 @@ router.post('/bookBike/vehicleNumber/:vehicleNumber/id/:id', async(req, res)=>{
                 rate:req.body.rate,
                 price:req.body.rate*req.body.bookingDuration
             })
-            var body = {available:false}
-            const update = await bikeDetails.findOneAndUpdate({vehicleNumber:vehicleNumber},{$set:body},{new:true}) 
-            const result = await data.save()  
+
+            const result = await data.save()
+            const update = await bikeDetails.findByIdAndUpdate({_id:bikeAvail._id},{$set:{available:false}},{new:true})          
+
             res.status(200).json({
                 status:200,
                 message:'Data updated',
-                data: result
+                data:result
             })
         }
         else {
-                res.status(400).json({
+            console.log(err)
+            res.status(400).json({
                 status:400,
-                message:'Bike Not available'
+                message:'user Not found'
             })
         }
     }
@@ -487,7 +489,7 @@ router.get('/application/:id',async(req, res) => {
     try{
         if (id==='0')
         {
-            const data = await bookingCollection.find({confirm:false})
+            const data = await bookingCollection.find({confirm:false}).sort({_id:-1})
             if(data.length!=0)
             {
                 res.status(200).json({
