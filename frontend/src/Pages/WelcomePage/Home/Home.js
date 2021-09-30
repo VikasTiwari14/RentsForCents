@@ -70,17 +70,17 @@ const Home = () => {
         const data = await res.json()
         console.log(data);
         if(data.status===200){
-            // let body ={
-            //     available:true
-            // }
-            // const result =await fetch(`bike/${dt?.vehicleNumber}`,{
-            //     method:"PUT",
-            //     headers:{
-            //         "Content-Type":"application/json",
-            //         'Access-Control-Allow-Origin': '*'
-            //     },
-            //     body: JSON.stringify(body)
-            // });
+            let body ={
+                available:true
+            }
+            const result =await fetch(`bike/${dt?.vehicleNumber}`,{
+                method:"PUT",
+                headers:{
+                    "Content-Type":"application/json",
+                    'Access-Control-Allow-Origin': '*'
+                },
+                body: JSON.stringify(body)
+            });
             alert("Your bike booking request is initiated. \r\n Your Booking id is "+ data.data.bookingId+"\r\nPlease visit Rent for Cents outlet for further Process")
         }
     }
