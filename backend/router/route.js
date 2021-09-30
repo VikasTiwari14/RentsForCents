@@ -363,11 +363,14 @@ router.get('/dashboard',async(req,res)=>{
         const countBikes = await bikeDetails.find().count()
         const availBike = await bikeDetails.find({available:true}).count() 
         const unAvailBike = await bikeDetails.find({available:false}).count() 
+        const feedback = await contact_collection.find().count()
+        const confirmed = await bookingCollection.find({confirm:false}).count()
+        const bookingHistory = await bookingCollection.find({confirm:true},{return:true}).count()
         res.status(200).json({
             status:true,
             message:'fetched all data',
             data:{
-                countUsers,verifiedUsers,unVerifiedUsers,countBikes,availBike,unAvailBike
+                countUsers,verifiedUsers,unVerifiedUsers,countBikes,availBike,unAvailBike,feedback,confirmed,bookingHistory
             }
         })
     }
