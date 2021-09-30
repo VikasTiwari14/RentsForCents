@@ -36,7 +36,7 @@ const Home = () => {
         document.getElementsByClassName("bikesImage")[index].style.display="block";
     }
     const bookBike = async(dt) => {
-        let retValue = window.confirm("Are you sure you want to book"+dt?.brandName+" "+dt?.modelNumber);
+        let retValue = window.confirm("Are you sure you want to book "+dt?.brandName+" "+dt?.modelNumber);
         if(!retValue)
             return;
         if(fDate==="" || tDate===""){
