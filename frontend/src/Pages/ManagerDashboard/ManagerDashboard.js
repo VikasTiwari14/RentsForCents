@@ -72,8 +72,8 @@ const ManagerDashboard = () => {
                         <input type="button" id="b4" value="Add Bike" onClick={handleValue}/>
                         <input type="button" id="b5" value="View Bikes" onClick={handleValue}/>
                         <input type="button" id="b7" value="Confirmation" onClick={handleValue}/>
-                        <input type="button" id="b8" value="Booking History" onClick={handleValue}/>
                         <input type="button" id="b9" value="Engaged Vehicle" onClick={handleValue}/>
+                        <input type="button" id="b8" value="Booking History" onClick={handleValue}/>
                         <input type="button" id="b6" value="Feedback & Query" onClick={handleValue}/>
                         <input type="button" id="b0" value="Sign Out" onClick={signOut}/>
                     </div>

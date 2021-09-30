@@ -12,7 +12,9 @@ const Engaged = () => {
         const res = await fetch(`/engaged`);
         const data = await res.json()
         console.log(data);
-        setValue(data?.data);
+        if(data.status){
+            setValue(data?.data);
+        }
     },[isopen])
     const handleConfirm = async(dt) => {
             let body = {

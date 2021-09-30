@@ -11,7 +11,7 @@ const Settings = () => {
         setValue(data.data);
     },[])
     return(
-        <div className="Settings">
+        <div className="History">
             <h1>BOOKING HISTORY</h1>
             {
                 value?.length===0?<h2>NO HISTORY AVAILABLE</h2>:

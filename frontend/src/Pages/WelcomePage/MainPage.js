@@ -19,6 +19,10 @@ const MainPage = ({setIsLog,isLog}) => {
     const [isopen, setisopen] = useState(false);
     const [islogedIn, setIslogedIn] = useState(false);
     const history = useHistory();
+
+    useEffect(() => {
+        localStorage.clear();
+    })
     const handleNavBar = (e) => {
         console.log(e.target);
         setId(e.target.name);

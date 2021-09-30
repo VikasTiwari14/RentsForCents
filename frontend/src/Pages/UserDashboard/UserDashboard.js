@@ -11,13 +11,15 @@ import {FaFacebookF, FaTimes} from "react-icons/fa";
 import { useHistory } from 'react-router';
 import ReactModal from 'react-modal';
 import Profile from './Profile/Profile';
+import NotFound from "../ManagerDashboard/Profile/Profile"
 import History from './History/History';
 import Application from './Application/Application';
 
 const UserDashboard = () => {
     const [id, setId] = useState("home");
     const [isopen, setisopen] = useState(false);
-    const [section, setSection] = useState("")
+    const [section, setSection] = useState("");
+    const [islog, setislog] = useState(false);
     const history= useHistory();
 
     const showSection = () => {
@@ -27,6 +29,16 @@ const UserDashboard = () => {
             case "contact":return <Contact/>
         }
     }
+    useEffect(()=>{
+        if(localStorage.getItem("name")){
+            setislog(false);
+            console.log(islog)
+        }
+        else{
+            setislog(true);
+            console.log(islog)
+        }
+    },[])
     const handleNavBar = (e) => {
         console.log(e.target);
         setId(e.target.name);
@@ -59,6 +71,8 @@ const UserDashboard = () => {
                 <FaTimes onClick={() => setisopen(false)} className="closeicon" />
                 {modalSection()}
             </ReactModal>
+            {console.log(islog)}
+            {islog?<NotFound />:
             <div className="UserDashboard">
                 <div className="MainPage">
                     <div className="NavBarContainer">
@@ -68,7 +82,7 @@ const UserDashboard = () => {
                                 <button id="home" name="home" onClick={handleNavBar}>HOME</button>
                                 <button id="about" name="about" onClick={handleNavBar}>ABOUT</button>
                                 <button id="contact" name="contact" onClick={handleNavBar}>CONTACT</button>
-                                <div className="circle" onMouseOver={mouseOver} onMouseOut={mouseOut}><h1>{localStorage.getItem("name")[0]}</h1></div>
+                                <div className="circle" onMouseOver={mouseOver} onMouseOut={mouseOut}><h1>{localStorage.getItem("name")&&localStorage.getItem("name")[0]}</h1></div>
                             </div>
                             <span></span>
                             <div className="dropdown">
@@ -105,7 +119,7 @@ const UserDashboard = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>}
         </>
     )
 }
