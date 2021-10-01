@@ -3,13 +3,17 @@ import "./Application.css"
 
 const Application = () => {
     const [value, setValue] = useState([]);
-
-    useEffect(async() => {
+    useEffect(() => {
+        refreshData();
+        setInterval(refreshData,10000)
+    },[])
+    const refreshData = async() => {
         const res = await fetch(`/application/${localStorage.getItem("id")}`);
         const data = await res.json()
         console.log(data);
-        setValue(data.data);
-    },[])
+        if(data?.status)
+            setValue(data.data);
+    }
     return (
         <div className="Application">
             <h1>Bike Booking Applications</h1>

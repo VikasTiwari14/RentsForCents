@@ -41,11 +41,14 @@ const UserDashboard = () => {
         }
     },[])
     useEffect(async() => {
-        const res = await fetch(`/user/${localStorage.getItem("id")}`);
-        const data = await res.json()
-        console.log(data);
-        setValue(data.data[0]);
+        if(localStorage.getItem("id")!==null){
+            const res = await fetch(`/user/${localStorage.getItem("id")}`);
+            const data = await res.json()
+            console.log(data);
+            setValue(data.data[0]);
+        }
     },[])
+    
     const handleNavBar = (e) => {
         console.log(e.target);
         setId(e.target.name);

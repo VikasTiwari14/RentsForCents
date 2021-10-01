@@ -4,14 +4,18 @@ import "./History.css"
 const History = () => {
     const [value, setValue] = useState([]);
 
-    useEffect(async() => {
+    useEffect(() => {
+        refreshData();
+        setInterval(refreshData,10000)
+    },[])
+    const refreshData = async() => {
         const res = await fetch(`/history/${localStorage.getItem("id")}`);
         const data = await res.json()
         console.log(data);
         if(data.status){
             setValue(data.data);
         }
-    },[])
+    }
     return (
         <div className="History">
             <h1>Bike Booking History</h1>

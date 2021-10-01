@@ -21,13 +21,17 @@ const Home = () => {
     const todayDate=date.getFullYear()+"-"+((date.getMonth()+1)<10?"0"+(date.getMonth()+1):(date.getMonth()+1))+"-"+(date.getDate()<10?"0"+date.getDate():date.getDate());
     const finalDate=date.getFullYear()+"-"+((date.getMonth()+2)<10?"0"+(date.getMonth()+2):(date.getMonth()+2))+"-"+(date.getDate()<10?"0"+date.getDate():date.getDate());
 
-
-    useEffect(async() => {
+    useEffect(() => {
+        refreshData();
+        setInterval(refreshData,10000)
+    },[])
+    
+    const refreshData = async() => {
         const res = await fetch(`/getBike`);
         const data = await res.json()
         console.log(data);
         setValue(data.data);
-    },[isopen])
+    }
     const handleMouseOver = (e,index) => {
         document.getElementsByClassName("bikesImage")[index].style.display="none";
         document.getElementsByClassName("bikesInfo")[index].style.height="23vw";

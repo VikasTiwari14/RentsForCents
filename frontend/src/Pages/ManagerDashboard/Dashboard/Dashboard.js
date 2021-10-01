@@ -6,8 +6,11 @@ import "./Dashboard.css"
 
 const Dashboard = () => {
     const [value, setValue] = useState();
-
-    useEffect(async()=>{
+    useEffect(() => {
+        refreshData();
+        setInterval(refreshData,10000)
+    },[])
+    const refreshData = async() => {
         const res = await fetch("/dashboard",{
             method:"get",
             headers:{
@@ -20,7 +23,7 @@ const Dashboard = () => {
         if(data.status){
             setValue(data.data);
         }
-    },[])
+    }
     return(
         <div className="Dashboard">
             <div className="dashboardCard">
