@@ -72,21 +72,21 @@ const Dashboard = () => {
             </div>
             <div className="dashboardCard">
                 <div>
-                    <h2 className="brownText">{value?.countBikes}</h2>
+                    <h2 className="brownText">{value?.confirmed}</h2>
                     <h3>Number of Confirmation Request</h3>
                 </div>
                 <MdConfirmationNumber className="dahboardIcon" />
             </div>
             <div className="dashboardCard">
                 <div>
-                    <h2 className="brownText">{value?.availBike}</h2>
+                    <h2 className="brownText">{value?.bookingHistory}</h2>
                     <h3>Total Number of Booking History</h3>
                 </div>
                 <FaHistory className="dahboardIcon" />
             </div>
             <div className="dashboardCard">
                 <div>
-                    <h2 className="brownText">{value?.unAvailBike}</h2>
+                    <h2 className="brownText">{value?.feedback}</h2>
                     <h3>Number of Feedback/Query</h3>
                 </div>
                 <FcFeedback className="dahboardIcon" />
