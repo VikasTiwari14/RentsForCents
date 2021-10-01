@@ -81,7 +81,7 @@ router.post("/signup",async(req,res)=>{
                     const userData = new userCollection({
                     ID:'',
                     userDetails:{
-                        customerName:req.body.userDetails.fullName,
+                        customerName:req.body.userDetails.customerName,
                         contactNumber:req.body.userDetails.mobile,
                         email:req.body.userDetails.email,
                         password:hashed_password,
