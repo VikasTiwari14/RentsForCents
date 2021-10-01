@@ -108,7 +108,7 @@ const UserDashboard = () => {
                         </div>
                         <div className="NavBarSide">
                             <h2>NO. 1 BIKE RENTAL<br /> SERVICES IN BHOPAL</h2>
-                            <Button variant="outlined">Learn More<FiArrowRight className="arrowRight" /></Button>
+                            <Button variant="outlined" onClick={(e) => setId("about")}>Learn More<FiArrowRight className="arrowRight" /></Button>
                         </div>
                     </div>
                     <div className="MainContent">

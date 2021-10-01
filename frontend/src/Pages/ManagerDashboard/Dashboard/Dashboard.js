@@ -1,7 +1,9 @@
 import React,{useState,useEffect} from "react"
-import {FaUsers,FaUserTimes,FaUserCheck,FaMotorcycle} from "react-icons/fa"
+import {FaUsers,FaUserTimes,FaUserCheck,FaMotorcycle,FaHistory} from "react-icons/fa"
 import {RiMotorbikeFill} from "react-icons/ri"
 import {GiFullMotorcycleHelmet} from "react-icons/gi"
+import {FcFeedback} from "react-icons/fc"
+import {MdConfirmationNumber} from "react-icons/md"
 import "./Dashboard.css"
 
 const Dashboard = () => {
@@ -67,6 +69,27 @@ const Dashboard = () => {
                     <h3>Number of Bikes Unavailable</h3>
                 </div>
                 <GiFullMotorcycleHelmet className="dahboardIcon" />
+            </div>
+            <div className="dashboardCard">
+                <div>
+                    <h2 className="brownText">{value?.countBikes}</h2>
+                    <h3>Number of Confirmation Request</h3>
+                </div>
+                <MdConfirmationNumber className="dahboardIcon" />
+            </div>
+            <div className="dashboardCard">
+                <div>
+                    <h2 className="brownText">{value?.availBike}</h2>
+                    <h3>Total Number of Booking History</h3>
+                </div>
+                <FaHistory className="dahboardIcon" />
+            </div>
+            <div className="dashboardCard">
+                <div>
+                    <h2 className="brownText">{value?.unAvailBike}</h2>
+                    <h3>Number of Feedback/Query</h3>
+                </div>
+                <FcFeedback className="dahboardIcon" />
             </div>
         </div>
     )
