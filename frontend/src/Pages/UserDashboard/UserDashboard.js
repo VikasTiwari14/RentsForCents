@@ -40,14 +40,19 @@ const UserDashboard = () => {
             console.log(islog)
         }
     },[])
-    useEffect(async() => {
-        if(localStorage.getItem("id")!==null){
+    useEffect(() => {
+        refreshUser();
+        setInterval(refreshUser,10000);
+    },[]);
+    const refreshUser = async() => {
+            console.log("hello")
             const res = await fetch(`/user/${localStorage.getItem("id")}`);
             const data = await res.json()
             console.log(data);
             setValue(data.data[0]);
-        }
-    },[])
+            localStorage.setItem("verified", data.data[0].verified);
+    }
+    
     
     const handleNavBar = (e) => {
         console.log(e.target);

@@ -58,8 +58,7 @@ const AddUser = () => {
         setValue({...value, [e.target.name] : e.target.value})
     }
     const handleImage = (e) => {
-        console.log( URL.createObjectURL(e.target.files[0]));
-        if(e.target.files){
+        if(e.target.files && e.target.files[0]){
             let dt= e.target.files[0];
             if(dt?.size<2000000){
                 if(dt.type==="image/png" || dt.type==="image/jpeg" || dt.type==="image/tiff" || dt.type==="image/bmp" || dt.type==="image/svg+xml"){
