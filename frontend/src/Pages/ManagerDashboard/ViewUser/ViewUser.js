@@ -9,8 +9,12 @@ const ViewUser = () => {
     const [value, setValue] = useState([]);
     const [Ddata, setDdata] = useState();
     const [isopen, setisopen] = useState(false);
-
-    useEffect(async()=>{
+    
+    useEffect(() => {
+        refreshData();
+        setInterval(refreshData,10000)
+    },[])
+    const refreshData = async() => {
         const res = await fetch("/userData",{
             method:"get",
             headers:{
@@ -23,7 +27,7 @@ const ViewUser = () => {
         if(data.status){
             setValue(data.data);
         }
-    },[isopen])
+    }
     const openModal = (dt) => {
         setDdata(dt);
         setisopen(true);
