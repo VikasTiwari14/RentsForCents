@@ -64,6 +64,28 @@ router.post("/signin",async(req,res)=>{
 })
 
 // Register
+router.post("/signup/check", async(req, res) => {
+    try{
+        const userRegisteredEmail = await userCollection.findOne({'userDetails.email':req.body.userDetails.email});
+        const userRegisteredMobile = await userCollection.findOne({'userDetails.contactNumber':req.body.userDetails.mobile});
+
+        if (userRegisteredEmail || userRegisteredMobile){
+            return res.status(422).json({
+                status:false,
+                message:"user already registered"
+            })
+        }
+        else{
+            return res.status(200).json({
+                    status:true,
+                    message:"New User"
+                   })   
+        }
+    }
+    catch(err){
+        res.status(400).json(err)
+    }
+})
 router.post("/signup",async(req,res)=>{
     // const {customerName,contactNumber,email,password} = req.body
     if(req.body.addressDetails || req.body.bankDetails || req.body.documentDetails)

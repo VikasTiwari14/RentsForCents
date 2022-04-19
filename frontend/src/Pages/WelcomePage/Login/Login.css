@@ -7,7 +7,7 @@ body{
 .box{
     background: white;
     border-radius: 10px;
-    height: 80vh;
+    height: 100%;
     display: flex;
 }
 #animate{
@@ -38,7 +38,7 @@ body{
 #create{
     display: flex;
     flex-direction: column;
-    padding-top: 5%;
+    justify-content: center;
     align-items: center;
     width: 50%;
 }
@@ -134,4 +134,30 @@ body{
 	51% {width:99%}
 	75% {width:75%}
 	100% {width:50%}
+}
+
+.OTPContainer{
+    text-align: center;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+.OTPContainer>div>*{
+    margin: 2rem 10px;
+}
+.VtP10Submit{
+    background-color: #2f2f2f !important;
+    color: white !important;
+    font-weight: 600;
+}
+
+.otpBox{
+    justify-content: space-between;
+    align-items: center;
+}
+.otpInput{
+    width: 2.5vw !important;
+    height: 3vw;
+    font-size: 1rem;
+    margin: 0 5px;
 }

@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react"
 import "./Login.css";
-import {FaFacebookF,FaTwitter,FaGooglePlusG,FaLock,FaUser} from "react-icons/fa";
+import {FaFacebookF,FaTwitter,FaGooglePlusG,FaLock,FaUser, FaArrowLeft} from "react-icons/fa";
 import {IoMail} from "react-icons/io5";
 import {GrTwitter,GrGoogle} from "react-icons/gr";
 import logo from "../../../images/RentForCentsLogo.png";
@@ -10,16 +10,21 @@ import TextField from '@material-ui/core/TextField';
 import { RentsForCents } from "../../../Constants/Constants";
 import axios from "axios";
 import login from "../../../images/login.jpg"
+import OtpInput from 'react-otp-input';
 import { useHistory } from "react-router";
-
+import {authentication} from "../../../firebase";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 
 const Login = ({isLog}) => {
     const [sign, setSign] = useState({fName:"",email:"",password:"",mobile:""});
     const [isopen, setisopen] = useState(false);
+    const [OTP, setOTP] = useState("");
+    const [isInput, setIsInput] = useState(false);
     const [btn, setBtn] = useState();
     const [head, setHead] = useState();
     const [para, setPara] = useState();
     const history= useHistory();
+
     useEffect(()=>{
         setBtn( isopen?"SIGN UP":"SIGN IN")
         setHead(isopen?"Hello, Friend!":"Welcome Back!");
@@ -142,6 +147,35 @@ const Login = ({isLog}) => {
     //     })
     // }
 
+    const checkUser = async (e) => {
+        const {fName,mobile,email,password} = sign
+        const userDetails =
+        {
+                fName: fName,
+                email: email,
+                mobile: mobile,
+                password:password
+        }
+        const res = await fetch("/signup/check",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+                'Access-Control-Allow-Origin': '*'
+            },
+            body:JSON.stringify({
+                userDetails
+            }),
+        });
+        const data = await res.json()
+        console.log(data);
+        if(data.status){
+            setIsInput(true);
+            handleAuth();
+        }
+        else if(data.message==="user already registered"){
+            alert(data.message);
+        }
+    }
     const handleSignUp = async (e)=>{
         e.preventDefault();
         if(sign.mobile==="" || sign.fName==="" || sign.email==="" || sign.password===""){
@@ -156,6 +190,24 @@ const Login = ({isLog}) => {
             alert("Invalid Email Address");
             return;
         }
+        checkUser();
+    }
+    const handleOtpSubmit = () => { 
+        let confirmationResult = window.confirmationResult;
+        confirmationResult.confirm(OTP)
+        .then((result) => {
+            const user = result.user;
+            // ...
+            handleSubmit();
+        })
+        .catch((error) => {
+            // User couldn't sign in (bad verification code?)
+            // ...
+            alert("Invalid OTP");
+        });
+    }
+
+    const handleSubmit = async() => { 
         const {fName,mobile,email,password} = sign
         const userDetails =
         {
@@ -188,6 +240,26 @@ const Login = ({isLog}) => {
         }
     }
     
+    const handleAuth = () => { 
+        window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-verifier', {
+            'size': 'invisible',
+            'callback': (response) => {
+              // reCAPTCHA solved, allow signInWithPhoneNumber.
+                console.log(response);
+            }
+        }, authentication);
+
+        const phoneNumber = "+91" + sign.mobile;
+        const appVerifier = window.recaptchaVerifier;
+
+        signInWithPhoneNumber(authentication, phoneNumber, appVerifier)
+        .then((confirmationResult) => {
+            window.confirmationResult = confirmationResult;
+        })
+        .catch((error) => {
+            alert("SMS not sent");
+        });
+    }
     
     return(
         <>
@@ -199,19 +271,43 @@ const Login = ({isLog}) => {
 		            <p>{para}</p>
 	                <button id="signIn" onClick={changeSignUp}>{btn}</button>
                 </div>
+
                 <div id="create">
-	                <h1>Create Account</h1>
-                    <div className="socialMediaContainer">
-		                <FaFacebookF className="socialMedia" />
-		                <GrTwitter className="socialMedia" />
-		                <GrGoogle className="socialMedia" />
-                    </div>
-		            <p className="paragraph">or use your email for registeration</p>
-		            <div className="inputContainer"><TextField variant="outlined" label="Name" className="materialInput" type="text" name="fName" placeholder=" Name" value={sign.fName} onChange={handleInput}  />       </div>
-		            <div className="inputContainer"><TextField variant="outlined" label="Email" className="materialInput" type="text" name="email"  placeholder=" Email" value={sign.email} onChange={handleInput} />    </div>
-		            <div className="inputContainer"><TextField variant="outlined" label="Password" className="materialInput" type="password" name="password" placeholder=" Password" value={sign.password} onChange={handleInput} /></div>
-		            <div className="inputContainer"><TextField variant="outlined" label="Mobile Number" className="materialInput" type="text" name="mobile" placeholder=" Mobile Number" value={sign.mobile} onChange={handleInput} /></div>
-		            <Button variant="contained" onClick={handleSignUp}>SIGN UP</Button>
+                    <div id="recaptcha-verifier"></div>
+                    {
+                        isInput?
+                        <div className="OTPContainer">
+                            {/* <FaArrowLeft onClick={() => setIsInput(false)} /> */}
+                            <div>
+                                <p>Please enter the OTP received on your<br />Mobile Number XXXXXX{sign?.mobile?.substring(6)}</p>
+                                <OtpInput
+                                    value={OTP}
+                                    onChange={(OTP) => setOTP(OTP)}
+                                    numInputs={6}
+                                    separator={<span> </span>}
+                                    containerStyle="otpBox"
+                                    inputStyle="otpInput"
+                                    focusStyle="otpFocus"
+                                />
+                                <Button className="VtP10Submit" variant="contained"  onClick={handleOtpSubmit}>SUBMIT</Button>
+                            </div>
+                        </div>
+                        :
+                        <>
+                            <h1>Create Account</h1>
+                            <div className="socialMediaContainer">
+                                <FaFacebookF className="socialMedia" />
+                                <GrTwitter className="socialMedia" />
+                                <GrGoogle className="socialMedia" />
+                            </div>
+                            <p className="paragraph">or use your email for registeration</p>
+                            <div className="inputContainer"><TextField variant="outlined" label="Name" className="materialInput" type="text" name="fName" placeholder=" Name" value={sign.fName} onChange={handleInput}  />       </div>
+                            <div className="inputContainer"><TextField variant="outlined" label="Email" className="materialInput" type="text" name="email"  placeholder=" Email" value={sign.email} onChange={handleInput} />    </div>
+                            <div className="inputContainer"><TextField variant="outlined" label="Password" className="materialInput" type="password" name="password" placeholder=" Password" value={sign.password} onChange={handleInput} /></div>
+                            <div className="inputContainer"><TextField variant="outlined" label="Mobile Number" className="materialInput" type="text" name="mobile" placeholder=" Mobile Number" value={sign.mobile} onChange={handleInput} /></div>
+                            <Button variant="contained" id="sign-in-button" onClick={handleSignUp}>SIGN UP</Button>
+                        </>
+                    }
 	            </div>
                 <div id="log">
 	                <h1>Sign In</h1>
